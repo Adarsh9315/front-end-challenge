@@ -1,0 +1,37 @@
+.todo-app {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.todo-item {
+  transition: all 0.3s ease;
+}
+
+.todo-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.todo-item.completed {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+.todo-text {
+  font-size: 1.1rem;
+  word-break: break-word;
+}
+
+.todo-stats {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-sm {
+  min-width: 60px;
+}
