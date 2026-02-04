@@ -1,0 +1,110 @@
+.tictactoe-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 80vh;
+	padding: 20px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.game-title {
+	color: white;
+	font-size: 3rem;
+	margin-bottom: 20px;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.status {
+	color: white;
+	font-size: 1.5rem;
+	margin-bottom: 20px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.board {
+	display: inline-block;
+	background: rgba(255, 255, 255, 0.1);
+	padding: 10px;
+	border-radius: 10px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.board-row {
+	display: flex;
+}
+
+.square {
+	width: 100px;
+	height: 100px;
+	background: white;
+	border: 3px solid #667eea;
+	font-size: 2.5rem;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	color: #333;
+	margin: 5px;
+	border-radius: 8px;
+}
+
+.square:hover:not(:disabled) {
+	background: #f0f0f0;
+	transform: scale(1.05);
+}
+
+.square:disabled {
+	cursor: not-allowed;
+}
+
+.square.winning {
+	background: #ffd700;
+	animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+	0%, 100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.1);
+	}
+}
+
+.reset-button {
+	margin-top: 30px;
+	padding: 12px 40px;
+	font-size: 1.2rem;
+	background: white;
+	color: #667eea;
+	border: none;
+	border-radius: 25px;
+	cursor: pointer;
+	font-weight: bold;
+	transition: all 0.3s ease;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.reset-button:hover {
+	background: #667eea;
+	color: white;
+	transform: translateY(-2px);
+	box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+	.square {
+		width: 80px;
+		height: 80px;
+		font-size: 2rem;
+	}
+
+	.game-title {
+		font-size: 2rem;
+	}
+
+	.status {
+		font-size: 1.2rem;
+	}
+}
