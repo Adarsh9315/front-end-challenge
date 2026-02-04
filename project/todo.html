@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Todo</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Arial;margin:24px}
+    input{padding:8px;font-size:16px}
+    button{padding:8px 10px;margin-left:8px}
+    ul{list-style:none;padding:0;margin-top:16px;max-width:640px}
+    li{display:flex;align-items:center;justify-content:space-between;padding:8px;border-bottom:1px solid #eee}
+    li.completed span{ text-decoration:line-through;color:#888}
+    .actions button{margin-left:8px}
+  </style>
+</head>
+<body>
+  <h1>Todo</h1>
+  <div>
+    <input id="itemInput" placeholder="Add a new todo" />
+    <button id="addBtn">Add</button>
+  </div>
+  <ul id="list"></ul>
+
+  <script>
+    const input = document.getElementById('itemInput');
+    const addBtn = document.getElementById('addBtn');
+    const list = document.getElementById('list');
+    const STORAGE_KEY = 'todo.items.v1';
+
+    function load(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      }catch(e){return []}
+    }
+    function save(items){ localStorage.setItem(STORAGE_KEY, JSON.stringify(items)); }
+
+    function render(){
+      const items = load();
+      list.innerHTML = '';
+      items.forEach((it, idx) => {
+        const li = document.createElement('li');
+        li.className = it.done ? 'completed' : '';
+        const span = document.createElement('span');
+        span.textContent = it.text;
+        span.style.flex = '1';
+        span.onclick = () => { toggle(idx); };
+        const actions = document.createElement('div');
+        actions.className = 'actions';
+        const del = document.createElement('button');
+        del.textContent = 'Delete';
+        del.onclick = (e)=>{ e.stopPropagation(); remove(idx); };
+        actions.appendChild(del);
+        li.appendChild(span);
+        li.appendChild(actions);
+        list.appendChild(li);
+      });
+    }
+
+    function add(text){
+      if(!text || !text.trim()) return;
+      const items = load();
+      items.push({text: text.trim(), done: false});
+      save(items);
+      render();
+    }
+    function toggle(idx){
+      const items = load();
+      if(!items[idx]) return;
+      items[idx].done = !items[idx].done;
+      save(items);
+      render();
+    }
+    function remove(idx){
+      const items = load();
+      items.splice(idx,1);
+      save(items);
+      render();
+    }
+
+    addBtn.addEventListener('click', ()=>{ add(input.value); input.value=''; input.focus(); });
+    input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ add(input.value); input.value=''; } });
+
+    render();
+  </script>
+</body>
+</html>
