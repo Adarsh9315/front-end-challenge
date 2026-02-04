@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        background: radial-gradient(circle at top, #f4f6ff, #edf1ff 40%, #e2e7ff);
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+      }
+
+      .todo-app {
+        width: min(520px, 100%);
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.15);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.75rem;
+        color: #111729;
+      }
+
+      form {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      input {
+        flex: 1;
+        border: 1px solid #d7def5;
+        border-radius: 999px;
+        padding: 0.85rem 1.25rem;
+        font-size: 1rem;
+      }
+
+      button {
+        border: none;
+        border-radius: 999px;
+        background: linear-gradient(120deg, #6366f1, #8b5cf6);
+        color: #fff;
+        padding: 0.85rem 1.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: filter 150ms ease;
+      }
+
+      button:hover {
+        filter: brightness(1.05);
+      }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: #f8f9ff;
+        border-radius: 12px;
+        padding: 0.9rem 1rem;
+        border: 1px solid #e3e8ff;
+      }
+
+      li.completed {
+        opacity: 0.65;
+        text-decoration: line-through;
+      }
+
+      li button {
+        margin-left: auto;
+        background: none;
+        color: #6366f1;
+        padding: 0.25rem 0.75rem;
+        border-radius: 8px;
+        border: 1px solid currentColor;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="todo-app" aria-labelledby="todo-title">
+      <header>
+        <p style="margin:0;color:#6366f1;font-weight:600">Stay on top of things</p>
+        <h1 id="todo-title">Today's Tasks</h1>
+      </header>
+      <form id="todo-form" autocomplete="off">
+        <label class="sr-only" for="todo-input">Add a new todo</label>
+        <input id="todo-input" name="todo" placeholder="Add a new todo" required />
+        <button type="submit">Add</button>
+      </form>
+      <ul id="todo-list" aria-live="polite">
+        <li>
+          <input type="checkbox" aria-label="Complete morning stand-up" />
+          <span>Morning stand-up</span>
+          <button type="button" data-action="remove">Remove</button>
+        </li>
+        <li>
+          <input type="checkbox" aria-label="Complete roadmap review" />
+          <span>Review roadmap draft</span>
+          <button type="button" data-action="remove">Remove</button>
+        </li>
+      </ul>
+    </main>
+
+    <script>
+      const form = document.getElementById("todo-form");
+      const input = document.getElementById("todo-input");
+      const list = document.getElementById("todo-list");
+
+      const template = (label) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <input type="checkbox" aria-label="Complete ${label}" />
+          <span></span>
+          <button type="button" data-action="remove">Remove</button>
+        `;
+        li.querySelector("span").textContent = label;
+        return li;
+      };
+
+      list.addEventListener("change", (event) => {
+        if (event.target.matches("input[type='checkbox']")) {
+          event.target.closest("li").classList.toggle("completed", event.target.checked);
+        }
+      });
+
+      list.addEventListener("click", (event) => {
+        if (event.target.dataset.action === "remove") {
+          event.target.closest("li").remove();
+        }
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const value = input.value.trim();
+        if (!value) return;
+        list.prepend(template(value));
+        input.value = "";
+        input.focus();
+      });
+    </script>
+  </body>
+</html>
