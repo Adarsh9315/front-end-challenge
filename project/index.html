@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Royal Gambit | Chess Landing Page</title>
+    <meta
+      name="description"
+      content="Master the board with Royal Gambit – the beautifully crafted chess experience for every skill level."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero" id="hero">
+      <nav class="nav">
+        <div class="logo">
+          <span aria-hidden="true">♛</span>
+          Royal Gambit
+        </div>
+        <div class="nav__links">
+          <a href="#features">Features</a>
+          <a href="#playground">Playground</a>
+          <a href="#community">Community</a>
+        </div>
+        <button class="btn btn--ghost">Download App</button>
+      </nav>
+
+      <div class="hero__content">
+        <div class="hero__text">
+          <p class="eyebrow">Precision crafted chess</p>
+          <h1>Command the board with cinematic clarity.</h1>
+          <p class="subtitle">
+            Practice openings, challenge adaptive AI, or host tournaments with
+            your club. Every move feels immersive, intentional, and bold.
+          </p>
+          <div class="hero__actions">
+            <button class="btn btn--primary">Play Free</button>
+            <button class="btn btn--secondary">Watch Demo</button>
+          </div>
+          <div class="hero__stats">
+            <div>
+              <span class="stat__value">2.4M+</span>
+              <span class="stat__label">Matches played</span>
+            </div>
+            <div>
+              <span class="stat__value">4.9/5</span>
+              <span class="stat__label">Player rating</span>
+            </div>
+            <div>
+              <span class="stat__value">120+</span>
+              <span class="stat__label">Club partners</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero__visual">
+          <div class="hero__board-glow"></div>
+          <div class="hero__pieces">
+            <div class="piece piece--queen">♕</div>
+            <div class="piece piece--bishop">♗</div>
+            <div class="piece piece--knight">♘</div>
+          </div>
+          <div class="hero__badge">
+            <p>Adaptive AI prepares you for real tournaments.</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="features" id="features">
+        <p class="eyebrow">Power to every player</p>
+        <h2>Tools for bold strategies.</h2>
+        <div class="feature-grid">
+          <article>
+            <h3>Opening Studio</h3>
+            <p>
+              Drill iconic openings with cinematic move breakdowns and custom
+              pacing.
+            </p>
+          </article>
+          <article>
+            <h3>Adaptive AI</h3>
+            <p>
+              AI sparring partners that learn your rhythm and expose blind
+              spots.
+            </p>
+          </article>
+          <article>
+            <h3>Club Rooms</h3>
+            <p>
+              Host live commentary, tournaments, and lessons in private rooms.
+            </p>
+          </article>
+          <article>
+            <h3>Focus Mode</h3>
+            <p>
+              Board-first interface with ambient scoring and guided clocks.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="playground" id="playground">
+        <div class="playground__intro">
+          <p class="eyebrow">Strategy playground</p>
+          <h2>Visualize openings in real time.</h2>
+          <p>
+            Tap through curated openings and watch the board animate each move.
+            Perfect for coaches showcasing concepts or players studying the next
+            tournament.
+          </p>
+        </div>
+        <div class="playground__content">
+          <div class="board" id="board" aria-label="Interactive chess board"></div>
+          <div class="playground__controls" aria-live="polite">
+            <div class="opening-card" data-opening="0">
+              <div>
+                <h3>King's Pawn</h3>
+                <p>Classic e4 assault controlling the center fast.</p>
+              </div>
+              <button class="btn btn--ghost">Try</button>
+            </div>
+            <div class="opening-card" data-opening="1">
+              <div>
+                <h3>Queen's Gambit</h3>
+                <p>Offer the flank pawn to unlock tempo-rich play.</p>
+              </div>
+              <button class="btn btn--ghost">Try</button>
+            </div>
+            <div class="opening-card" data-opening="2">
+              <div>
+                <h3>Sicilian Defense</h3>
+                <p>Counter-punch with asymmetrical pressure from c5.</p>
+              </div>
+              <button class="btn btn--ghost">Try</button>
+            </div>
+            <div class="playground__note">
+              <span>Tip</span>
+              Drag or tap squares to inspect highlighted lines.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="community" id="community">
+        <div class="community__content">
+          <p class="eyebrow">Built with community</p>
+          <h2>Events, lessons, and nightly arenas.</h2>
+          <p>
+            From scholastic leagues to grandmaster masterclasses, Royal Gambit
+            brings every player into the spotlight.
+          </p>
+          <ul class="pill-list">
+            <li>Weekly Arenas</li>
+            <li>Coach Spotlight</li>
+            <li>Immersive Broadcasts</li>
+          </ul>
+        </div>
+        <div class="testimonials">
+          <article>
+            <p>
+              “The most cinematic and calm way to prep for title events. The
+              AI’s prep lines were uncanny.”
+            </p>
+            <span>— IM Vanessa Truong</span>
+          </article>
+          <article>
+            <p>
+              “Our club scrimmages never looked better. The broadcast tools feel
+              premium and effortless.”
+            </p>
+            <span>— Brooklyn Knights Club</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="faq" id="faq">
+        <p class="eyebrow">Questions, answered</p>
+        <h2>Everything you need before your first move.</h2>
+        <div class="accordion">
+          <button class="accordion__trigger" aria-expanded="false">
+            <span>Is Royal Gambit free to play?</span>
+            <span aria-hidden="true">+</span>
+          </button>
+          <div class="accordion__panel" hidden>
+            Yes. Core features are totally free. Advanced lesson libraries and
+            broadcast add-ons are included in Pro tiers.
+          </div>
+
+          <button class="accordion__trigger" aria-expanded="false">
+            <span>Do you support over-the-board clubs?</span>
+            <span aria-hidden="true">+</span>
+          </button>
+          <div class="accordion__panel" hidden>
+            Absolutely. Clubs get shared dashboards, tab-friendly clocks, and
+            templated tournament brackets.
+          </div>
+
+          <button class="accordion__trigger" aria-expanded="false">
+            <span>Can I train with coaches here?</span>
+            <span aria-hidden="true">+</span>
+          </button>
+          <div class="accordion__panel" hidden>
+            Coaches can host private rooms, schedule lessons, and track student
+            insights in one place.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <div class="logo">
+          <span aria-hidden="true">♛</span>
+          Royal Gambit
+        </div>
+        <p>Crafting bold chess stories since 2026.</p>
+      </div>
+      <form class="newsletter">
+        <label for="email">Weekly prep lines straight to your inbox.</label>
+        <div class="newsletter__control">
+          <input type="email" id="email" placeholder="you@club.com" required />
+          <button class="btn btn--primary" type="submit">Subscribe</button>
+        </div>
+      </form>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
