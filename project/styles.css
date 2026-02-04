@@ -1,0 +1,342 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light dark;
+  font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif;
+  background-color: #05060a;
+  color: #f6f6f9;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 3rem clamp(1.5rem, 5vw, 4rem) 4rem;
+  background: radial-gradient(circle at top, #0e1220, #05060a 55%);
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem;
+}
+
+.title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+}
+
+.subtitle {
+  max-width: 640px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+button.primary {
+  background: linear-gradient(120deg, #ffd460, #ff7b7b);
+  color: #05060a;
+  box-shadow: 0 10px 30px rgba(255, 116, 116, 0.25);
+}
+
+button.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f7f7ff;
+}
+
+button.ghost {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 0.6rem;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.board-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+}
+
+.board-label {
+  display: flex;
+  width: min(100%, 520px);
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.board-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rank-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: min(100%, 520px);
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.chess-board {
+  width: min(100%, 520px);
+  height: min(100vw, 520px);
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  border-radius: 1.2rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #1b1f2d;
+}
+
+.square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.square.light {
+  background: #f8eedc;
+  color: #05060a;
+}
+
+.square.dark {
+  background: #2b354f;
+  color: #f7f7ff;
+}
+
+.square.highlight {
+  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.4);
+}
+
+.square.move-option::after {
+  content: '';
+  position: absolute;
+  width: 26%;
+  height: 26%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+}
+
+.square.capture-option::after {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  border: 4px solid rgba(255, 255, 255, 0.7);
+  border-radius: 10%;
+  pointer-events: none;
+}
+
+.info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.status-card {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.label {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 0.3rem;
+}
+
+.turn-indicator {
+  font-size: 1.5rem;
+  margin: 0 0 0.3rem;
+}
+
+.status-text {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.move-list {
+  max-height: 240px;
+  overflow-y: auto;
+  padding-left: 1.25rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.move-list li {
+  margin-bottom: 0.4rem;
+}
+
+.captures {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 1.5rem;
+}
+
+.captures-label {
+  margin: 0 0 0.5rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.capture-row {
+  min-height: 2rem;
+  margin: 0;
+}
+
+.tips {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.tips li {
+  margin-bottom: 0.4rem;
+}
+
+.promotion-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 6, 10, 0.8);
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(5px);
+}
+
+.promotion-dialog {
+  background: #111528;
+  padding: 2rem;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+
+.promotion-dialog h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.promotion-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  gap: 0.8rem;
+}
+
+.promotion-option {
+  font-size: 2rem;
+  padding: 0.6rem;
+  border-radius: 0.8rem;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.promotion-option:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 960px) {
+  body {
+    padding: 2rem 1rem 3rem;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .board-label,
+  .board-wrapper {
+    width: 100%;
+  }
+
+  .board-panel {
+    padding: 1rem;
+  }
+
+  .rank-labels {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-header {
+    flex-direction: column;
+  }
+
+  .header-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+}
