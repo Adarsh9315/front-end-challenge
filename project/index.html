@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe Arena</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0f172a;
+        --card: #1e293b;
+        --accent: #38bdf8;
+        --accent-dark: #0ea5e9;
+        --text: #f8fafc;
+        --muted: #94a3b8;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+        background: radial-gradient(circle at top, rgba(56, 189, 248, 0.2), transparent 55%), var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        padding: 1.5rem 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .logo {
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        margin-left: 1.5rem;
+        font-weight: 500;
+        transition: color 150ms ease;
+      }
+      nav a:hover {
+        color: var(--text);
+      }
+      main {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+        align-items: center;
+        padding: 3rem;
+      }
+      .hero {
+        max-width: 560px;
+      }
+      .eyebrow {
+        font-size: 0.9rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      h1 {
+        font-size: clamp(2.5rem, 5vw, 3.75rem);
+        margin: 0.75rem 0;
+        line-height: 1.1;
+      }
+      p {
+        color: var(--muted);
+        line-height: 1.6;
+        font-size: 1.05rem;
+      }
+      .actions {
+        margin-top: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .btn {
+        border: none;
+        border-radius: 999rem;
+        padding: 0.95rem 2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #0f172a;
+        box-shadow: 0 15px 35px rgba(56, 189, 248, 0.35);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        background: var(--accent-dark);
+      }
+      .btn-ghost {
+        background: transparent;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        color: var(--text);
+      }
+      .preview {
+        background: var(--card);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        position: relative;
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.65);
+      }
+      .glow {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(120deg, rgba(14, 165, 233, 0.6), rgba(56, 189, 248, 0.1));
+        -webkit-mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+      .board {
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .cell {
+        aspect-ratio: 1;
+        border-radius: 0.75rem;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(2rem, 6vw, 3rem);
+        font-weight: 700;
+        color: var(--accent);
+        text-transform: uppercase;
+      }
+      .cell.o {
+        color: #fcd34d;
+      }
+      .card-grid {
+        margin-top: 2rem;
+        display: grid;
+        gap: 1rem;
+      }
+      .card {
+        background: rgba(15, 23, 42, 0.45);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 1rem;
+        padding: 1.2rem;
+      }
+      .card h3 {
+        margin: 0 0 0.5rem;
+      }
+      footer {
+        padding: 1.5rem 3rem;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      @media (max-width: 640px) {
+        header, main, footer {
+          padding: 1.5rem;
+        }
+        nav {
+          width: 100%;
+        }
+        nav a {
+          margin-left: 0;
+          margin-right: 1rem;
+        }
+        .preview {
+          order: -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">TicTacPro</div>
+      <nav>
+        <a href="#learn">Learn</a>
+        <a href="#play">Play</a>
+        <a href="#features">Features</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">Challenge Accepted</div>
+        <h1>Master the timeless duel of Tic Tac Toe.</h1>
+        <p>
+          Sharpen your strategy, trade turns with friends, and let every move glow. TicTacPro
+          delivers a premium, modern board that makes each X and O feel like a decisive moment.
+        </p>
+        <div class="actions">
+          <button class="btn btn-primary">Start a Match</button>
+          <button class="btn btn-ghost">Watch Tutorial</button>
+        </div>
+        <div class="card-grid" id="features">
+          <div class="card">
+            <h3>Smart Highlights</h3>
+            <p>Automatic streak detection keeps winning lines illuminated for instant clarity.</p>
+          </div>
+          <div class="card">
+            <h3>Quick Rematches</h3>
+            <p>Reset the board in a beat and jump into best-of series with score tracking.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="preview" aria-label="Tic Tac Toe board preview">
+        <span class="glow" aria-hidden="true"></span>
+        <div class="board">
+          <div class="cell x">x</div>
+          <div class="cell o">o</div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell x">x</div>
+          <div class="cell o">o</div>
+          <div class="cell o">o</div>
+          <div class="cell"></div>
+          <div class="cell x">x</div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="learn">
+      Built for casual play, fierce rivalries, and everything between — TicTacPro keeps the classics fresh.
+    </footer>
+  </body>
+</html>
