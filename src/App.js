@@ -12,16 +12,22 @@ const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
 		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=a21d8f2b`;
 
-		const response = await fetch(url);
-		const responseJson = await response.json();
+		setIsLoading(true);
+		try {
+			const response = await fetch(url);
+			const responseJson = await response.json();
 
-		if (responseJson.Search) {
-			setMovies(responseJson.Search);
+			if (responseJson.Search) {
+				setMovies(responseJson.Search);
+			}
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -76,6 +82,14 @@ const App = () => {
 
 	return (
 		<div className='container-fluid movie-app'>
+			{isLoading ? (
+				<div className='loading-screen' role='status' aria-live='polite' aria-label='Loading'>
+					<div className='loading-content'>
+						<div className='loading-spinner' />
+						<div className='loading-text'>Loading movies...</div>
+					</div>
+				</div>
+			) : null}
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
