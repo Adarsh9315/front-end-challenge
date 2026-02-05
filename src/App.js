@@ -6,12 +6,14 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import LandingPage from './components/LandingPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [showLanding, setShowLanding] = useState(true);
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
@@ -26,8 +28,10 @@ const App = () => {
 	};
 
 	useEffect(() => {
-		getMovieRequest(searchValue);
-	}, [searchValue]);
+		if (!showLanding && searchValue) {
+			getMovieRequest(searchValue);
+		}
+	}, [searchValue, showLanding]);
 
 	useEffect(() => {
 		const movieNomination = JSON.parse(
@@ -74,13 +78,39 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const handleGetStarted = () => {
+		setShowLanding(false);
+	};
+
+	const handleBackToLanding = () => {
+		setShowLanding(true);
+	};
+
+	const getNominations = () => {
+		try {
+			const nominations = JSON.parse(localStorage.getItem('nominations'));
+			return nominations || [];
+		} catch {
+			return [];
+		}
+	};
+
+	if (showLanding) {
+		return <LandingPage onGetStarted={handleGetStarted} />;
+	}
+
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
+				<div className='col-auto'>
+					<button className='back-button' onClick={handleBackToLanding}>
+						← Back
+					</button>
+				</div>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div className='banner' style={{display: getNominations().length === 5 ? 'block' : 'none'}}>
 				All 5 nominations are done
 			</div>
 			<div className='row'>

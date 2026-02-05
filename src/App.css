@@ -35,3 +35,19 @@ body {
 	display: block;
 	margin: auto;
 }
+
+.back-button {
+	background: transparent;
+	border: 1px solid #e94560;
+	color: #e94560;
+	padding: 8px 20px;
+	font-size: 1rem;
+	border-radius: 25px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.back-button:hover {
+	background: #e94560;
+	color: #ffffff;
+}
