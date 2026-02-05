@@ -1,6 +1,30 @@
 body {
 	background: #141414;
 	color: #ffffff;
+	margin: 0;
+	padding: 0;
+}
+
+.app-header {
+	padding: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.back-to-landing {
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	color: #ffffff;
+	padding: 10px 20px;
+	font-size: 0.9rem;
+	border-radius: 25px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.back-to-landing:hover {
+	background: rgba(255, 255, 255, 0.1);
+	border-color: #e50914;
+	color: #e50914;
 }
 
 .movie-app > .row {
