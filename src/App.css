@@ -3,6 +3,82 @@ body {
 	color: #ffffff;
 }
 
+.landing {
+	margin: 20px 20px 10px;
+	padding: 32px 28px;
+	background: linear-gradient(135deg, #1f1f1f 0%, #111111 60%);
+	border: 1px solid #2a2a2a;
+	border-radius: 16px;
+}
+
+.landing-hero {
+	display: flex;
+	gap: 24px;
+	align-items: stretch;
+	flex-wrap: wrap;
+}
+
+.landing-copy {
+	flex: 1 1 320px;
+	min-width: 260px;
+}
+
+.landing-kicker {
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+	font-size: 0.75rem;
+	color: #bdbdbd;
+}
+
+.landing-copy h1 {
+	margin: 10px 0 12px;
+	font-size: 2.5rem;
+}
+
+.landing-copy p {
+	color: #d7d7d7;
+	max-width: 520px;
+}
+
+.landing-actions {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin-top: 18px;
+}
+
+.landing-meta {
+	display: flex;
+	gap: 16px;
+	flex-wrap: wrap;
+	margin-top: 18px;
+	color: #9a9a9a;
+	font-size: 0.9rem;
+}
+
+.landing-panel {
+	flex: 1 1 260px;
+	display: grid;
+	gap: 16px;
+}
+
+.landing-panel-card {
+	background: #181818;
+	border: 1px solid #2b2b2b;
+	padding: 16px;
+	border-radius: 12px;
+}
+
+.landing-panel-card h3 {
+	font-size: 1.1rem;
+	margin-bottom: 8px;
+}
+
+.landing-panel-card p {
+	color: #cfcfcf;
+	margin-bottom: 0;
+}
+
 .movie-app > .row {
 	overflow-x: auto;
 	flex-wrap: nowrap;

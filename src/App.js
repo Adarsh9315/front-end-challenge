@@ -74,13 +74,57 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const nominationLimitReached = nomination.length === 5;
+
 	return (
 		<div className='container-fluid movie-app'>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
+			<section className='landing'>
+				<div className='landing-hero'>
+					<div className='landing-copy'>
+						<span className='landing-kicker'>The Shoppies</span>
+						<h1>Build your five-movie shortlist in minutes.</h1>
+						<p>
+							Search the OMDB catalog, save your top picks, and share your
+							nominations when you hit five.
+						</p>
+						<div className='landing-actions'>
+							<a className='btn btn-danger' href='#search'>
+								Start nominating
+							</a>
+							<a className='btn btn-outline-light' href='#how-it-works'>
+								How it works
+							</a>
+						</div>
+						<div className='landing-meta'>
+							<span>Real-time search</span>
+							<span>One list per fan</span>
+							<span>Auto-saved progress</span>
+						</div>
+					</div>
+					<div id='how-it-works' className='landing-panel'>
+						<div className='landing-panel-card'>
+							<h3>1. Find a film</h3>
+							<p>Search by title to explore the OMDB library.</p>
+						</div>
+						<div className='landing-panel-card'>
+							<h3>2. Nominate your favorites</h3>
+							<p>Pick up to five movies for your final list.</p>
+						</div>
+						<div className='landing-panel-card'>
+							<h3>3. Celebrate your picks</h3>
+							<p>Share your list once all five slots are filled.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			<div id='search' className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div
+				className='banner'
+				style={{ display: nominationLimitReached ? 'block' : 'none' }}
+			>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
