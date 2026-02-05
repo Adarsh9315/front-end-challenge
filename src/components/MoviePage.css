@@ -1,0 +1,114 @@
+/* Movie Page Styles */
+.movie-page {
+	min-height: 100vh;
+	background: #141414;
+}
+
+.movie-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2rem;
+	background: rgba(20, 20, 20, 0.95);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	backdrop-filter: blur(10px);
+}
+
+.back-link {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: 600;
+	transition: all 0.3s ease;
+}
+
+.back-link:hover {
+	color: #e94560;
+}
+
+.back-arrow {
+	font-size: 1.5rem;
+	transition: transform 0.3s ease;
+}
+
+.back-link:hover .back-arrow {
+	transform: translateX(-5px);
+}
+
+.nav-brand-text {
+	background: linear-gradient(90deg, #e94560, #ff6b6b);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	font-size: 1.25rem;
+}
+
+.nomination-counter {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1rem;
+	background: rgba(233, 69, 96, 0.1);
+	border: 1px solid rgba(233, 69, 96, 0.3);
+	border-radius: 20px;
+}
+
+.counter-label {
+	color: #b0b0b0;
+	font-size: 0.9rem;
+}
+
+.counter-value {
+	color: #e94560;
+	font-weight: 700;
+	font-size: 1rem;
+}
+
+/* Override existing styles */
+.movie-page .movie-app {
+	padding-top: 1rem;
+}
+
+.movie-page .banner {
+	text-align: center;
+	font-size: 1.2em;
+	padding: 15px 20px;
+	background: linear-gradient(135deg, #e94560, #ff6b6b);
+	color: #ffffff;
+	width: fit-content;
+	max-width: 90%;
+	display: block;
+	margin: 0 auto 20px auto;
+	border-radius: 10px;
+	font-weight: 600;
+	box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+}
+
+@media (max-width: 480px) {
+	.movie-nav {
+		padding: 0.75rem 1rem;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.nav-brand-text {
+		font-size: 1rem;
+	}
+
+	.nomination-counter {
+		padding: 0.4rem 0.75rem;
+	}
+
+	.counter-label {
+		font-size: 0.8rem;
+	}
+
+	.counter-value {
+		font-size: 0.9rem;
+	}
+}
