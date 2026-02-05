@@ -6,6 +6,7 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import LandingPage from './components/LandingPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
@@ -76,11 +77,18 @@ const App = () => {
 
 	return (
 		<div className='container-fluid movie-app'>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
+			<LandingPage />
+			<div
+				className='row d-flex align-items-center mt-4 mb-4'
+				id='search-section'
+			>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div
+				className='banner'
+				style={{ display: nomination.length === 5 ? 'block' : 'none' }}
+			>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
