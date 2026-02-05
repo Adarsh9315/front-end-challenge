@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -6,6 +7,7 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import TodoPage from './components/TodoPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
@@ -74,13 +76,13 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
-	return (
+	const moviesPage = (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div className='banner' style={{ display: nomination.length === 5 ? 'block' : 'none' }}>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
@@ -100,6 +102,34 @@ const App = () => {
 					nominationComponent={RemoveNominations}
 				/>
 			</div>
+		</div>
+	);
+
+	return (
+		<div className='app-shell'>
+			<nav className='app-nav'>
+				<NavLink
+					className={({ isActive }) =>
+						`app-nav-link${isActive ? ' active' : ''}`
+					}
+					to='/'
+					end
+				>
+					Movies
+				</NavLink>
+				<NavLink
+					className={({ isActive }) =>
+						`app-nav-link${isActive ? ' active' : ''}`
+					}
+					to='/todos'
+				>
+					Todos
+				</NavLink>
+			</nav>
+			<Routes>
+				<Route path='/' element={moviesPage} />
+				<Route path='/todos' element={<TodoPage />} />
+			</Routes>
 		</div>
 	);
 };

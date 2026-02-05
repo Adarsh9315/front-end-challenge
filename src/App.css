@@ -3,6 +3,89 @@ body {
 	color: #ffffff;
 }
 
+.app-shell {
+	min-height: 100vh;
+}
+
+.app-nav {
+	display: flex;
+	gap: 20px;
+	padding: 16px 24px;
+	background-color: #0b0b0b;
+	border-bottom: 1px solid #222222;
+}
+
+.app-nav-link {
+	color: #c9c9c9;
+	text-decoration: none;
+	font-weight: 600;
+	letter-spacing: 0.3px;
+}
+
+.app-nav-link.active {
+	color: #ffffff;
+	border-bottom: 2px solid #ffffff;
+	padding-bottom: 4px;
+}
+
+.todo-page {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 32px 24px 48px;
+}
+
+.todo-card {
+	background-color: #1d1d1d;
+	border-radius: 12px;
+	padding: 24px;
+	box-shadow: 0 12px 20px rgba(0, 0, 0, 0.35);
+}
+
+.todo-form {
+	display: flex;
+	gap: 12px;
+	margin-bottom: 20px;
+}
+
+.todo-form .form-control {
+	background-color: #121212;
+	border: 1px solid #2e2e2e;
+	color: #ffffff;
+}
+
+.todo-form .form-control::placeholder {
+	color: #8d8d8d;
+}
+
+.todo-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.todo-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 0;
+	border-bottom: 1px solid #2a2a2a;
+}
+
+.todo-item:last-child {
+	border-bottom: none;
+}
+
+.todo-text {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.todo-completed {
+	text-decoration: line-through;
+	color: #8d8d8d;
+}
+
 .movie-app > .row {
 	overflow-x: auto;
 	flex-wrap: nowrap;
