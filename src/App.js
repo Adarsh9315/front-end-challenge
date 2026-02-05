@@ -6,12 +6,15 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import MovieShowdown from './components/MovieShowdown';
+import Leaderboard from './components/Leaderboard';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [activeTab, setActiveTab] = useState('showdown');
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
@@ -31,7 +34,7 @@ const App = () => {
 
 	useEffect(() => {
 		const movieNomination = JSON.parse(
-			localStorage.getItem('nominations')
+			localStorage.getItem('nominations') || '[]'
 		);
 
 		if (movieNomination) {
@@ -75,31 +78,66 @@ const App = () => {
 	};
 
 	return (
-		<div className='container-fluid movie-app'>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='Movies' />
-				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-				All 5 nominations are done
-			</div>
-			<div className='row'>
-				<MovieList
-					movies={movies}
-					handleNominationClick={addNominationMovie}
-					nominationComponent={AddNomination}
-				/>
-			</div>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='Nominations' />
-			</div>
-			<div className='row'>
-				<MovieList
-					movies={nomination}
-					handleNominationClick={removeNominationMovie}
-					nominationComponent={RemoveNominations}
-				/>
-			</div>
+		<div className='app-container'>
+			<nav className='nav-tabs'>
+				<button 
+					className={`nav-tab ${activeTab === 'showdown' ? 'active' : ''}`}
+					onClick={() => setActiveTab('showdown')}
+				>
+					🎬 Showdown
+				</button>
+				<button 
+					className={`nav-tab ${activeTab === 'leaderboard' ? 'active' : ''}`}
+					onClick={() => setActiveTab('leaderboard')}
+				>
+					🏆 Leaderboard
+				</button>
+				<button 
+					className={`nav-tab ${activeTab === 'nominations' ? 'active' : ''}`}
+					onClick={() => setActiveTab('nominations')}
+				>
+					⭐ Nominations
+				</button>
+			</nav>
+
+			{activeTab === 'showdown' && (
+				<MovieShowdown />
+			)}
+
+			{activeTab === 'leaderboard' && (
+				<Leaderboard />
+			)}
+
+			{activeTab === 'nominations' && (
+				<div className='container-fluid movie-app'>
+					<div className='row d-flex align-items-center mt-4 mb-4'>
+						<MovieListHeading heading='Movies' />
+						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+					</div>
+					{nomination.length === 5 && (
+						<div className='banner'>
+							All 5 nominations are done
+						</div>
+					)}
+					<div className='row'>
+						<MovieList
+							movies={movies}
+							handleNominationClick={addNominationMovie}
+							nominationComponent={AddNomination}
+						/>
+					</div>
+					<div className='row d-flex align-items-center mt-4 mb-4'>
+						<MovieListHeading heading='Nominations' />
+					</div>
+					<div className='row'>
+						<MovieList
+							movies={nomination}
+							handleNominationClick={removeNominationMovie}
+							nominationComponent={RemoveNominations}
+						/>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };
