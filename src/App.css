@@ -35,3 +35,21 @@ body {
 	display: block;
 	margin: auto;
 }
+
+.back-button {
+	background: linear-gradient(90deg, #e94560, #ff6b6b);
+	border: none;
+	color: #ffffff;
+	padding: 0.5rem 1.25rem;
+	font-size: 0.9rem;
+	font-weight: 600;
+	border-radius: 25px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 10px rgba(233, 69, 96, 0.3);
+}
+
+.back-button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+}
