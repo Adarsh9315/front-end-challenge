@@ -3,6 +3,68 @@ body {
 	color: #ffffff;
 }
 
+.landing {
+	background: radial-gradient(circle at top, #2a2a2a 0%, #141414 60%);
+	border-bottom: 1px solid #2a2a2a;
+	padding: 64px 20px 48px;
+}
+
+.landing-inner {
+	max-width: 980px;
+	margin: 0 auto;
+}
+
+.landing-eyebrow {
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 0.85rem;
+	color: #b3b3b3;
+	margin-bottom: 12px;
+}
+
+.landing-title {
+	font-size: 2.75rem;
+	font-weight: 700;
+	margin-bottom: 16px;
+}
+
+.landing-subtitle {
+	font-size: 1.1rem;
+	color: #d4d4d4;
+	max-width: 640px;
+	margin-bottom: 28px;
+}
+
+.landing-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-bottom: 32px;
+}
+
+.landing-highlights {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 16px;
+}
+
+.landing-card {
+	background: #1b1b1b;
+	border: 1px solid #2c2c2c;
+	border-radius: 12px;
+	padding: 18px 20px;
+}
+
+.landing-card h3 {
+	font-size: 1.1rem;
+	margin-bottom: 8px;
+}
+
+.landing-card p {
+	color: #c9c9c9;
+	margin: 0;
+}
+
 .movie-app > .row {
 	overflow-x: auto;
 	flex-wrap: nowrap;
