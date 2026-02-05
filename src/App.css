@@ -1,6 +1,8 @@
 body {
 	background: #141414;
 	color: #ffffff;
+	margin: 0;
+	padding: 0;
 }
 
 .movie-app > .row {
@@ -34,4 +36,215 @@ body {
 	width: 30%;
 	display: block;
 	margin: auto;
+}
+
+/* Landing Page Styles */
+.landing-page {
+	min-height: 100vh;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.landing-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+
+.bg-gradient {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.bg-pattern {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: 
+		radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+		radial-gradient(circle at 80% 20%, rgba(78, 205, 196, 0.1) 0%, transparent 50%),
+		radial-gradient(circle at 40% 40%, rgba(255, 230, 109, 0.05) 0%, transparent 40%);
+}
+
+.landing-hero {
+	position: relative;
+	z-index: 1;
+	text-align: center;
+	padding: 40px 20px;
+	max-width: 900px;
+}
+
+.landing-content {
+	animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.landing-title {
+	font-size: 3.5rem;
+	font-weight: 700;
+	margin-bottom: 20px;
+	background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.title-icon {
+	display: inline-block;
+	margin-right: 15px;
+	-webkit-text-fill-color: initial;
+}
+
+.landing-subtitle {
+	font-size: 1.3rem;
+	color: #a0a0a0;
+	margin-bottom: 50px;
+	line-height: 1.6;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.landing-features {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 30px;
+	margin-bottom: 50px;
+}
+
+.feature-item {
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 16px;
+	padding: 30px 25px;
+	width: 250px;
+	text-align: center;
+	transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+	transform: translateY(-5px);
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.2);
+}
+
+.feature-icon {
+	font-size: 2.5rem;
+	margin-bottom: 15px;
+}
+
+.feature-text h3 {
+	font-size: 1.1rem;
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: #ffffff;
+}
+
+.feature-text p {
+	font-size: 0.9rem;
+	color: #888;
+	line-height: 1.5;
+	margin: 0;
+}
+
+.landing-cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+	color: #ffffff;
+	font-size: 1.2rem;
+	font-weight: 600;
+	padding: 18px 45px;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+}
+
+.landing-cta:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+}
+
+.landing-cta:active {
+	transform: translateY(0);
+}
+
+.cta-arrow {
+	transition: transform 0.3s ease;
+}
+
+.landing-cta:hover .cta-arrow {
+	transform: translateX(5px);
+}
+
+/* Back button for movie app */
+.back-button {
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	color: #ffffff;
+	padding: 10px 20px;
+	border-radius: 25px;
+	cursor: pointer;
+	font-size: 0.9rem;
+	transition: all 0.3s ease;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.back-button:hover {
+	background: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+	.landing-title {
+		font-size: 2.5rem;
+	}
+	
+	.landing-subtitle {
+		font-size: 1.1rem;
+	}
+	
+	.landing-features {
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.feature-item {
+		width: 100%;
+		max-width: 300px;
+	}
+	
+	.landing-cta {
+		padding: 15px 35px;
+		font-size: 1.1rem;
+	}
 }

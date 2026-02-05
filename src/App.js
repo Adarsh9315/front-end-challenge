@@ -6,12 +6,14 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import LandingPage from './components/LandingPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [showLanding, setShowLanding] = useState(true);
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
@@ -74,13 +76,39 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const handleGetStarted = () => {
+		setShowLanding(false);
+	};
+
+	const handleBackToLanding = () => {
+		setShowLanding(true);
+	};
+
+	const getNominationsCount = () => {
+		try {
+			const nominations = JSON.parse(localStorage.getItem('nominations'));
+			return nominations ? nominations.length : 0;
+		} catch {
+			return 0;
+		}
+	};
+
+	if (showLanding) {
+		return <LandingPage onGetStarted={handleGetStarted} />;
+	}
+
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
+				<div className='col-2'>
+					<button className='back-button' onClick={handleBackToLanding}>
+						<span>←</span> Home
+					</button>
+				</div>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div className='banner' style={{display: getNominationsCount() === 5 ? 'block' : 'none'}}>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
