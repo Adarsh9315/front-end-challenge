@@ -3,6 +3,64 @@ body {
 	color: #ffffff;
 }
 
+.app-wrapper {
+	min-height: 100vh;
+}
+
+/* Navigation Styles */
+.navigation {
+	background: #1f1f1f;
+	border-bottom: 2px solid #333;
+	padding: 0;
+}
+
+.app-title {
+	font-size: 1.8em;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+.brand-link {
+	color: #ffffff;
+	text-decoration: none;
+	transition: color 0.3s;
+}
+
+.brand-link:hover {
+	color: #e50914;
+	text-decoration: none;
+}
+
+.nav-links {
+	list-style: none;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+	gap: 30px;
+}
+
+.nav-links li {
+	display: inline-block;
+}
+
+.nav-links a {
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 1.1em;
+	font-weight: 500;
+	transition: color 0.3s;
+	padding: 8px 16px;
+	border-radius: 4px;
+}
+
+.nav-links a:hover {
+	color: #e50914;
+	background: rgba(229, 9, 20, 0.1);
+}
+
+/* Movie App Styles */
 .movie-app > .row {
 	overflow-x: auto;
 	flex-wrap: nowrap;
@@ -34,4 +92,94 @@ body {
 	width: 30%;
 	display: block;
 	margin: auto;
+}
+
+/* About Us Page Styles */
+.about-us-page {
+	padding: 40px 20px;
+	min-height: calc(100vh - 100px);
+}
+
+.about-us-page h1 {
+	font-size: 2.5em;
+	font-weight: bold;
+	color: #e50914;
+	margin-bottom: 20px;
+}
+
+.about-us-page h2 {
+	font-size: 2em;
+	color: #ffffff;
+	margin-bottom: 20px;
+}
+
+.about-us-page h3 {
+	font-size: 1.5em;
+	color: #e50914;
+	margin-bottom: 15px;
+	margin-top: 30px;
+}
+
+.about-content {
+	background: #1f1f1f;
+	padding: 40px;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.about-content p {
+	font-size: 1.1em;
+	line-height: 1.8;
+	color: #cccccc;
+	margin-bottom: 20px;
+}
+
+.feature-list {
+	list-style: none;
+	padding: 0;
+	margin: 20px 0;
+}
+
+.feature-list li {
+	font-size: 1.1em;
+	line-height: 1.8;
+	color: #cccccc;
+	margin-bottom: 15px;
+	padding-left: 30px;
+	position: relative;
+}
+
+.feature-list li:before {
+	content: "▸";
+	color: #e50914;
+	font-size: 1.5em;
+	position: absolute;
+	left: 0;
+	top: -2px;
+}
+
+.feature-list strong {
+	color: #ffffff;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+	.nav-links {
+		justify-content: center;
+		margin-top: 10px;
+		gap: 15px;
+	}
+	
+	.app-title {
+		text-align: center;
+		font-size: 1.5em;
+	}
+	
+	.about-content {
+		padding: 20px;
+	}
+	
+	.about-us-page h1 {
+		font-size: 2em;
+	}
 }
