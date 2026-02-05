@@ -6,12 +6,14 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import TodoPage from './pages/TodoPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [activePage, setActivePage] = useState('movies');
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
@@ -74,15 +76,17 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
-	return (
-		<div className='container-fluid movie-app'>
+	const renderMoviesPage = () => (
+		<>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-				All 5 nominations are done
-			</div>
+			{nomination.length === 5 && (
+				<div className='banner'>
+					All 5 nominations are done
+				</div>
+			)}
 			<div className='row'>
 				<MovieList
 					movies={movies}
@@ -100,6 +104,33 @@ const App = () => {
 					nominationComponent={RemoveNominations}
 				/>
 			</div>
+		</>
+	);
+
+	return (
+		<div className='container-fluid movie-app'>
+			<div className='row d-flex align-items-center mt-4 mb-2'>
+				<MovieListHeading heading='Movie App' />
+				<div className='col d-flex justify-content-end'>
+					<div className='page-nav btn-group' role='group' aria-label='Page navigation'>
+						<button
+							type='button'
+							className={`btn ${activePage === 'movies' ? 'btn-light' : 'btn-outline-light'}`}
+							onClick={() => setActivePage('movies')}
+						>
+							Movies
+						</button>
+						<button
+							type='button'
+							className={`btn ${activePage === 'todos' ? 'btn-light' : 'btn-outline-light'}`}
+							onClick={() => setActivePage('todos')}
+						>
+							Todos
+						</button>
+					</div>
+				</div>
+			</div>
+			{activePage === 'movies' ? renderMoviesPage() : <TodoPage />}
 		</div>
 	);
 };

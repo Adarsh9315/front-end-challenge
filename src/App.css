@@ -35,3 +35,77 @@ body {
 	display: block;
 	margin: auto;
 }
+
+.page-nav .btn {
+	min-width: 110px;
+}
+
+.todo-page {
+	padding: 0 20px 40px;
+}
+
+.todo-form {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.todo-form .form-control {
+	flex: 1 1 240px;
+	min-width: 220px;
+}
+
+.todo-controls {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin: 16px 0;
+}
+
+.todo-list {
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+}
+
+.todo-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	background-color: #1c1c1c;
+	border: 1px solid #2c2c2c;
+	border-radius: 6px;
+	padding: 12px 16px;
+	margin-bottom: 10px;
+}
+
+.todo-label {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin: 0;
+}
+
+.todo-item.completed .todo-label span {
+	text-decoration: line-through;
+	opacity: 0.6;
+}
+
+.todo-empty {
+	text-align: center;
+	color: #b7b7b7;
+	margin-top: 24px;
+}
+
+@media (max-width: 576px) {
+	.page-nav .btn {
+		min-width: 90px;
+	}
+
+	.todo-item {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
