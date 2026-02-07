@@ -35,3 +35,21 @@ body {
 	display: block;
 	margin: auto;
 }
+
+.todo-app {
+	min-height: 100vh;
+	padding-bottom: 50px;
+}
+
+.todo-item {
+	transition: all 0.2s ease;
+}
+
+.todo-item:hover {
+	background-color: #333 !important;
+}
+
+.navbar-nav .nav-link.active {
+	font-weight: bold;
+	border-bottom: 2px solid #007bff;
+}
