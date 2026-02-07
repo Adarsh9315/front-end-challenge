@@ -6,12 +6,15 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import Navigation from './components/Navigation';
+import NoteTaking from './components/NoteTaking';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [currentPage, setCurrentPage] = useState('movies');
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
@@ -74,13 +77,18 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
-	return (
-		<div className='container-fluid movie-app'>
+	const getNominationsFromStorage = () => {
+		const nominations = localStorage.getItem('nominations');
+		return nominations ? JSON.parse(nominations) : [];
+	};
+
+	const renderMoviesPage = () => (
+		<>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div className='banner' style={{display: getNominationsFromStorage().length === 5 ? 'block' : 'none'}}>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
@@ -100,6 +108,19 @@ const App = () => {
 					nominationComponent={RemoveNominations}
 				/>
 			</div>
+		</>
+	);
+
+	const renderNotesPage = () => (
+		<div className='notes-page'>
+			<NoteTaking />
+		</div>
+	);
+
+	return (
+		<div className='container-fluid movie-app'>
+			<Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
+			{currentPage === 'movies' ? renderMoviesPage() : renderNotesPage()}
 		</div>
 	);
 };
