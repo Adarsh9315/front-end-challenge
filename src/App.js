@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -6,9 +7,10 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import TodoPage from './pages/TodoPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
-const App = () => {
+const MoviePage = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -74,13 +76,15 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const hasFiveNominations = nomination.length >= 5;
+
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
-				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+				<SearchBox value={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div className='banner' style={{display: hasFiveNominations ? 'block' : 'none'}}>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
@@ -100,6 +104,28 @@ const App = () => {
 					nominationComponent={RemoveNominations}
 				/>
 			</div>
+		</div>
+	);
+};
+
+const App = () => {
+	return (
+		<div className='app-shell'>
+			<nav className='app-nav'>
+				<div className='nav-brand'>Movie App</div>
+				<div className='nav-links'>
+					<NavLink className='nav-link' to='/' end>
+						Movies
+					</NavLink>
+					<NavLink className='nav-link' to='/todo'>
+						Todo
+					</NavLink>
+				</div>
+			</nav>
+			<Routes>
+				<Route path='/' element={<MoviePage />} />
+				<Route path='/todo' element={<TodoPage />} />
+			</Routes>
 		</div>
 	);
 };
