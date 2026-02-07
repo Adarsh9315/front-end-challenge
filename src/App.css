@@ -3,6 +3,32 @@ body {
 	color: #ffffff;
 }
 
+.app-shell {
+	min-height: 100vh;
+}
+
+.app-nav {
+	display: flex;
+	gap: 12px;
+	padding: 16px 20px;
+	background-color: #1b1b1b;
+	border-bottom: 1px solid #2a2a2a;
+}
+
+.nav-button {
+	border: 1px solid #ffffff;
+	background: transparent;
+	color: #ffffff;
+	padding: 6px 16px;
+	border-radius: 20px;
+	font-size: 0.95rem;
+}
+
+.nav-button.active {
+	background: #ffffff;
+	color: #141414;
+}
+
 .movie-app > .row {
 	overflow-x: auto;
 	flex-wrap: nowrap;
@@ -34,4 +60,35 @@ body {
 	width: 30%;
 	display: block;
 	margin: auto;
+}
+
+.todo-page {
+	padding-bottom: 40px;
+}
+
+.todo-empty {
+	padding: 24px;
+	text-align: center;
+	background: #1b1b1b;
+	border-radius: 8px;
+	color: #d9d9d9;
+}
+
+.todo-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	background: #1b1b1b;
+	color: #ffffff;
+	border: 1px solid #2a2a2a;
+}
+
+.todo-item .form-check {
+	margin-bottom: 0;
+}
+
+.todo-item.completed label {
+	text-decoration: line-through;
+	color: #bdbdbd;
 }
