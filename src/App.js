@@ -7,8 +7,10 @@ import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import { useSnackbar } from 'react-simple-snackbar'
+import ChessGamePage from './components/ChessGamePage';
 
 const App = () => {
+	const [activePage, setActivePage] = useState('movies');
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -74,32 +76,62 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const hasMaxNominations = nomination.length === 5;
+
 	return (
-		<div className='container-fluid movie-app'>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='Movies' />
-				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+		<div className='container-fluid app-shell'>
+			<div className='row d-flex align-items-center mt-4 mb-3 app-header'>
+				<div className='col-12 col-lg'>
+					<h1 className='app-title'>Media & Games</h1>
+					<p className='app-subtitle'>Search for movies or jump into a quick chess match.</p>
+				</div>
+				<div className='col-12 col-lg-auto app-nav'>
+					<button
+						type='button'
+						className={`btn ${activePage === 'movies' ? 'btn-light' : 'btn-outline-light'}`}
+						onClick={() => setActivePage('movies')}
+					>
+						Movies
+					</button>
+					<button
+						type='button'
+						className={`btn ${activePage === 'chess' ? 'btn-light' : 'btn-outline-light'}`}
+						onClick={() => setActivePage('chess')}
+					>
+						Chess
+					</button>
+				</div>
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-				All 5 nominations are done
-			</div>
-			<div className='row'>
-				<MovieList
-					movies={movies}
-					handleNominationClick={addNominationMovie}
-					nominationComponent={AddNomination}
-				/>
-			</div>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='Nominations' />
-			</div>
-			<div className='row'>
-				<MovieList
-					movies={nomination}
-					handleNominationClick={removeNominationMovie}
-					nominationComponent={RemoveNominations}
-				/>
-			</div>
+			{activePage === 'movies' ? (
+				<div className='movie-app'>
+					<div className='row d-flex align-items-center mt-4 mb-4'>
+						<MovieListHeading heading='Movies' />
+						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+					</div>
+					<div className='banner' style={{display: hasMaxNominations ? 'block' : 'none'}}>
+						All 5 nominations are done
+					</div>
+					<div className='row'>
+						<MovieList
+							movies={movies}
+							handleNominationClick={addNominationMovie}
+							nominationComponent={AddNomination}
+						/>
+					</div>
+					<div className='row d-flex align-items-center mt-4 mb-4'>
+						<MovieListHeading heading='Nominations' />
+					</div>
+					<div className='row'>
+						<MovieList
+							movies={nomination}
+							handleNominationClick={removeNominationMovie}
+							nominationComponent={RemoveNominations}
+						/>
+					</div>
+				</div>
+			) : (
+				<ChessGamePage />
+			)}
 		</div>
 	);
 };
