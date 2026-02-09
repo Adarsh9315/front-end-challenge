@@ -1,0 +1,127 @@
+.landing-page {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, #141414 0%, #1a1a1a 50%, #141414 100%);
+	padding: 20px;
+}
+
+.landing-content {
+	max-width: 1200px;
+	width: 100%;
+	text-align: center;
+	animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.landing-header {
+	margin-bottom: 60px;
+}
+
+.landing-title {
+	font-size: 4rem;
+	font-weight: bold;
+	margin-bottom: 20px;
+	background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.landing-subtitle {
+	font-size: 1.5rem;
+	color: #cccccc;
+	margin: 0;
+}
+
+.landing-features {
+	display: flex;
+	justify-content: center;
+	gap: 40px;
+	margin-bottom: 60px;
+	flex-wrap: wrap;
+}
+
+.feature-card {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 12px;
+	padding: 30px;
+	max-width: 300px;
+	transition: transform 0.3s ease, background 0.3s ease;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-card:hover {
+	transform: translateY(-10px);
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.feature-icon {
+	font-size: 3rem;
+	margin-bottom: 15px;
+}
+
+.feature-card h3 {
+	font-size: 1.5rem;
+	margin-bottom: 10px;
+	color: #ffffff;
+}
+
+.feature-card p {
+	color: #cccccc;
+	font-size: 1rem;
+	line-height: 1.6;
+	margin: 0;
+}
+
+.enter-app-btn {
+	background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+	color: #ffffff;
+	border: none;
+	padding: 18px 50px;
+	font-size: 1.2rem;
+	font-weight: bold;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.enter-app-btn:hover {
+	transform: scale(1.05);
+	box-shadow: 0 8px 20px rgba(229, 9, 20, 0.4);
+}
+
+.enter-app-btn:active {
+	transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+	.landing-title {
+		font-size: 2.5rem;
+	}
+
+	.landing-subtitle {
+		font-size: 1.2rem;
+	}
+
+	.landing-features {
+		gap: 20px;
+	}
+
+	.feature-card {
+		max-width: 100%;
+	}
+}
