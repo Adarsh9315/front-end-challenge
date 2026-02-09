@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -6,9 +7,34 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import ChessGame from './components/ChessGame';
 import { useSnackbar } from 'react-simple-snackbar'
 
-const App = () => {
+const NavBar = () => {
+	const location = useLocation();
+
+	return (
+		<nav className="app-nav">
+			<div className="nav-brand">App Hub</div>
+			<div className="nav-links">
+				<Link
+					to="/"
+					className={`nav-link-item ${location.pathname === '/' ? 'active' : ''}`}
+				>
+					Movies
+				</Link>
+				<Link
+					to="/chess"
+					className={`nav-link-item ${location.pathname === '/chess' ? 'active' : ''}`}
+				>
+					Chess
+				</Link>
+			</div>
+		</nav>
+	);
+};
+
+const MovieApp = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -101,6 +127,22 @@ const App = () => {
 				/>
 			</div>
 		</div>
+	);
+};
+
+const App = () => {
+	return (
+		<Router>
+			<NavBar />
+			<Switch>
+				<Route exact path="/">
+					<MovieApp />
+				</Route>
+				<Route path="/chess">
+					<ChessGame />
+				</Route>
+			</Switch>
+		</Router>
 	);
 };
 

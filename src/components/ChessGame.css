@@ -1,0 +1,379 @@
+.chess-page {
+	min-height: 100vh;
+	background: #141414;
+	color: #ffffff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.chess-page h1 {
+	font-size: 2rem;
+	margin-bottom: 8px;
+	letter-spacing: 2px;
+	font-weight: 300;
+}
+
+.chess-status {
+	font-size: 1.1rem;
+	margin-bottom: 16px;
+	min-height: 28px;
+	color: #b0b0b0;
+}
+
+.chess-status.check {
+	color: #ff6b6b;
+	font-weight: 600;
+}
+
+.chess-status.checkmate {
+	color: #ffd700;
+	font-weight: 700;
+	font-size: 1.3rem;
+}
+
+.chess-status.stalemate {
+	color: #ffa500;
+	font-weight: 600;
+}
+
+.chess-layout {
+	display: flex;
+	gap: 32px;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.chess-board-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.chess-board {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	border: 3px solid #555;
+	border-radius: 4px;
+	overflow: hidden;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.chess-square {
+	width: 64px;
+	height: 64px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 40px;
+	cursor: pointer;
+	user-select: none;
+	position: relative;
+	transition: background-color 0.15s ease;
+}
+
+.chess-square.light {
+	background-color: #e8d5b5;
+	color: #1a1a1a;
+}
+
+.chess-square.dark {
+	background-color: #b58863;
+	color: #1a1a1a;
+}
+
+.chess-square.selected {
+	background-color: #7fc97f !important;
+	box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.chess-square.legal-move {
+	position: relative;
+}
+
+.chess-square.legal-move::after {
+	content: '';
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	background: rgba(0, 0, 0, 0.25);
+	border-radius: 50%;
+}
+
+.chess-square.legal-capture {
+	position: relative;
+}
+
+.chess-square.legal-capture::after {
+	content: '';
+	position: absolute;
+	width: 56px;
+	height: 56px;
+	border: 4px solid rgba(0, 0, 0, 0.25);
+	border-radius: 50%;
+	box-sizing: border-box;
+}
+
+.chess-square.last-move-from {
+	background-color: #cdd26a !important;
+}
+
+.chess-square.last-move-to {
+	background-color: #aaa23a !important;
+}
+
+.chess-square.king-in-check {
+	background: radial-gradient(circle, #ff0000 0%, #cc0000 40%, transparent 70%) !important;
+}
+
+.chess-square:hover {
+	filter: brightness(1.1);
+}
+
+.chess-piece {
+	line-height: 1;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	pointer-events: none;
+}
+
+.chess-piece.white-piece {
+	filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+.chess-piece.black-piece {
+	filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.chess-sidebar {
+	background: #1e1e1e;
+	border-radius: 8px;
+	padding: 20px;
+	min-width: 220px;
+	max-width: 260px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.chess-sidebar h3 {
+	font-size: 1rem;
+	margin-bottom: 12px;
+	color: #aaa;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 400;
+}
+
+.captured-pieces {
+	margin-bottom: 20px;
+}
+
+.captured-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2px;
+	margin-bottom: 8px;
+	min-height: 28px;
+}
+
+.captured-row span {
+	font-size: 20px;
+}
+
+.captured-label {
+	font-size: 0.75rem;
+	color: #666;
+	margin-bottom: 2px;
+}
+
+.move-history {
+	max-height: 300px;
+	overflow-y: auto;
+	font-size: 0.85rem;
+}
+
+.move-history::-webkit-scrollbar {
+	width: 6px;
+}
+
+.move-history::-webkit-scrollbar-track {
+	background: #2a2a2a;
+	border-radius: 3px;
+}
+
+.move-history::-webkit-scrollbar-thumb {
+	background: #555;
+	border-radius: 3px;
+}
+
+.move-row {
+	display: flex;
+	gap: 12px;
+	padding: 3px 6px;
+	border-radius: 3px;
+}
+
+.move-row:nth-child(odd) {
+	background: rgba(255, 255, 255, 0.03);
+}
+
+.move-number {
+	color: #555;
+	min-width: 28px;
+}
+
+.move-white, .move-black {
+	min-width: 60px;
+}
+
+.chess-controls {
+	margin-top: 20px;
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+}
+
+.chess-btn {
+	padding: 10px 24px;
+	background: #333;
+	color: #fff;
+	border: 1px solid #555;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 0.9rem;
+	transition: all 0.2s ease;
+	letter-spacing: 0.5px;
+}
+
+.chess-btn:hover {
+	background: #444;
+	border-color: #777;
+}
+
+.chess-btn.primary {
+	background: #2d7d46;
+	border-color: #3a9d5a;
+}
+
+.chess-btn.primary:hover {
+	background: #35915a;
+}
+
+.promotion-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+}
+
+.promotion-dialog {
+	background: #2a2a2a;
+	border-radius: 12px;
+	padding: 24px;
+	text-align: center;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.promotion-dialog h3 {
+	margin-bottom: 16px;
+	font-weight: 400;
+	color: #ccc;
+}
+
+.promotion-options {
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+}
+
+.promotion-option {
+	width: 64px;
+	height: 64px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 40px;
+	background: #3a3a3a;
+	border: 2px solid #555;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.promotion-option:hover {
+	background: #4a4a4a;
+	border-color: #7fc97f;
+	transform: scale(1.1);
+}
+
+.board-coordinates {
+	display: flex;
+}
+
+.file-labels {
+	display: grid;
+	grid-template-columns: repeat(8, 64px);
+	margin-top: 4px;
+}
+
+.file-labels span {
+	text-align: center;
+	font-size: 0.75rem;
+	color: #666;
+}
+
+.rank-labels {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	margin-right: 4px;
+}
+
+.rank-labels span {
+	height: 64px;
+	display: flex;
+	align-items: center;
+	font-size: 0.75rem;
+	color: #666;
+}
+
+@media (max-width: 768px) {
+	.chess-square {
+		width: 44px;
+		height: 44px;
+		font-size: 28px;
+	}
+
+	.file-labels {
+		grid-template-columns: repeat(8, 44px);
+	}
+
+	.rank-labels span {
+		height: 44px;
+	}
+
+	.chess-layout {
+		gap: 16px;
+	}
+
+	.chess-sidebar {
+		min-width: 180px;
+	}
+
+	.legal-move::after {
+		width: 12px;
+		height: 12px;
+	}
+
+	.legal-capture::after {
+		width: 38px;
+		height: 38px;
+	}
+}
