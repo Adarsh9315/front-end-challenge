@@ -35,3 +35,66 @@ body {
 	display: block;
 	margin: auto;
 }
+
+/* Todo Page Styles */
+.todo-app {
+	min-height: 100vh;
+	padding-bottom: 50px;
+}
+
+.todo-item {
+	background-color: #2a2a2a;
+	border-radius: 8px;
+	border: 1px solid #444;
+	transition: all 0.2s;
+}
+
+.todo-item:hover {
+	background-color: #333;
+	border-color: #555;
+}
+
+.todo-app .form-control {
+	background-color: #2a2a2a;
+	border: 1px solid #444;
+	color: #ffffff;
+}
+
+.todo-app .form-control:focus {
+	background-color: #333;
+	border-color: #666;
+	color: #ffffff;
+	box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
+}
+
+.todo-app .form-control::placeholder {
+	color: #888;
+}
+
+.todo-app .btn-primary {
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.todo-app .btn-primary:hover {
+	background-color: #0056b3;
+	border-color: #0056b3;
+}
+
+.todo-app .text-muted {
+	color: #888 !important;
+}
+
+/* Navigation Styles */
+.navbar {
+	margin-bottom: 0;
+}
+
+.navbar-nav .nav-link {
+	color: rgba(255, 255, 255, 0.7) !important;
+	transition: color 0.2s;
+}
+
+.navbar-nav .nav-link:hover {
+	color: rgba(255, 255, 255, 1) !important;
+}
