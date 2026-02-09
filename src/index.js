@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import SnackbarProvider from 'react-simple-snackbar'
+import SnackbarProvider from 'react-simple-snackbar';
 
 ReactDOM.render(
 	<React.StrictMode>
