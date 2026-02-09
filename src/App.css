@@ -35,3 +35,78 @@ body {
 	display: block;
 	margin: auto;
 }
+
+/* Navbar */
+.app-navbar {
+	background-color: #1c1c1c;
+	padding: 12px 20px;
+	border-bottom: 1px solid #2a2a2a;
+}
+
+.app-navbar .navbar-brand {
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
+.nav-links {
+	display: flex;
+	gap: 20px;
+}
+
+.nav-link-item {
+	color: #aaaaaa;
+	text-decoration: none;
+	font-size: 1em;
+	padding: 6px 14px;
+	border-radius: 4px;
+	transition: color 0.2s, background-color 0.2s;
+}
+
+.nav-link-item:hover {
+	color: #ffffff;
+	text-decoration: none;
+	background-color: #2a2a2a;
+}
+
+.nav-link-item.active {
+	color: #ffffff;
+	background-color: #333333;
+}
+
+/* Todo Page */
+.todo-page {
+	max-width: 700px;
+}
+
+.todo-page .form-control {
+	background-color: #1c1c1c;
+	border: 1px solid #333333;
+	color: #ffffff;
+}
+
+.todo-page .form-control::placeholder {
+	color: #777777;
+}
+
+.todo-page .form-control:focus {
+	background-color: #1c1c1c;
+	border-color: #555555;
+	color: #ffffff;
+	box-shadow: none;
+}
+
+.todo-item {
+	background-color: #1c1c1c;
+	border: 1px solid #2a2a2a;
+	color: #ffffff;
+	transition: background-color 0.2s;
+}
+
+.todo-item:hover {
+	background-color: #222222;
+}
+
+.todo-completed {
+	text-decoration: line-through;
+	color: #666666;
+}
