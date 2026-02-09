@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -6,9 +7,11 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import Navbar from './components/Navbar';
+import TodoPage from './components/TodoPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
-const App = () => {
+const MoviesPage = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -101,6 +104,18 @@ const App = () => {
 				/>
 			</div>
 		</div>
+	);
+};
+
+const App = () => {
+	return (
+		<Router>
+			<Navbar />
+			<Switch>
+				<Route exact path='/' component={MoviesPage} />
+				<Route path='/todos' component={TodoPage} />
+			</Switch>
+		</Router>
 	);
 };
 
