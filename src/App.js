@@ -6,12 +6,14 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import LandingPage from './components/LandingPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [showLanding, setShowLanding] = useState(true);
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
@@ -73,6 +75,14 @@ const App = () => {
 		setNomination(newNominationList);
 		saveToLocalStorage(newNominationList);
 	};
+
+	const handleGetStarted = () => {
+		setShowLanding(false);
+	};
+
+	if (showLanding) {
+		return <LandingPage onGetStarted={handleGetStarted} />;
+	}
 
 	return (
 		<div className='container-fluid movie-app'>
