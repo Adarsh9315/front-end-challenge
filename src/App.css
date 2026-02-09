@@ -3,6 +3,38 @@ body {
 	color: #ffffff;
 }
 
+/* Navbar */
+.navbar-container {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 24px;
+	background-color: #1f1f1f;
+	border-bottom: 1px solid #2a2a2a;
+}
+
+.navbar-link {
+	color: #aaaaaa;
+	text-decoration: none;
+	padding: 8px 16px;
+	border-radius: 4px;
+	font-size: 1rem;
+	font-weight: 500;
+	transition: background-color 0.2s, color 0.2s;
+}
+
+.navbar-link:hover {
+	color: #ffffff;
+	background-color: #2a2a2a;
+	text-decoration: none;
+}
+
+.navbar-link-active {
+	color: #ffffff;
+	background-color: #333333;
+}
+
+/* Movie app */
 .movie-app > .row {
 	overflow-x: auto;
 	flex-wrap: nowrap;
@@ -34,4 +66,107 @@ body {
 	width: 30%;
 	display: block;
 	margin: auto;
+}
+
+/* Todo Page */
+.todo-page {
+	max-width: 700px;
+	margin-top: 40px;
+}
+
+.todo-title {
+	margin-bottom: 24px;
+}
+
+.todo-input-container {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 24px;
+}
+
+.todo-input {
+	background-color: #1f1f1f;
+	border: 1px solid #333333;
+	color: #ffffff;
+	flex: 1;
+}
+
+.todo-input::placeholder {
+	color: #888888;
+}
+
+.todo-input:focus {
+	background-color: #1f1f1f;
+	border-color: #555555;
+	color: #ffffff;
+	box-shadow: none;
+}
+
+.todo-add-btn {
+	background-color: #e50914;
+	color: #ffffff;
+	padding: 6px 20px;
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+.todo-add-btn:hover {
+	background-color: #b0060f;
+	color: #ffffff;
+}
+
+.todo-empty {
+	color: #888888;
+	text-align: center;
+	margin-top: 40px;
+	font-size: 1.1rem;
+}
+
+.todo-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.todo-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 16px;
+	margin-bottom: 8px;
+	background-color: #1f1f1f;
+	border: 1px solid #2a2a2a;
+	border-radius: 6px;
+	transition: background-color 0.2s;
+}
+
+.todo-item:hover {
+	background-color: #262626;
+}
+
+.todo-text {
+	flex: 1;
+	cursor: pointer;
+	font-size: 1rem;
+	user-select: none;
+}
+
+.todo-completed .todo-text {
+	text-decoration: line-through;
+	color: #666666;
+}
+
+.todo-delete-btn {
+	color: #e50914;
+	background: none;
+	border: 1px solid #e50914;
+	padding: 4px 12px;
+	font-size: 0.85rem;
+	margin-left: 12px;
+	border-radius: 4px;
+}
+
+.todo-delete-btn:hover {
+	background-color: #e50914;
+	color: #ffffff;
 }
