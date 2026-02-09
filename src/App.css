@@ -35,3 +35,267 @@ body {
 	display: block;
 	margin: auto;
 }
+
+/* ===== Landing Page ===== */
+
+.landing-page {
+	min-height: 100vh;
+	background: #141414;
+	color: #ffffff;
+	overflow: hidden;
+}
+
+/* Hero Section */
+.landing-hero {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 80vh;
+	padding: 60px 8%;
+	gap: 40px;
+}
+
+.landing-hero-content {
+	flex: 1;
+	max-width: 560px;
+}
+
+.landing-badge {
+	display: inline-block;
+	padding: 6px 16px;
+	border-radius: 20px;
+	background: rgba(229, 9, 20, 0.15);
+	color: #e50914;
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	margin-bottom: 24px;
+}
+
+.landing-title {
+	font-size: 3.2rem;
+	font-weight: 800;
+	line-height: 1.15;
+	margin-bottom: 24px;
+	letter-spacing: -0.5px;
+}
+
+.landing-title-accent {
+	background: linear-gradient(135deg, #e50914, #ff6b6b);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.landing-subtitle {
+	font-size: 1.15rem;
+	line-height: 1.7;
+	color: #a0a0a0;
+	margin-bottom: 40px;
+	max-width: 480px;
+}
+
+.landing-cta {
+	display: inline-block;
+	padding: 16px 48px;
+	background: linear-gradient(135deg, #e50914, #b20710);
+	color: #ffffff;
+	border: none;
+	border-radius: 8px;
+	font-size: 1.1rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	letter-spacing: 0.5px;
+}
+
+.landing-cta:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 30px rgba(229, 9, 20, 0.4);
+}
+
+.landing-cta:active {
+	transform: translateY(0);
+}
+
+/* Hero Visual — Floating movie cards */
+.landing-hero-visual {
+	flex: 1;
+	position: relative;
+	height: 420px;
+	max-width: 420px;
+}
+
+.landing-card {
+	position: absolute;
+	width: 160px;
+	border-radius: 12px;
+	overflow: hidden;
+	background: #1e1e1e;
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+	animation: floatCard 6s ease-in-out infinite;
+}
+
+.landing-card-1 {
+	top: 20px;
+	left: 30px;
+	animation-delay: 0s;
+}
+
+.landing-card-2 {
+	top: 60px;
+	left: 180px;
+	animation-delay: -2s;
+}
+
+.landing-card-3 {
+	top: 180px;
+	left: 90px;
+	animation-delay: -4s;
+}
+
+.landing-card-poster {
+	width: 100%;
+	height: 200px;
+	background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+}
+
+.landing-card-1 .landing-card-poster {
+	background: linear-gradient(135deg, #e50914, #ff6b6b);
+}
+
+.landing-card-2 .landing-card-poster {
+	background: linear-gradient(135deg, #1a1a6e, #4a4ae0);
+}
+
+.landing-card-3 .landing-card-poster {
+	background: linear-gradient(135deg, #0e6e3a, #2ecc71);
+}
+
+.landing-card-info {
+	padding: 14px;
+}
+
+.landing-card-title-bar {
+	height: 10px;
+	width: 80%;
+	background: #3a3a3a;
+	border-radius: 4px;
+	margin-bottom: 8px;
+}
+
+.landing-card-year-bar {
+	height: 8px;
+	width: 40%;
+	background: #2a2a2a;
+	border-radius: 4px;
+}
+
+@keyframes floatCard {
+	0%, 100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-16px);
+	}
+}
+
+/* Features Section */
+.landing-features {
+	padding: 80px 8%;
+	background: #0a0a0a;
+}
+
+.landing-features-heading {
+	text-align: center;
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 50px;
+	color: #ffffff;
+}
+
+.landing-feature-card {
+	background: #1a1a1a;
+	border: 1px solid #2a2a2a;
+	border-radius: 16px;
+	padding: 36px 28px;
+	text-align: center;
+	transition: transform 0.25s ease, border-color 0.25s ease;
+	height: 100%;
+}
+
+.landing-feature-card:hover {
+	transform: translateY(-6px);
+	border-color: #e50914;
+}
+
+.landing-feature-number {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #e50914, #b20710);
+	color: #ffffff;
+	font-size: 1.3rem;
+	font-weight: 700;
+	margin-bottom: 20px;
+}
+
+.landing-feature-title {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin-bottom: 12px;
+	color: #ffffff;
+}
+
+.landing-feature-desc {
+	font-size: 0.95rem;
+	line-height: 1.65;
+	color: #a0a0a0;
+}
+
+/* Footer */
+.landing-footer {
+	text-align: center;
+	padding: 30px 8%;
+	color: #555;
+	font-size: 0.85rem;
+	border-top: 1px solid #1e1e1e;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.landing-hero {
+		flex-direction: column;
+		text-align: center;
+		padding: 40px 6%;
+		min-height: auto;
+	}
+
+	.landing-hero-content {
+		max-width: 100%;
+	}
+
+	.landing-subtitle {
+		max-width: 100%;
+	}
+
+	.landing-title {
+		font-size: 2.2rem;
+	}
+
+	.landing-hero-visual {
+		display: none;
+	}
+
+	.landing-features {
+		padding: 50px 4%;
+	}
+
+	.landing-feature-card {
+		margin-bottom: 20px;
+	}
+}
