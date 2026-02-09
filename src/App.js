@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import LandingPage from './components/LandingPage';
 import MovieList from './components/MovieList';
 import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
@@ -9,6 +10,7 @@ import RemoveNominations from './components/RemoveNominations.js';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
+	const [showLandingPage, setShowLandingPage] = useState(true);
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -74,13 +76,20 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	if (showLandingPage) {
+		return <LandingPage onGetStarted={() => setShowLandingPage(false)} />;
+	}
+
+	const nominations = JSON.parse(localStorage.getItem('nominations')) || [];
+	const bannerDisplay = nominations.length === 5 ? 'block' : 'none';
+
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div className='banner' style={{display: bannerDisplay}}>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
