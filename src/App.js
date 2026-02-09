@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Switch, Route, Link, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -6,9 +7,41 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import ChessGame from './components/ChessGame';
 import { useSnackbar } from 'react-simple-snackbar'
 
-const App = () => {
+const NavBar = () => {
+	const location = useLocation();
+
+	const navStyle = {
+		display: 'flex',
+		alignItems: 'center',
+		gap: '20px',
+		padding: '12px 24px',
+		background: '#1a1a1a',
+		borderBottom: '1px solid #333',
+	};
+
+	const linkStyle = (path) => ({
+		color: location.pathname === path ? '#ffffff' : '#888',
+		textDecoration: 'none',
+		fontSize: '1rem',
+		fontWeight: location.pathname === path ? '600' : '400',
+		padding: '6px 16px',
+		borderRadius: '4px',
+		background: location.pathname === path ? '#333' : 'transparent',
+		transition: 'all 0.2s',
+	});
+
+	return (
+		<nav style={navStyle}>
+			<Link to="/" style={linkStyle('/')}>Movies</Link>
+			<Link to="/chess" style={linkStyle('/chess')}>Chess</Link>
+		</nav>
+	);
+};
+
+const MoviePage = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -74,13 +107,16 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const nominationsData = JSON.parse(localStorage.getItem('nominations'));
+	const showBanner = nominationsData && nominationsData.length === 5;
+
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div className='banner' style={{display: showBanner ? 'block' : 'none'}}>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
@@ -100,6 +136,22 @@ const App = () => {
 					nominationComponent={RemoveNominations}
 				/>
 			</div>
+		</div>
+	);
+};
+
+const App = () => {
+	return (
+		<div>
+			<NavBar />
+			<Switch>
+				<Route exact path="/">
+					<MoviePage />
+				</Route>
+				<Route path="/chess">
+					<ChessGame />
+				</Route>
+			</Switch>
 		</div>
 	);
 };
