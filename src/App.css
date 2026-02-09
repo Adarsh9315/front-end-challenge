@@ -35,3 +35,111 @@ body {
 	display: block;
 	margin: auto;
 }
+
+/* Landing Page Styles */
+.landing-page {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, #141414 0%, #2d2d2d 100%);
+	padding: 20px;
+}
+
+.landing-content {
+	max-width: 1200px;
+	text-align: center;
+	padding: 40px 20px;
+}
+
+.landing-title {
+	font-size: 3.5em;
+	font-weight: bold;
+	margin-bottom: 20px;
+	background: linear-gradient(90deg, #ffffff 0%, #a0a0a0 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.landing-description {
+	font-size: 1.3em;
+	margin-bottom: 50px;
+	color: #cccccc;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.landing-features {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	margin-bottom: 50px;
+	flex-wrap: wrap;
+}
+
+.feature-card {
+	background: #1f1f1f;
+	border-radius: 10px;
+	padding: 30px;
+	width: 280px;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	border: 1px solid #333;
+}
+
+.feature-card:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
+.feature-card h3 {
+	font-size: 1.5em;
+	margin-bottom: 15px;
+	color: #ffffff;
+}
+
+.feature-card p {
+	font-size: 1em;
+	color: #aaaaaa;
+	line-height: 1.6;
+}
+
+.landing-button {
+	background: linear-gradient(90deg, #e50914 0%, #b20710 100%);
+	border: none;
+	color: white;
+	padding: 18px 50px;
+	font-size: 1.2em;
+	font-weight: bold;
+	border-radius: 30px;
+	cursor: pointer;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	box-shadow: 0 5px 20px rgba(229, 9, 20, 0.4);
+}
+
+.landing-button:hover {
+	transform: scale(1.05);
+	box-shadow: 0 8px 30px rgba(229, 9, 20, 0.6);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.landing-title {
+		font-size: 2.5em;
+	}
+	
+	.landing-description {
+		font-size: 1.1em;
+	}
+	
+	.landing-features {
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.feature-card {
+		width: 100%;
+		max-width: 400px;
+	}
+}
