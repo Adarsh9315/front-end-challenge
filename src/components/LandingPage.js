@@ -1,0 +1,37 @@
+import React from 'react';
+import './LandingPage.css';
+
+const LandingPage = ({ onGetStarted }) => {
+	return (
+		<div className='landing-page'>
+			<div className='landing-content'>
+				<h1 className='landing-title'>Welcome to OMDB Movie App</h1>
+				<p className='landing-subtitle'>
+					Discover and nominate your favorite movies
+				</p>
+				<div className='landing-features'>
+					<div className='feature-item'>
+						<div className='feature-icon'>🔍</div>
+						<h3>Search Movies</h3>
+						<p>Search through thousands of movies using the OMDB database</p>
+					</div>
+					<div className='feature-item'>
+						<div className='feature-icon'>⭐</div>
+						<h3>Nominate Favorites</h3>
+						<p>Select up to 5 movies to nominate for higher ratings</p>
+					</div>
+					<div className='feature-item'>
+						<div className='feature-icon'>🎬</div>
+						<h3>Manage Nominations</h3>
+						<p>Add or remove nominations as you discover new favorites</p>
+					</div>
+				</div>
+				<button className='get-started-btn' onClick={onGetStarted}>
+					Get Started
+				</button>
+			</div>
+		</div>
+	);
+};
+
+export default LandingPage;
