@@ -6,9 +6,11 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import ChessGame from './components/ChessGame';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
+	const [currentPage, setCurrentPage] = useState('movies');
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -76,30 +78,56 @@ const App = () => {
 
 	return (
 		<div className='container-fluid movie-app'>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='Movies' />
-				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+			{/* Navigation */}
+			<div className='row mt-3 mb-3'>
+				<div className='col text-center'>
+					<button 
+						className={`btn btn-handler ${currentPage === 'movies' ? 'btn-primary' : 'btn-secondary'}`}
+						onClick={() => setCurrentPage('movies')}
+						style={{marginRight: '10px'}}
+					>
+						Movie Nominations
+					</button>
+					<button 
+						className={`btn btn-handler ${currentPage === 'chess' ? 'btn-primary' : 'btn-secondary'}`}
+						onClick={() => setCurrentPage('chess')}
+					>
+						Chess Game
+					</button>
+				</div>
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-				All 5 nominations are done
-			</div>
-			<div className='row'>
-				<MovieList
-					movies={movies}
-					handleNominationClick={addNominationMovie}
-					nominationComponent={AddNomination}
-				/>
-			</div>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='Nominations' />
-			</div>
-			<div className='row'>
-				<MovieList
-					movies={nomination}
-					handleNominationClick={removeNominationMovie}
-					nominationComponent={RemoveNominations}
-				/>
-			</div>
+
+			{/* Render pages based on currentPage */}
+			{currentPage === 'movies' ? (
+				<>
+					<div className='row d-flex align-items-center mt-4 mb-4'>
+						<MovieListHeading heading='Movies' />
+						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+					</div>
+					<div className='banner' style={{display: localStorage.getItem('nominations') && JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+						All 5 nominations are done
+					</div>
+					<div className='row'>
+						<MovieList
+							movies={movies}
+							handleNominationClick={addNominationMovie}
+							nominationComponent={AddNomination}
+						/>
+					</div>
+					<div className='row d-flex align-items-center mt-4 mb-4'>
+						<MovieListHeading heading='Nominations' />
+					</div>
+					<div className='row'>
+						<MovieList
+							movies={nomination}
+							handleNominationClick={removeNominationMovie}
+							nominationComponent={RemoveNominations}
+						/>
+					</div>
+				</>
+			) : (
+				<ChessGame />
+			)}
 		</div>
 	);
 };
