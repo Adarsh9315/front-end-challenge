@@ -6,12 +6,17 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import NotesList from './components/NotesList';
+import NoteEditor from './components/NoteEditor';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [notes, setNotes] = useState([]);
+	const [editingNote, setEditingNote] = useState(null);
+	const [editingIndex, setEditingIndex] = useState(null);
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
@@ -36,6 +41,14 @@ const App = () => {
 
 		if (movieNomination) {
 			setNomination(movieNomination);
+		}
+
+		const savedNotes = JSON.parse(
+			localStorage.getItem('notes')
+		);
+
+		if (savedNotes) {
+			setNotes(savedNotes);
 		}
 	}, []);
 
@@ -74,6 +87,44 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const saveNotesToLocalStorage = (items) => {
+		localStorage.setItem('notes', JSON.stringify(items));
+	};
+
+	const addNote = (note) => {
+		const newNotesList = [...notes, note];
+		setNotes(newNotesList);
+		saveNotesToLocalStorage(newNotesList);
+		openSnackbar('Note added successfully');
+	};
+
+	const updateNote = (note, index) => {
+		const newNotesList = [...notes];
+		newNotesList[index] = note;
+		setNotes(newNotesList);
+		saveNotesToLocalStorage(newNotesList);
+		setEditingNote(null);
+		setEditingIndex(null);
+		openSnackbar('Note updated successfully');
+	};
+
+	const deleteNote = (index) => {
+		const newNotesList = notes.filter((_, i) => i !== index);
+		setNotes(newNotesList);
+		saveNotesToLocalStorage(newNotesList);
+		openSnackbar('Note deleted successfully');
+	};
+
+	const handleEditNote = (note, index) => {
+		setEditingNote(note);
+		setEditingIndex(index);
+	};
+
+	const handleCancelEdit = () => {
+		setEditingNote(null);
+		setEditingIndex(null);
+	};
+
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
@@ -99,6 +150,25 @@ const App = () => {
 					handleNominationClick={removeNominationMovie}
 					nominationComponent={RemoveNominations}
 				/>
+			</div>
+			<div className='row d-flex align-items-center mt-4 mb-4'>
+				<MovieListHeading heading='Notes' />
+			</div>
+			<div className='notes-section'>
+				<NoteEditor
+					handleAddNote={addNote}
+					handleUpdateNote={updateNote}
+					handleCancelEdit={handleCancelEdit}
+					editingNote={editingNote}
+					editingIndex={editingIndex}
+				/>
+				<div className='row mt-4'>
+					<NotesList
+						notes={notes}
+						handleEditClick={handleEditNote}
+						handleDeleteClick={deleteNote}
+					/>
+				</div>
 			</div>
 		</div>
 	);
