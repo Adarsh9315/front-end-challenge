@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch, Link, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -6,9 +7,34 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import MovieShowdown from './components/MovieShowdown';
 import { useSnackbar } from 'react-simple-snackbar'
 
-const App = () => {
+const NavBar = () => {
+	const location = useLocation();
+
+	return (
+		<nav className='app-navbar'>
+			<div className='app-navbar-brand'>OMDB Movie App</div>
+			<div className='app-navbar-links'>
+				<Link
+					to='/'
+					className={`app-navbar-link ${location.pathname === '/' ? 'app-navbar-link-active' : ''}`}
+				>
+					Movies
+				</Link>
+				<Link
+					to='/showdown'
+					className={`app-navbar-link ${location.pathname === '/showdown' ? 'app-navbar-link-active' : ''}`}
+				>
+					Showdown
+				</Link>
+			</div>
+		</nav>
+	);
+};
+
+const HomePage = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -74,13 +100,22 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const getNominationsCount = () => {
+		try {
+			const stored = JSON.parse(localStorage.getItem('nominations'));
+			return stored ? stored.length : 0;
+		} catch {
+			return 0;
+		}
+	};
+
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div className='banner' style={{display: getNominationsCount() === 5 ? 'block' : 'none'}}>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
@@ -101,6 +136,18 @@ const App = () => {
 				/>
 			</div>
 		</div>
+	);
+};
+
+const App = () => {
+	return (
+		<Router>
+			<NavBar />
+			<Switch>
+				<Route exact path='/' component={HomePage} />
+				<Route path='/showdown' component={MovieShowdown} />
+			</Switch>
+		</Router>
 	);
 };
 
