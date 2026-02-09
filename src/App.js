@@ -6,6 +6,8 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import Navigation from './components/Navigation';
+import Notes from './components/Notes';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
