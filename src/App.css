@@ -35,3 +35,42 @@ body {
 	display: block;
 	margin: auto;
 }
+
+.todo-app {
+	padding: 20px;
+}
+
+.todo-app .form-control {
+	background-color: #2d2d2d;
+	border-color: #444;
+	color: #fff;
+}
+
+.todo-app .form-control:focus {
+	background-color: #2d2d2d;
+	border-color: #007bff;
+	color: #fff;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.todo-app .list-group-item {
+	border-color: #444;
+	transition: all 0.2s;
+}
+
+.todo-app .list-group-item:hover {
+	transform: translateX(5px);
+}
+
+.navbar {
+	padding: 1rem 2rem;
+}
+
+.nav-link {
+	padding: 0.5rem 1rem !important;
+	transition: color 0.2s;
+}
+
+.nav-link:hover {
+	color: #fff !important;
+}
