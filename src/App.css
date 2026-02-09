@@ -35,3 +35,15 @@ body {
 	display: block;
 	margin: auto;
 }
+
+.todo-app {
+	padding: 20px;
+}
+
+.todo-app .list-group-item {
+	transition: background-color 0.2s;
+}
+
+.todo-app .list-group-item:hover {
+	background-color: #3d3d3d !important;
+}
