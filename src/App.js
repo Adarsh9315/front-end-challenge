@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch, Link, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -6,9 +7,24 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import ChessGame from './components/ChessGame';
 import { useSnackbar } from 'react-simple-snackbar'
 
-const App = () => {
+const NavBar = () => {
+	const location = useLocation();
+	return (
+		<nav className="app-nav">
+			<Link to="/" className={`nav-link-item ${location.pathname === '/' ? 'active' : ''}`}>
+				Movies
+			</Link>
+			<Link to="/chess" className={`nav-link-item ${location.pathname === '/chess' ? 'active' : ''}`}>
+				Chess
+			</Link>
+		</nav>
+	);
+};
+
+const MoviesPage = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -74,13 +90,16 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const nominationsData = JSON.parse(localStorage.getItem('nominations'));
+	const showBanner = nominationsData && nominationsData.length === 5;
+
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div className='banner' style={{display: showBanner ? 'block' : 'none'}}>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
@@ -101,6 +120,18 @@ const App = () => {
 				/>
 			</div>
 		</div>
+	);
+};
+
+const App = () => {
+	return (
+		<Router>
+			<NavBar />
+			<Switch>
+				<Route exact path="/" component={MoviesPage} />
+				<Route path="/chess" component={ChessGame} />
+			</Switch>
+		</Router>
 	);
 };
 
