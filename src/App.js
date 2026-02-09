@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import MovieList from './components/MovieList';
 import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import TodoPage from './components/TodoPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
-const App = () => {
+const MoviesPage = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -101,6 +103,28 @@ const App = () => {
 				/>
 			</div>
 		</div>
+	);
+};
+
+const App = () => {
+	return (
+		<Router>
+			<div>
+				<nav className='navbar navbar-expand-lg navbar-dark'>
+					<div className='container-fluid'>
+						<Link className='navbar-brand' to='/'>Movie App</Link>
+						<div className='navbar-nav'>
+							<Link className='nav-link' to='/'>Movies</Link>
+							<Link className='nav-link' to='/todo'>Todo</Link>
+						</div>
+					</div>
+				</nav>
+				<Switch>
+					<Route exact path='/' component={MoviesPage} />
+					<Route path='/todo' component={TodoPage} />
+				</Switch>
+			</div>
+		</Router>
 	);
 };
 
