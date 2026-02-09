@@ -35,3 +35,148 @@ body {
 	display: block;
 	margin: auto;
 }
+
+/* Todo Page Styles */
+.todo-app {
+	min-height: 100vh;
+	padding: 20px;
+}
+
+.todo-title {
+	font-size: 2.5rem;
+	font-weight: bold;
+	color: #ffffff;
+	margin-bottom: 10px;
+}
+
+.todo-subtitle {
+	color: #aaaaaa;
+	font-size: 1.1rem;
+}
+
+.todo-input {
+	background-color: #2a2a2a;
+	color: #ffffff;
+	border: 2px solid #444444;
+	padding: 12px 20px;
+	font-size: 1rem;
+	border-radius: 5px 0 0 5px;
+}
+
+.todo-input:focus {
+	background-color: #2a2a2a;
+	color: #ffffff;
+	border-color: #0d6efd;
+	box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.todo-input::placeholder {
+	color: #888888;
+}
+
+.add-todo-btn {
+	padding: 12px 30px;
+	font-size: 1rem;
+	border-radius: 0 5px 5px 0;
+}
+
+.todo-stats {
+	font-size: 0.95rem;
+	padding: 10px 0;
+}
+
+.todo-filters {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.todo-filters .btn {
+	margin-right: 10px;
+	margin-bottom: 10px;
+	border-radius: 20px;
+	padding: 8px 20px;
+}
+
+.todo-item {
+	background-color: #2a2a2a;
+	border: 1px solid #444444;
+	border-radius: 8px;
+	padding: 15px 20px;
+	transition: all 0.3s ease;
+}
+
+.todo-item:hover {
+	background-color: #333333;
+	border-color: #555555;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.todo-checkbox {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.todo-text {
+	font-size: 1.05rem;
+	color: #ffffff;
+	word-break: break-word;
+}
+
+.todo-completed {
+	text-decoration: line-through;
+	color: #888888;
+	opacity: 0.7;
+}
+
+.delete-btn {
+	padding: 6px 15px;
+	font-size: 0.85rem;
+	border-radius: 5px;
+}
+
+.todo-list {
+	max-height: 600px;
+	overflow-y: auto;
+}
+
+.todo-list::-webkit-scrollbar {
+	width: 8px;
+}
+
+.todo-list::-webkit-scrollbar-track {
+	background: #1a1a1a;
+	border-radius: 10px;
+}
+
+.todo-list::-webkit-scrollbar-thumb {
+	background: #555555;
+	border-radius: 10px;
+}
+
+.todo-list::-webkit-scrollbar-thumb:hover {
+	background: #666666;
+}
+
+/* Navigation Styles */
+.navbar {
+	margin-bottom: 0;
+}
+
+.navbar-brand {
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+	margin-left: 15px;
+	padding: 8px 16px;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+}
