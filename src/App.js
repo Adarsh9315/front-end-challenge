@@ -6,12 +6,14 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import LandingPage from './components/LandingPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [showLandingPage, setShowLandingPage] = useState(true);
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
@@ -26,7 +28,10 @@ const App = () => {
 	};
 
 	useEffect(() => {
-		getMovieRequest(searchValue);
+		if (searchValue) {
+			setShowLandingPage(false);
+			getMovieRequest(searchValue);
+		}
 	}, [searchValue]);
 
 	useEffect(() => {
@@ -74,15 +79,28 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const handleGetStarted = () => {
+		setShowLandingPage(false);
+	};
+
+	if (showLandingPage) {
+		return <LandingPage onGetStarted={handleGetStarted} />;
+	}
+
+	const savedNominations = JSON.parse(localStorage.getItem('nominations')) || [];
+	const showBanner = savedNominations.length === 5;
+
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-				All 5 nominations are done
-			</div>
+			{showBanner && (
+				<div className='banner'>
+					All 5 nominations are done
+				</div>
+			)}
 			<div className='row'>
 				<MovieList
 					movies={movies}

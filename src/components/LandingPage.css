@@ -1,0 +1,124 @@
+.landing-page {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, #141414 0%, #1a1a1a 50%, #141414 100%);
+	padding: 40px 20px;
+}
+
+.landing-content {
+	max-width: 1200px;
+	width: 100%;
+	text-align: center;
+	animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.landing-header {
+	margin-bottom: 60px;
+}
+
+.landing-title {
+	font-size: 3.5rem;
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: #ffffff;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.landing-subtitle {
+	font-size: 1.5rem;
+	color: #cccccc;
+	margin-bottom: 0;
+}
+
+.landing-features {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 30px;
+	margin-bottom: 50px;
+}
+
+.feature-card {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 12px;
+	padding: 40px 30px;
+	transition: transform 0.3s ease, background 0.3s ease;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-card:hover {
+	transform: translateY(-10px);
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.2);
+}
+
+.feature-icon {
+	font-size: 3rem;
+	margin-bottom: 20px;
+}
+
+.feature-card h3 {
+	font-size: 1.5rem;
+	margin-bottom: 15px;
+	color: #ffffff;
+}
+
+.feature-card p {
+	font-size: 1rem;
+	color: #cccccc;
+	line-height: 1.6;
+	margin: 0;
+}
+
+.get-started-btn {
+	background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+	color: #ffffff;
+	border: none;
+	padding: 18px 50px;
+	font-size: 1.2rem;
+	font-weight: bold;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+}
+
+.get-started-btn:hover {
+	transform: scale(1.05);
+	box-shadow: 0 6px 20px rgba(229, 9, 20, 0.5);
+}
+
+.get-started-btn:active {
+	transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+	.landing-title {
+		font-size: 2.5rem;
+	}
+	
+	.landing-subtitle {
+		font-size: 1.2rem;
+	}
+	
+	.landing-features {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	
+	.feature-card {
+		padding: 30px 20px;
+	}
+}
