@@ -1,0 +1,129 @@
+.landing-page {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+	padding: 20px;
+}
+
+.landing-content {
+	max-width: 1200px;
+	width: 100%;
+	text-align: center;
+}
+
+.hero-section {
+	margin-bottom: 60px;
+}
+
+.app-title {
+	font-size: 3.5rem;
+	font-weight: bold;
+	margin-bottom: 20px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.app-subtitle {
+	font-size: 1.5rem;
+	color: #b0b0b0;
+	margin-bottom: 0;
+}
+
+.features-section {
+	margin-bottom: 60px;
+}
+
+.features-title {
+	font-size: 2rem;
+	margin-bottom: 40px;
+	color: #ffffff;
+}
+
+.features-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 30px;
+	margin-bottom: 20px;
+}
+
+.feature-card {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 12px;
+	padding: 30px 20px;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+	border-color: rgba(102, 126, 234, 0.5);
+}
+
+.feature-icon {
+	font-size: 3rem;
+	margin-bottom: 15px;
+}
+
+.feature-card h3 {
+	font-size: 1.3rem;
+	margin-bottom: 10px;
+	color: #ffffff;
+}
+
+.feature-card p {
+	font-size: 1rem;
+	color: #b0b0b0;
+	line-height: 1.6;
+	margin-bottom: 0;
+}
+
+.cta-section {
+	margin-top: 40px;
+}
+
+.cta-button {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: #ffffff;
+	border: none;
+	padding: 18px 60px;
+	font-size: 1.2rem;
+	font-weight: bold;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.cta-button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+}
+
+.cta-button:active {
+	transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+	.app-title {
+		font-size: 2.5rem;
+	}
+
+	.app-subtitle {
+		font-size: 1.2rem;
+	}
+
+	.features-grid {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+
+	.cta-button {
+		padding: 15px 40px;
+		font-size: 1rem;
+	}
+}
