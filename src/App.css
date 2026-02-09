@@ -1,7 +1,12 @@
+/* ===== Global ===== */
+
 body {
 	background: #141414;
 	color: #ffffff;
+	font-family: 'Poppins', sans-serif;
 }
+
+/* ===== Movie App ===== */
 
 .movie-app > .row {
 	overflow-x: auto;
@@ -34,4 +39,213 @@ body {
 	width: 30%;
 	display: block;
 	margin: auto;
+}
+
+/* ===== Landing Page ===== */
+
+.landing-page {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	font-family: 'Poppins', sans-serif;
+}
+
+/* Hero */
+
+.landing-hero {
+	position: relative;
+	min-height: 85vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	overflow: hidden;
+	background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 40%, #16213e 70%, #0f3460 100%);
+}
+
+.landing-hero-overlay {
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(ellipse at 30% 50%, rgba(229, 9, 20, 0.12) 0%, transparent 60%),
+				radial-gradient(ellipse at 70% 30%, rgba(15, 52, 96, 0.25) 0%, transparent 55%);
+	pointer-events: none;
+}
+
+.landing-hero-content {
+	position: relative;
+	z-index: 1;
+	max-width: 700px;
+	padding: 0 24px;
+	animation: landingFadeInUp 0.8s ease-out;
+}
+
+@keyframes landingFadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.landing-tagline {
+	font-size: 0.9rem;
+	font-weight: 500;
+	letter-spacing: 4px;
+	text-transform: uppercase;
+	color: #e50914;
+	margin-bottom: 12px;
+}
+
+.landing-title {
+	font-size: 3.8rem;
+	font-weight: 800;
+	line-height: 1.1;
+	margin-bottom: 20px;
+	color: #ffffff;
+}
+
+.landing-highlight {
+	background: linear-gradient(90deg, #e50914, #ff6b6b);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.landing-subtitle {
+	font-size: 1.15rem;
+	font-weight: 300;
+	line-height: 1.7;
+	color: rgba(255, 255, 255, 0.7);
+	margin-bottom: 40px;
+}
+
+.landing-cta {
+	display: inline-block;
+	padding: 16px 48px;
+	font-family: 'Poppins', sans-serif;
+	font-size: 1rem;
+	font-weight: 600;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: #ffffff;
+	background: linear-gradient(135deg, #e50914, #b20710);
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+	box-shadow: 0 4px 25px rgba(229, 9, 20, 0.35);
+}
+
+.landing-cta:hover {
+	transform: translateY(-3px) scale(1.03);
+	box-shadow: 0 8px 35px rgba(229, 9, 20, 0.5);
+}
+
+.landing-cta:active {
+	transform: translateY(0) scale(0.98);
+}
+
+/* Features */
+
+.landing-features {
+	background: #0d0d0d;
+	padding: 80px 0;
+	flex: 1;
+}
+
+.landing-features-heading {
+	text-align: center;
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 50px;
+	color: #ffffff;
+}
+
+.landing-feature-card {
+	background: linear-gradient(145deg, #1a1a2e, #16213e);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	border-radius: 16px;
+	padding: 40px 28px;
+	text-align: center;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	margin-bottom: 24px;
+	height: 100%;
+}
+
+.landing-feature-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 12px 40px rgba(229, 9, 20, 0.12);
+}
+
+.landing-feature-number {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #e50914, #b20710);
+	color: #ffffff;
+	font-size: 1.3rem;
+	font-weight: 700;
+	margin-bottom: 20px;
+}
+
+.landing-feature-title {
+	font-size: 1.2rem;
+	font-weight: 600;
+	margin-bottom: 12px;
+	color: #ffffff;
+}
+
+.landing-feature-desc {
+	font-size: 0.92rem;
+	font-weight: 300;
+	line-height: 1.7;
+	color: rgba(255, 255, 255, 0.6);
+	margin-bottom: 0;
+}
+
+/* Footer */
+
+.landing-footer {
+	background: #0a0a0a;
+	text-align: center;
+	padding: 24px 0;
+	border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.landing-footer p {
+	margin: 0;
+	font-size: 0.82rem;
+	color: rgba(255, 255, 255, 0.35);
+	letter-spacing: 0.5px;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+	.landing-title {
+		font-size: 2.5rem;
+	}
+
+	.landing-subtitle {
+		font-size: 1rem;
+	}
+
+	.landing-cta {
+		padding: 14px 36px;
+		font-size: 0.9rem;
+	}
+
+	.landing-features {
+		padding: 50px 0;
+	}
+
+	.landing-feature-card {
+		padding: 30px 20px;
+	}
 }
