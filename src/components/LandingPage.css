@@ -1,0 +1,118 @@
+.landing-page {
+	background: linear-gradient(135deg, #141414 0%, #1a1a1a 100%);
+	min-height: 100vh;
+	padding: 20px 0;
+}
+
+.landing-title {
+	color: #ffffff;
+	font-weight: 700;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	animation: fadeInDown 0.8s ease-out;
+}
+
+.landing-subtitle {
+	color: #cccccc;
+	font-size: 1.3rem;
+	animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.feature-card {
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 15px;
+	padding: 40px 30px;
+	height: 100%;
+	transition: all 0.3s ease;
+	animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.feature-card:hover {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.2);
+	transform: translateY(-5px);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.feature-card:nth-child(2) {
+	animation-delay: 0.6s;
+}
+
+.feature-icon {
+	font-size: 4rem;
+	line-height: 1;
+}
+
+.feature-card h3 {
+	color: #ffffff;
+	font-weight: 600;
+}
+
+.feature-card p {
+	color: #cccccc;
+	line-height: 1.6;
+}
+
+.btn-primary {
+	background-color: #e50914;
+	border-color: #e50914;
+	padding: 12px 30px;
+	font-weight: 600;
+	transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+	background-color: #f40612;
+	border-color: #f40612;
+	transform: scale(1.05);
+	box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
+}
+
+.btn-outline-light {
+	border-width: 2px;
+	padding: 12px 30px;
+	font-weight: 600;
+	transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+	transform: scale(1.05);
+}
+
+@keyframes fadeInDown {
+	from {
+		opacity: 0;
+		transform: translateY(-30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media (max-width: 768px) {
+	.landing-title {
+		font-size: 2.5rem;
+	}
+	
+	.landing-subtitle {
+		font-size: 1.1rem;
+	}
+	
+	.feature-card {
+		padding: 30px 20px;
+		margin-bottom: 20px;
+	}
+}
