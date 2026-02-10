@@ -8,6 +8,7 @@ import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import ChessGame from './components/ChessGame';
+import TodoPage from './components/TodoPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const NavBar = () => {
@@ -19,6 +20,9 @@ const NavBar = () => {
 			</Link>
 			<Link to="/chess" className={`nav-link-item ${location.pathname === '/chess' ? 'active' : ''}`}>
 				Chess
+			</Link>
+			<Link to="/todo" className={`nav-link-item ${location.pathname === '/todo' ? 'active' : ''}`}>
+				Todo
 			</Link>
 		</nav>
 	);
@@ -130,6 +134,7 @@ const App = () => {
 			<Switch>
 				<Route exact path="/" component={MoviesPage} />
 				<Route path="/chess" component={ChessGame} />
+				<Route path="/todo" component={TodoPage} />
 			</Switch>
 		</Router>
 	);
