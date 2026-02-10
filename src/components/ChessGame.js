@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-const Chess = require('chess.js');
 import '../ChessGame.css';
+const Chess = require('chess.js');
 
 const ChessGame = () => {
 	const [game, setGame] = useState(new Chess());
