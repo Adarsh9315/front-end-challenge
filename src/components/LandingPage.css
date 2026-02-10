@@ -1,0 +1,153 @@
+.landing-page {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+	padding: 20px;
+}
+
+.landing-content {
+	max-width: 1200px;
+	width: 100%;
+	text-align: center;
+}
+
+.hero-section {
+	animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.app-title {
+	font-size: 4rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+	background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	animation: gradient 3s ease infinite;
+	background-size: 200% 200%;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.app-subtitle {
+	font-size: 1.5rem;
+	color: #cccccc;
+	margin-bottom: 3rem;
+}
+
+.feature-list {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+	margin-bottom: 3rem;
+	flex-wrap: wrap;
+}
+
+.feature-item {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 15px;
+	padding: 2rem;
+	max-width: 300px;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-item:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+	border-color: rgba(255, 107, 107, 0.5);
+}
+
+.feature-icon {
+	font-size: 3rem;
+	display: block;
+	margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+	font-size: 1.5rem;
+	margin-bottom: 0.5rem;
+	color: #ffffff;
+}
+
+.feature-item p {
+	color: #aaaaaa;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+.get-started-btn {
+	background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+	color: white;
+	border: none;
+	padding: 1rem 3rem;
+	font-size: 1.25rem;
+	font-weight: bold;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+.get-started-btn:hover {
+	transform: scale(1.05);
+	box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+}
+
+.get-started-btn:active {
+	transform: scale(0.98);
+}
+
+.landing-footer {
+	margin-top: 4rem;
+	color: #666666;
+	font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.app-title {
+		font-size: 2.5rem;
+	}
+
+	.app-subtitle {
+		font-size: 1.2rem;
+	}
+
+	.feature-list {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.feature-item {
+		max-width: 100%;
+	}
+
+	.get-started-btn {
+		padding: 0.8rem 2rem;
+		font-size: 1rem;
+	}
+}
