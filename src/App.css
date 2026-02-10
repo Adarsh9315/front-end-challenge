@@ -35,3 +35,19 @@ body {
 	display: block;
 	margin: auto;
 }
+
+.landing-page {
+	min-height: 100vh;
+	background: #141414;
+	color: #ffffff;
+}
+
+.landing-page .btn {
+	margin: 0 10px;
+	transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.landing-page .btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}

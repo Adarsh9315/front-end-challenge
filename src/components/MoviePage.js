@@ -84,7 +84,8 @@ const MoviePage = () => {
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-                <div className='col-auto'>
+                <div className='col-auto d-flex'>
+                    <Link to="/" className="btn btn-outline-light mr-2">Home</Link>
                     <Link to="/chess" className="btn btn-secondary">Play Chess</Link>
                 </div>
 			</div>
