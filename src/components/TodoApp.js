@@ -5,13 +5,18 @@ const TodoApp = () => {
 	const [todos, setTodos] = useState([]);
 	const [inputValue, setInputValue] = useState('');
 	const [filter, setFilter] = useState('all'); // all, active, completed
+	const [isLoading, setIsLoading] = useState(true);
 
 	// Load todos from localStorage on mount
 	useEffect(() => {
-		const savedTodos = JSON.parse(localStorage.getItem('todos'));
-		if (savedTodos) {
-			setTodos(savedTodos);
-		}
+		// Simulate loading delay
+		setTimeout(() => {
+			const savedTodos = JSON.parse(localStorage.getItem('todos'));
+			if (savedTodos) {
+				setTodos(savedTodos);
+			}
+			setIsLoading(false);
+		}, 800);
 	}, []);
 
 	// Save todos to localStorage whenever they change
@@ -78,6 +83,19 @@ const TodoApp = () => {
 	const filteredTodos = getFilteredTodos();
 	const activeTodosCount = todos.filter(todo => !todo.completed).length;
 	const completedTodosCount = todos.filter(todo => todo.completed).length;
+
+	if (isLoading) {
+		return (
+			<div className="todo-app-container">
+				<div className="todo-app">
+					<div className="loader-container">
+						<div className="loader"></div>
+						<p className="loader-text">Loading your todos...</p>
+					</div>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="todo-app-container">
