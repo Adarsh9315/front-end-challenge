@@ -35,3 +35,105 @@ body {
 	display: block;
 	margin: auto;
 }
+
+/* Navbar */
+.navbar {
+	background-color: #1c1c1c;
+	border-bottom: 1px solid #333;
+	padding: 12px 20px;
+}
+
+.navbar-brand {
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
+.nav-links {
+	display: flex;
+	gap: 20px;
+}
+
+.nav-link-item {
+	color: #aaa;
+	text-decoration: none;
+	font-size: 1.1em;
+	padding: 4px 8px;
+	border-radius: 4px;
+	transition: color 0.2s, background-color 0.2s;
+}
+
+.nav-link-item:hover {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.nav-link-item.active {
+	color: #ffffff;
+	background-color: #333;
+}
+
+/* Notes Page */
+.notes-form {
+	max-width: 600px;
+}
+
+.notes-form .form-control {
+	background-color: #1c1c1c;
+	border: 1px solid #333;
+	color: #ffffff;
+}
+
+.notes-form .form-control::placeholder {
+	color: #888;
+}
+
+.notes-form .form-control:focus {
+	background-color: #1c1c1c;
+	border-color: #555;
+	color: #ffffff;
+	box-shadow: none;
+}
+
+.note-card {
+	background-color: #1c1c1c;
+	border: 1px solid #333;
+	border-radius: 8px;
+	height: 100%;
+	transition: transform 0.2s, border-color 0.2s;
+}
+
+.note-card:hover {
+	transform: translateY(-2px);
+	border-color: #555;
+}
+
+.note-card .form-control {
+	background-color: #252525;
+	border: 1px solid #444;
+	color: #ffffff;
+}
+
+.note-card .form-control:focus {
+	background-color: #252525;
+	border-color: #666;
+	color: #ffffff;
+	box-shadow: none;
+}
+
+.note-title {
+	margin-bottom: 8px;
+	word-wrap: break-word;
+}
+
+.note-body {
+	color: #ccc;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	margin-bottom: 8px;
+}
+
+.note-date {
+	color: #777;
+	display: block;
+	margin-bottom: 4px;
+}
