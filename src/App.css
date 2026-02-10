@@ -12,26 +12,136 @@ body {
 .image-container {
 	position: relative;
 	transition: transform 0.2s;
+	min-width: 200px;
 }
 
 .image-container:hover {
 	cursor: pointer;
-	transform: scale(1.1);
+	transform: scale(1.05);
 }
 
-.btn-handler{
-	padding: 15px 50px;
-	background-color: 'red';
+.image-container:focus-within {
+	outline: 2px solid #fff;
+	outline-offset: 4px;
+	border-radius: 4px;
+}
+
+.movie-poster {
+	height: 40vh;
+	width: 100%;
+	object-fit: cover;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.movie-title {
+	width: 250px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-weight: 500;
+}
+
+.movie-year {
+	color: #cccccc;
+	font-size: 0.9em;
+}
+
+.btn-handler {
+	padding: 12px 24px;
 	margin-top: 10px;
+	border: none;
+	border-radius: 6px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	width: 100%;
+	font-size: 0.95em;
 }
 
-.banner{
+.btn-handler:focus {
+	outline: 2px solid #fff;
+	outline-offset: 2px;
+}
+
+.btn-handler:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.btn-add {
+	background-color: #e50914;
+	color: #ffffff;
+}
+
+.btn-add:hover:not(:disabled) {
+	background-color: #f40612;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px rgba(229, 9, 20, 0.3);
+}
+
+.btn-remove {
+	background-color: #6c757d;
+	color: #ffffff;
+}
+
+.btn-remove:hover {
+	background-color: #5a6268;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+.banner {
 	text-align: center;
 	font-size: 1.2em;
-	padding: 10px 0px;
-	background-color: #ffffff;
-	color: #141414;
-	width: 30%;
+	padding: 15px 20px;
+	background-color: #28a745;
+	color: #ffffff;
+	width: 100%;
+	max-width: 600px;
 	display: block;
-	margin: auto;
+	margin: 20px auto;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	font-weight: 500;
+}
+
+.alert {
+	margin: 20px auto;
+	max-width: 600px;
+	border-radius: 8px;
+}
+
+.spinner-border {
+	width: 3rem;
+	height: 3rem;
+}
+
+.text-muted {
+	color: #6c757d !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+	.movie-app > .row {
+		padding: 10px;
+	}
+
+	.image-container {
+		min-width: 150px;
+	}
+
+	.movie-poster {
+		height: 30vh;
+	}
+
+	.movie-title {
+		width: 150px;
+		font-size: 0.9em;
+	}
+
+	.btn-handler {
+		padding: 10px 16px;
+		font-size: 0.85em;
+	}
 }
