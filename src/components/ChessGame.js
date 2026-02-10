@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 const Chess = require('chess.js');
 import '../ChessGame.css';
 
@@ -130,6 +131,11 @@ const ChessGame = () => {
 
 	return (
 		<div className="chess-game-container">
+			<div style={{ marginBottom: '20px' }}>
+				<Link to="/" className="chess-button" style={{ display: 'inline-block', textDecoration: 'none' }}>
+					← Back to Home
+				</Link>
+			</div>
 			<h1 className="chess-title">Chess Game</h1>
 
 			<div className="chess-content">

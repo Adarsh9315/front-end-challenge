@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -76,6 +77,11 @@ const MovieApp = () => {
 
 	return (
 		<div className='container-fluid movie-app'>
+			<div className='row mb-3'>
+				<div className='col'>
+					<Link to="/" className='btn btn-secondary'>← Back to Home</Link>
+				</div>
+			</div>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
