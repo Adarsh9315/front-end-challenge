@@ -9,6 +9,7 @@ import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import ChessGame from './components/ChessGame';
 import TodoApp from './components/TodoApp';
+import NoteTaking from './components/NoteTaking';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const NavBar = () => {
@@ -23,6 +24,9 @@ const NavBar = () => {
 			</Link>
 			<Link to="/todo" className={`nav-link-item ${location.pathname === '/todo' ? 'active' : ''}`}>
 				Todo
+			</Link>
+			<Link to="/notes" className={`nav-link-item ${location.pathname === '/notes' ? 'active' : ''}`}>
+				Notes
 			</Link>
 		</nav>
 	);
@@ -135,6 +139,7 @@ const App = () => {
 				<Route exact path="/" component={MoviesPage} />
 				<Route path="/chess" component={ChessGame} />
 				<Route path="/todo" component={TodoApp} />
+				<Route path="/notes" component={NoteTaking} />
 			</Switch>
 		</Router>
 	);
