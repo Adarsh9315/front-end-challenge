@@ -1,0 +1,97 @@
+.landing-page {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+	padding: 20px;
+}
+
+.landing-container {
+	max-width: 1200px;
+	width: 100%;
+	text-align: center;
+}
+
+.landing-title {
+	font-size: 3.5rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+	color: #ffffff;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.landing-subtitle {
+	font-size: 1.5rem;
+	color: #b0b0b0;
+	margin-bottom: 3rem;
+}
+
+.landing-cards {
+	display: flex;
+	gap: 2rem;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.landing-card {
+	background: #1f1f1f;
+	border-radius: 12px;
+	padding: 3rem 2rem;
+	width: 300px;
+	text-decoration: none;
+	color: inherit;
+	transition: all 0.3s ease;
+	border: 2px solid transparent;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.landing-card:hover {
+	transform: translateY(-10px);
+	border-color: #e50914;
+	box-shadow: 0 8px 16px rgba(229, 9, 20, 0.3);
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.card-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.card-icon {
+	font-size: 4rem;
+	margin-bottom: 1.5rem;
+}
+
+.landing-card h2 {
+	font-size: 1.8rem;
+	margin-bottom: 1rem;
+	color: #ffffff;
+}
+
+.landing-card p {
+	font-size: 1rem;
+	color: #b0b0b0;
+	line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+	.landing-title {
+		font-size: 2.5rem;
+	}
+
+	.landing-subtitle {
+		font-size: 1.2rem;
+	}
+
+	.landing-cards {
+		gap: 1.5rem;
+	}
+
+	.landing-card {
+		width: 100%;
+		max-width: 350px;
+	}
+}
