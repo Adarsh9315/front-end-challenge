@@ -35,3 +35,121 @@ body {
 	display: block;
 	margin: auto;
 }
+
+/* Navigation Styles */
+.navigation {
+	background: #1f1f1f;
+	padding: 15px 0;
+	border-bottom: 2px solid #333;
+	margin-bottom: 20px;
+}
+
+.nav-links {
+	display: flex;
+	gap: 30px;
+	padding: 0 20px;
+}
+
+.nav-link {
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 1.1em;
+	padding: 8px 16px;
+	border-radius: 4px;
+	transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-link:hover {
+	background-color: #333;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+/* Notes Page Styles */
+.notes-app {
+	padding: 0 20px;
+}
+
+.note-editor {
+	background: #1f1f1f;
+	padding: 20px;
+	border-radius: 8px;
+	border: 1px solid #333;
+}
+
+.note-editor input,
+.note-editor textarea {
+	background: #141414;
+	color: #ffffff;
+	border: 1px solid #333;
+}
+
+.note-editor input:focus,
+.note-editor textarea:focus {
+	background: #1a1a1a;
+	color: #ffffff;
+	border-color: #555;
+	outline: none;
+}
+
+.button-group {
+	display: flex;
+	gap: 10px;
+}
+
+.notes-list {
+	max-height: 80vh;
+	overflow-y: auto;
+}
+
+.note-item {
+	background: #1f1f1f;
+	border: 1px solid #333;
+	border-radius: 8px;
+	transition: transform 0.2s;
+}
+
+.note-item:hover {
+	transform: translateY(-2px);
+	border-color: #555;
+}
+
+.note-item h3 {
+	color: #ffffff;
+	margin-bottom: 10px;
+	font-size: 1.3em;
+}
+
+.note-content {
+	color: #cccccc;
+	margin-bottom: 10px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+.note-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.text-muted {
+	color: #888888 !important;
+}
+
+/* Scrollbar Styles */
+.notes-list::-webkit-scrollbar {
+	width: 8px;
+}
+
+.notes-list::-webkit-scrollbar-track {
+	background: #141414;
+}
+
+.notes-list::-webkit-scrollbar-thumb {
+	background: #333;
+	border-radius: 4px;
+}
+
+.notes-list::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
