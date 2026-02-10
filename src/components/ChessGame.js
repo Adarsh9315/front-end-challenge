@@ -116,7 +116,8 @@ const ChessGame = () => {
     <div style={containerStyle}>
       <h1>Chess Game</h1>
       <div style={{ marginBottom: '10px' }}>
-         <Link to="/" className="btn btn-primary">Back to Movies</Link>
+         <Link to="/" className="btn btn-primary mr-2">Home</Link>
+         <Link to="/movies" className="btn btn-primary">Movies</Link>
       </div>
       <div style={{ marginBottom: '10px' }}>
         Turn: {game.turn() === 'w' ? 'White' : 'Black'}

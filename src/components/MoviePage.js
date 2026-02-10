@@ -85,6 +85,7 @@ const MoviePage = () => {
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
                 <div className='col-auto'>
+                    <Link to="/" className="btn btn-secondary mr-2">Home</Link>
                     <Link to="/chess" className="btn btn-secondary">Play Chess</Link>
                 </div>
 			</div>
