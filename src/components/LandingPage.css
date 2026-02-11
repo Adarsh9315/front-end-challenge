@@ -1,0 +1,133 @@
+.landing-page {
+	min-height: calc(100vh - 56px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 40px 20px;
+	background: linear-gradient(135deg, #141414 0%, #1a1a1a 100%);
+}
+
+.landing-content {
+	max-width: 1200px;
+	width: 100%;
+}
+
+.hero-section {
+	text-align: center;
+	margin-bottom: 60px;
+	padding: 40px 20px;
+}
+
+.hero-title {
+	font-size: 3.5rem;
+	font-weight: bold;
+	margin-bottom: 20px;
+	background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.hero-subtitle {
+	font-size: 1.5rem;
+	color: rgba(255, 255, 255, 0.7);
+	margin: 0;
+}
+
+.features-section {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 30px;
+	margin-bottom: 60px;
+}
+
+.feature-card {
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 12px;
+	padding: 40px 30px;
+	text-align: center;
+	transition: all 0.3s ease;
+	cursor: pointer;
+	backdrop-filter: blur(10px);
+}
+
+.feature-card:hover {
+	transform: translateY(-10px);
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.2);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.feature-icon {
+	font-size: 4rem;
+	margin-bottom: 20px;
+}
+
+.feature-title {
+	font-size: 1.8rem;
+	font-weight: bold;
+	margin-bottom: 15px;
+	color: #ffffff;
+}
+
+.feature-description {
+	font-size: 1rem;
+	color: rgba(255, 255, 255, 0.7);
+	line-height: 1.6;
+	margin-bottom: 25px;
+}
+
+.feature-button {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: #ffffff;
+	border: none;
+	padding: 12px 30px;
+	border-radius: 6px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.feature-button:hover {
+	transform: scale(1.05);
+	box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.cta-section {
+	text-align: center;
+	padding: 40px 20px;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cta-text {
+	font-size: 1.3rem;
+	color: #ffffff;
+	margin-bottom: 10px;
+	font-weight: 600;
+}
+
+.cta-subtext {
+	font-size: 1rem;
+	color: rgba(255, 255, 255, 0.6);
+	margin: 0;
+}
+
+@media (max-width: 768px) {
+	.hero-title {
+		font-size: 2.5rem;
+	}
+
+	.hero-subtitle {
+		font-size: 1.2rem;
+	}
+
+	.features-section {
+		grid-template-columns: 1fr;
+	}
+
+	.feature-card {
+		padding: 30px 20px;
+	}
+}

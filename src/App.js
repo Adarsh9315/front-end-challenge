@@ -7,10 +7,11 @@ import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import ChessGame from './components/ChessGame';
+import LandingPage from './components/LandingPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
-	const [currentPage, setCurrentPage] = useState('movies');
+	const [currentPage, setCurrentPage] = useState('home');
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -84,6 +85,12 @@ const App = () => {
 					<span className="navbar-brand">My App</span>
 					<div className="navbar-nav">
 						<button 
+							className={`nav-link btn btn-link ${currentPage === 'home' ? 'active' : ''}`}
+							onClick={() => setCurrentPage('home')}
+						>
+							Home
+						</button>
+						<button 
 							className={`nav-link btn btn-link ${currentPage === 'movies' ? 'active' : ''}`}
 							onClick={() => setCurrentPage('movies')}
 						>
@@ -100,7 +107,9 @@ const App = () => {
 			</nav>
 
 			{/* Conditional Rendering based on current page */}
-			{currentPage === 'movies' ? (
+			{currentPage === 'home' ? (
+				<LandingPage onNavigate={setCurrentPage} />
+			) : currentPage === 'movies' ? (
 				<div className='container-fluid movie-app'>
 					<div className='row d-flex align-items-center mt-4 mb-4'>
 						<MovieListHeading heading='Movies' />
