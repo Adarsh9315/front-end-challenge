@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../components/Loader';
 import '../TournamentLanding.css';
 
 const TournamentLanding = () => {
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		// Simulate initial loading
+		const timer = setTimeout(() => {
+			setLoading(false);
+		}, 1500);
+
+		return () => clearTimeout(timer);
+	}, []);
+
+	if (loading) {
+		return <Loader message="Preparing the Tournament..." />;
+	}
+
 	return (
 		<div className="tournament-landing">
 			<div className="hero-section">
