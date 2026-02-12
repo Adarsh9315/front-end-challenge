@@ -8,6 +8,7 @@ import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import ChessGame from './components/ChessGame';
+import Spinner from './components/Spinner';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const NavBar = () => {
@@ -45,16 +46,33 @@ const MoviePage = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [loading, setLoading] = useState(false);
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
+		if (!searchValue) {
+			setMovies([]);
+			setLoading(false);
+			return;
+		}
+
+		setLoading(true);
 		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=a21d8f2b`;
 
-		const response = await fetch(url);
-		const responseJson = await response.json();
+		try {
+			const response = await fetch(url);
+			const responseJson = await response.json();
 
-		if (responseJson.Search) {
-			setMovies(responseJson.Search);
+			if (responseJson.Search) {
+				setMovies(responseJson.Search);
+			} else {
+				setMovies([]);
+			}
+		} catch (error) {
+			console.error('Error fetching movies:', error);
+			setMovies([]);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -120,11 +138,15 @@ const MoviePage = () => {
 				All 5 nominations are done
 			</div>
 			<div className='row'>
-				<MovieList
-					movies={movies}
-					handleNominationClick={addNominationMovie}
-					nominationComponent={AddNomination}
-				/>
+				{loading ? (
+					<Spinner />
+				) : (
+					<MovieList
+						movies={movies}
+						handleNominationClick={addNominationMovie}
+						nominationComponent={AddNomination}
+					/>
+				)}
 			</div>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Nominations' />
