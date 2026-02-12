@@ -5,6 +5,7 @@ import './App.css';
 import './Chess.css';
 import MovieApp from './components/MovieApp';
 import ChessGame from './components/ChessGame';
+import TodoApp from './components/TodoApp';
 
 const App = () => {
 	return (
@@ -22,6 +23,11 @@ const App = () => {
 								Chess Game
 							</NavLink>
 						</li>
+						<li>
+							<NavLink to="/todo" activeClassName="active">
+								Todo
+							</NavLink>
+						</li>
 					</ul>
 				</nav>
 				
@@ -31,6 +37,9 @@ const App = () => {
 					</Route>
 					<Route path="/chess">
 						<ChessGame />
+					</Route>
+					<Route path="/todo">
+						<TodoApp />
 					</Route>
 				</Switch>
 			</div>
