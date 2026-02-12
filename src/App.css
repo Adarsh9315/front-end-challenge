@@ -180,3 +180,166 @@ body {
 .movie-app__content {
 	padding-bottom: 40px;
 }
+
+/* Todo App Styles */
+.todo-app {
+	padding: 20px 0;
+}
+
+.todo-app__card {
+	background: #1d1d1d;
+	border-radius: 14px;
+	padding: 32px;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.todo-app__header {
+	margin-bottom: 24px;
+	text-align: center;
+}
+
+.todo-app__title {
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 8px;
+	color: #ffffff;
+}
+
+.todo-app__subtitle {
+	color: #cbd5e1;
+	font-size: 1rem;
+	margin-bottom: 0;
+}
+
+.todo-form {
+	margin-bottom: 24px;
+}
+
+.todo-form .form-control {
+	background-color: #2a2a2a;
+	border-color: #3a3a3a;
+	color: #ffffff;
+}
+
+.todo-form .form-control:focus {
+	background-color: #2a2a2a;
+	border-color: #38bdf8;
+	color: #ffffff;
+	box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.25);
+}
+
+.todo-form .form-control::placeholder {
+	color: #9aa4b2;
+}
+
+.todo-app__stats {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.todo-app__filters {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.todo-list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.todo-list__empty {
+	min-height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.todo-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 16px;
+	background-color: #2a2a2a;
+	border-radius: 8px;
+	border: 1px solid #3a3a3a;
+	transition: all 0.2s ease;
+}
+
+.todo-item:hover {
+	background-color: #333333;
+	border-color: #4a4a4a;
+}
+
+.todo-item--completed {
+	opacity: 0.7;
+}
+
+.todo-item__content {
+	display: flex;
+	align-items: center;
+	flex: 1;
+	gap: 12px;
+}
+
+.todo-item__checkbox {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	accent-color: #38bdf8;
+}
+
+.todo-item__text {
+	flex: 1;
+	font-size: 1rem;
+	color: #ffffff;
+	word-break: break-word;
+}
+
+.todo-item--completed .todo-item__text {
+	text-decoration: line-through;
+}
+
+.todo-item__delete {
+	font-size: 1.5rem;
+	line-height: 1;
+	padding: 4px 10px;
+	border-radius: 4px;
+	transition: all 0.2s ease;
+	min-width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.todo-item__delete:hover {
+	background-color: #dc3545;
+	border-color: #dc3545;
+	color: #ffffff;
+	transform: scale(1.1);
+}
+
+.todo-app__actions {
+	text-align: center;
+}
+
+@media (max-width: 768px) {
+	.todo-app__card {
+		padding: 24px 16px;
+	}
+
+	.todo-app__title {
+		font-size: 1.5rem;
+	}
+
+	.todo-item {
+		padding: 10px 12px;
+	}
+
+	.todo-item__text {
+		font-size: 0.9rem;
+	}
+}

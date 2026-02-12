@@ -6,6 +6,7 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import TodoApp from './components/TodoApp';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
@@ -186,6 +187,10 @@ const App = () => {
 					/>
 				</div>
 			</div>
+
+			<section className='landing-section' id='todo-app'>
+				<TodoApp />
+			</section>
 		</div>
 	);
 };
