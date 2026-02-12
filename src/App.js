@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-do
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './Chess.css';
+import LandingPage from './components/LandingPage';
 import MovieApp from './components/MovieApp';
 import ChessGame from './components/ChessGame';
 
@@ -14,6 +15,11 @@ const App = () => {
 					<ul className="nav-links">
 						<li>
 							<NavLink exact to="/" activeClassName="active">
+								Home
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to="/movies" activeClassName="active">
 								Movie App
 							</NavLink>
 						</li>
@@ -27,6 +33,9 @@ const App = () => {
 				
 				<Switch>
 					<Route exact path="/">
+						<LandingPage />
+					</Route>
+					<Route path="/movies">
 						<MovieApp />
 					</Route>
 					<Route path="/chess">

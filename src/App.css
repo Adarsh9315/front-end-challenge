@@ -3,6 +3,45 @@ body {
 	color: #ffffff;
 }
 
+.navigation {
+	background: #1a1a1a;
+	padding: 15px 0;
+	border-bottom: 2px solid #333;
+}
+
+.nav-links {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	margin: 0;
+	padding: 0;
+}
+
+.nav-links li {
+	margin: 0;
+}
+
+.nav-links a {
+	color: #cccccc;
+	text-decoration: none;
+	font-size: 1.1rem;
+	font-weight: 500;
+	padding: 8px 16px;
+	border-radius: 6px;
+	transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+	color: #ffffff;
+	background: #2d2d2d;
+}
+
+.nav-links a.active {
+	color: #ffffff;
+	background: #333333;
+}
+
 .movie-app > .row {
 	overflow-x: auto;
 	flex-wrap: nowrap;
