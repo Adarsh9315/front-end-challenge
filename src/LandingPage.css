@@ -1,0 +1,150 @@
+.landing-page {
+	min-height: 100vh;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+.landing-container {
+	max-width: 1200px;
+	width: 100%;
+	text-align: center;
+}
+
+.landing-header {
+	margin-bottom: 60px;
+	animation: fadeInDown 1s ease-out;
+}
+
+.landing-title {
+	font-size: 3.5rem;
+	font-weight: 700;
+	color: #ffffff;
+	margin-bottom: 20px;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.landing-subtitle {
+	font-size: 1.5rem;
+	color: #f0f0f0;
+	font-weight: 300;
+}
+
+.features-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 40px;
+	margin-bottom: 60px;
+	animation: fadeInUp 1s ease-out;
+}
+
+.feature-card {
+	background: rgba(255, 255, 255, 0.95);
+	border-radius: 20px;
+	padding: 40px 30px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	color: #333;
+}
+
+.feature-card:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.feature-icon {
+	font-size: 4rem;
+	margin-bottom: 20px;
+}
+
+.feature-card h2 {
+	font-size: 2rem;
+	margin-bottom: 15px;
+	color: #667eea;
+	font-weight: 600;
+}
+
+.feature-card p {
+	font-size: 1.1rem;
+	line-height: 1.6;
+	margin-bottom: 25px;
+	color: #666;
+}
+
+.feature-button {
+	display: inline-block;
+	padding: 12px 30px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	text-decoration: none;
+	border-radius: 50px;
+	font-weight: 600;
+	font-size: 1.1rem;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.feature-button:hover {
+	transform: scale(1.05);
+	box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+	color: white;
+	text-decoration: none;
+}
+
+.landing-footer {
+	color: #f0f0f0;
+	font-size: 1.1rem;
+	animation: fadeIn 1.5s ease-out;
+}
+
+@keyframes fadeInDown {
+	from {
+		opacity: 0;
+		transform: translateY(-30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@media (max-width: 768px) {
+	.landing-title {
+		font-size: 2.5rem;
+	}
+
+	.landing-subtitle {
+		font-size: 1.2rem;
+	}
+
+	.features-grid {
+		grid-template-columns: 1fr;
+		gap: 30px;
+	}
+
+	.feature-card {
+		padding: 30px 20px;
+	}
+}
