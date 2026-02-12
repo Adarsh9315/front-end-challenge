@@ -1,0 +1,264 @@
+.note-taking-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+	min-height: 100vh;
+}
+
+.note-header {
+	text-align: center;
+	margin-bottom: 30px;
+	padding: 20px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.note-header h1 {
+	margin: 0;
+	font-size: 2.5em;
+	color: #ffffff;
+}
+
+.note-count {
+	margin: 10px 0 0 0;
+	font-size: 1.1em;
+	color: #f0f0f0;
+	opacity: 0.9;
+}
+
+.note-editor {
+	background: #1e1e1e;
+	padding: 25px;
+	border-radius: 10px;
+	margin-bottom: 30px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+	border: 1px solid #333;
+}
+
+.note-title-input {
+	width: 100%;
+	padding: 15px;
+	font-size: 1.3em;
+	border: 2px solid #333;
+	border-radius: 8px;
+	background: #2a2a2a;
+	color: #ffffff;
+	margin-bottom: 15px;
+	transition: border-color 0.3s;
+}
+
+.note-title-input:focus {
+	outline: none;
+	border-color: #667eea;
+}
+
+.note-content-input {
+	width: 100%;
+	padding: 15px;
+	font-size: 1.1em;
+	border: 2px solid #333;
+	border-radius: 8px;
+	background: #2a2a2a;
+	color: #ffffff;
+	margin-bottom: 15px;
+	resize: vertical;
+	font-family: inherit;
+	transition: border-color 0.3s;
+}
+
+.note-content-input:focus {
+	outline: none;
+	border-color: #667eea;
+}
+
+.note-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.btn-save,
+.btn-cancel {
+	padding: 12px 30px;
+	font-size: 1em;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.3s;
+	font-weight: 600;
+}
+
+.btn-save {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: #ffffff;
+	flex: 1;
+}
+
+.btn-save:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-cancel {
+	background: #dc3545;
+	color: #ffffff;
+	flex: 0.3;
+}
+
+.btn-cancel:hover {
+	background: #c82333;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.search-container {
+	margin-bottom: 25px;
+}
+
+.search-input {
+	width: 100%;
+	padding: 15px;
+	font-size: 1.1em;
+	border: 2px solid #333;
+	border-radius: 8px;
+	background: #1e1e1e;
+	color: #ffffff;
+	transition: border-color 0.3s;
+}
+
+.search-input:focus {
+	outline: none;
+	border-color: #667eea;
+}
+
+.notes-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	gap: 20px;
+}
+
+.note-card {
+	background: #1e1e1e;
+	border: 1px solid #333;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	transition: all 0.3s;
+	display: flex;
+	flex-direction: column;
+}
+
+.note-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 6px 16px rgba(102, 126, 234, 0.3);
+	border-color: #667eea;
+}
+
+.note-card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 15px;
+	gap: 10px;
+}
+
+.note-card-title {
+	margin: 0;
+	font-size: 1.4em;
+	color: #ffffff;
+	word-break: break-word;
+	flex: 1;
+}
+
+.note-card-actions {
+	display: flex;
+	gap: 8px;
+	flex-shrink: 0;
+}
+
+.btn-edit,
+.btn-delete {
+	padding: 8px 12px;
+	font-size: 0.85em;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.3s;
+	white-space: nowrap;
+}
+
+.btn-edit {
+	background: #28a745;
+	color: #ffffff;
+}
+
+.btn-edit:hover {
+	background: #218838;
+	transform: scale(1.05);
+}
+
+.btn-delete {
+	background: #dc3545;
+	color: #ffffff;
+}
+
+.btn-delete:hover {
+	background: #c82333;
+	transform: scale(1.05);
+}
+
+.note-card-content {
+	color: #cccccc;
+	line-height: 1.6;
+	margin-bottom: 15px;
+	flex: 1;
+	word-break: break-word;
+	white-space: pre-wrap;
+}
+
+.note-card-footer {
+	border-top: 1px solid #333;
+	padding-top: 10px;
+	color: #888;
+	font-size: 0.9em;
+}
+
+.empty-state {
+	grid-column: 1 / -1;
+	text-align: center;
+	padding: 60px 20px;
+	font-size: 1.3em;
+	color: #666;
+	background: #1e1e1e;
+	border-radius: 10px;
+	border: 2px dashed #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.notes-list {
+		grid-template-columns: 1fr;
+	}
+
+	.note-header h1 {
+		font-size: 2em;
+	}
+
+	.note-card-header {
+		flex-direction: column;
+	}
+
+	.note-card-actions {
+		width: 100%;
+		justify-content: flex-end;
+	}
+
+	.note-actions {
+		flex-direction: column;
+	}
+
+	.btn-save,
+	.btn-cancel {
+		width: 100%;
+	}
+}
