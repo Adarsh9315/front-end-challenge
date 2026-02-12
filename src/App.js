@@ -8,13 +8,23 @@ import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import ChessGame from './components/ChessGame';
+import LandingPage from './components/LandingPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const NavBar = () => {
 	const location = useLocation();
+	const isLandingPage = location.pathname === '/';
+	
+	if (isLandingPage) {
+		return null;
+	}
+	
 	return (
 		<nav className="app-nav">
-			<Link to="/" className={`nav-link-item ${location.pathname === '/' ? 'active' : ''}`}>
+			<Link to="/" className="nav-link-item">
+				Home
+			</Link>
+			<Link to="/movies" className={`nav-link-item ${location.pathname === '/movies' ? 'active' : ''}`}>
 				Movies
 			</Link>
 			<Link to="/chess" className={`nav-link-item ${location.pathname === '/chess' ? 'active' : ''}`}>
@@ -128,7 +138,8 @@ const App = () => {
 		<Router>
 			<NavBar />
 			<Switch>
-				<Route exact path="/" component={MoviesPage} />
+				<Route exact path="/" component={LandingPage} />
+				<Route path="/movies" component={MoviesPage} />
 				<Route path="/chess" component={ChessGame} />
 			</Switch>
 		</Router>
