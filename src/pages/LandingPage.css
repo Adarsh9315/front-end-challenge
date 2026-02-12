@@ -1,0 +1,133 @@
+.landing-page {
+	min-height: calc(100vh - 80px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 40px 20px;
+	background: linear-gradient(135deg, #141414 0%, #1f1f1f 100%);
+}
+
+.landing-container {
+	max-width: 1200px;
+	width: 100%;
+}
+
+.hero-section {
+	text-align: center;
+	margin-bottom: 60px;
+	padding: 40px 20px;
+}
+
+.hero-title {
+	font-size: 3.5em;
+	font-weight: 700;
+	margin-bottom: 20px;
+	color: #ffffff;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+	font-size: 1.5em;
+	color: #b0b0b0;
+	margin-bottom: 0;
+	line-height: 1.6;
+}
+
+.features-section {
+	margin-bottom: 60px;
+}
+
+.feature-card {
+	background-color: #1f1f1f;
+	border-radius: 15px;
+	padding: 40px 30px;
+	margin-bottom: 30px;
+	text-align: center;
+	transition: transform 0.3s, box-shadow 0.3s;
+	border: 1px solid #333;
+}
+
+.feature-card:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+	border-color: #4caf50;
+}
+
+.feature-icon {
+	font-size: 4em;
+	margin-bottom: 20px;
+}
+
+.feature-title {
+	font-size: 2em;
+	color: #ffffff;
+	margin-bottom: 15px;
+	font-weight: 600;
+}
+
+.feature-description {
+	font-size: 1.1em;
+	color: #b0b0b0;
+	line-height: 1.6;
+	margin-bottom: 25px;
+}
+
+.feature-button {
+	display: inline-block;
+	padding: 12px 30px;
+	background-color: #4caf50;
+	color: #ffffff;
+	text-decoration: none;
+	border-radius: 5px;
+	font-size: 1.1em;
+	font-weight: 500;
+	transition: all 0.3s;
+	border: 2px solid #4caf50;
+}
+
+.feature-button:hover {
+	background-color: transparent;
+	color: #4caf50;
+	text-decoration: none;
+	transform: scale(1.05);
+}
+
+.cta-section {
+	text-align: center;
+	padding: 40px 20px;
+}
+
+.cta-title {
+	font-size: 2.5em;
+	color: #ffffff;
+	margin-bottom: 15px;
+	font-weight: 600;
+}
+
+.cta-description {
+	font-size: 1.2em;
+	color: #b0b0b0;
+	margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+	.hero-title {
+		font-size: 2.5em;
+	}
+
+	.hero-subtitle {
+		font-size: 1.2em;
+	}
+
+	.feature-card {
+		margin-bottom: 20px;
+	}
+
+	.feature-title {
+		font-size: 1.5em;
+	}
+
+	.cta-title {
+		font-size: 2em;
+	}
+}
