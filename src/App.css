@@ -9,6 +9,63 @@ body {
 	color: #f3f4f6;
 }
 
+.app-nav {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	background: rgba(5, 6, 10, 0.95);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-content {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 16px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.nav-logo {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin: 0;
+	background: linear-gradient(135deg, #f9a826, #f86a6a);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.nav-links {
+	display: flex;
+	gap: 8px;
+}
+
+.nav-link {
+	padding: 8px 20px;
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 999px;
+	color: #c8cbd9;
+	font-size: 0.95rem;
+	cursor: pointer;
+	transition: all 0.2s;
+	font-weight: 500;
+}
+
+.nav-link:hover {
+	background: rgba(255, 255, 255, 0.05);
+	border-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-link.active {
+	background: linear-gradient(135deg, #f9a826, #f86a6a);
+	color: #0b0c12;
+	border-color: transparent;
+	font-weight: 600;
+}
+
 .landing-page {
 	min-height: 100vh;
 	background: radial-gradient(circle at top, rgba(90, 44, 255, 0.35), transparent 55%),

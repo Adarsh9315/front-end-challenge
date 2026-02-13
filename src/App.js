@@ -6,6 +6,7 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import TodoPage from './components/TodoPage';
 import { useSnackbar } from 'react-simple-snackbar';
 
 const highlights = [
@@ -26,6 +27,7 @@ const highlights = [
 const NOMINATION_LIMIT = 5;
 
 const App = () => {
+	const [currentPage, setCurrentPage] = useState('movies'); // 'movies' or 'todos'
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -104,8 +106,55 @@ const App = () => {
 
 	const isNominationLimitReached = nomination.length >= NOMINATION_LIMIT;
 
+	// Render todo page if selected
+	if (currentPage === 'todos') {
+		return (
+			<>
+				<nav className='app-nav'>
+					<div className='nav-content'>
+						<h2 className='nav-logo'>The Shoppies 2.0</h2>
+						<div className='nav-links'>
+							<button 
+								className='nav-link'
+								onClick={() => setCurrentPage('movies')}
+							>
+								Movies
+							</button>
+							<button 
+								className='nav-link active'
+								onClick={() => setCurrentPage('todos')}
+							>
+								Todos
+							</button>
+						</div>
+					</div>
+				</nav>
+				<TodoPage />
+			</>
+		);
+	}
+
 	return (
 		<div className='landing-page'>
+			<nav className='app-nav'>
+				<div className='nav-content'>
+					<h2 className='nav-logo'>The Shoppies 2.0</h2>
+					<div className='nav-links'>
+						<button 
+							className='nav-link active'
+							onClick={() => setCurrentPage('movies')}
+						>
+							Movies
+						</button>
+						<button 
+							className='nav-link'
+							onClick={() => setCurrentPage('todos')}
+						>
+							Todos
+						</button>
+					</div>
+				</div>
+			</nav>
 			<header className='hero'>
 				<div className='hero__overlay' />
 				<div className='hero__content'>
