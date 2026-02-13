@@ -35,3 +35,34 @@ body {
 	display: block;
 	margin: auto;
 }
+
+.nav-buttons {
+	padding: 20px;
+}
+
+.note-card {
+	background: #2a2a2a;
+	padding: 15px;
+	border-radius: 8px;
+	min-height: 120px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.note-card p {
+	margin-bottom: 10px;
+	word-break: break-word;
+}
+
+.note-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: #888;
+}
+
+.no-notes {
+	padding: 20px;
+	color: #888;
+}

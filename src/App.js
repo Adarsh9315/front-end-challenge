@@ -6,6 +6,7 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import Notes from './components/Notes';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
 	const [openSnackbar] = useSnackbar()
+	const [currentPage, setCurrentPage] = useState('movies');
 
 	const getMovieRequest = async (searchValue) => {
 		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=a21d8f2b`;
@@ -76,11 +78,27 @@ const App = () => {
 
 	return (
 		<div className='container-fluid movie-app'>
+			<div className='nav-buttons mb-4'>
+				<button 
+					className={`btn ${currentPage === 'movies' ? 'btn-primary' : 'btn-outline-primary'} mr-2`}
+					onClick={() => setCurrentPage('movies')}
+				>
+					Movies
+				</button>
+				<button 
+					className={`btn ${currentPage === 'notes' ? 'btn-primary' : 'btn-outline-primary'}`}
+					onClick={() => setCurrentPage('notes')}
+				>
+					Notes
+				</button>
+			</div>
+			{currentPage === 'movies' ? (
+				<>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations') || '[]').length === 5 ? 'block' : 'none'}}>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
@@ -100,6 +118,10 @@ const App = () => {
 					nominationComponent={RemoveNominations}
 				/>
 			</div>
+				</>
+			) : (
+				<Notes />
+			)}
 		</div>
 	);
 };
