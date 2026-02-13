@@ -4,22 +4,39 @@ import MovieListHeading from './MovieListHeading';
 import SearchBox from './SearchBox';
 import AddNomination from './AddNomination';
 import RemoveNominations from './RemoveNominations.js';
+import Loader from './Loader';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const Home = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [loading, setLoading] = useState(false);
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
+		if (!searchValue) {
+			setMovies([]);
+			return;
+		}
+
+		setLoading(true);
 		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=a21d8f2b`;
 
-		const response = await fetch(url);
-		const responseJson = await response.json();
+		try {
+			const response = await fetch(url);
+			const responseJson = await response.json();
 
-		if (responseJson.Search) {
-			setMovies(responseJson.Search);
+			if (responseJson.Search) {
+				setMovies(responseJson.Search);
+			} else {
+				setMovies([]);
+			}
+		} catch (error) {
+			console.error('Error fetching movies:', error);
+			setMovies([]);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -81,13 +98,17 @@ const Home = () => {
 			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations') || '[]').length === 5 ? 'block' : 'none'}}>
 				All 5 nominations are done
 			</div>
-			<div className='row'>
-				<MovieList
-					movies={movies}
-					handleNominationClick={addNominationMovie}
-					nominationComponent={AddNomination}
-				/>
-			</div>
+			{loading ? (
+				<Loader />
+			) : (
+				<div className='row'>
+					<MovieList
+						movies={movies}
+						handleNominationClick={addNominationMovie}
+						nominationComponent={AddNomination}
+					/>
+				</div>
+			)}
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Nominations' />
 			</div>
