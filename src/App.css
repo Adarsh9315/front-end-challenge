@@ -35,3 +35,72 @@ body {
 	display: block;
 	margin: auto;
 }
+
+/* Navbar */
+.nav-link-custom {
+	color: #aaaaaa;
+	text-decoration: none;
+	padding: 8px 16px;
+	margin-left: 8px;
+	border-radius: 4px;
+	transition: color 0.2s, background-color 0.2s;
+}
+
+.nav-link-custom:hover {
+	color: #ffffff;
+	background-color: rgba(255, 255, 255, 0.1);
+	text-decoration: none;
+}
+
+.nav-link-custom.active {
+	color: #ffffff;
+	background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Notes Page */
+.notes-form {
+	background-color: #1c1c1c;
+	padding: 20px;
+	border-radius: 8px;
+}
+
+.notes-input {
+	background-color: #2a2a2a;
+	border: 1px solid #3a3a3a;
+	color: #ffffff;
+}
+
+.notes-input:focus {
+	background-color: #2a2a2a;
+	border-color: #5a5a5a;
+	color: #ffffff;
+	box-shadow: none;
+}
+
+.notes-input::placeholder {
+	color: #888888;
+}
+
+.note-card {
+	background-color: #1c1c1c;
+	border-radius: 8px;
+	padding: 16px;
+	height: 100%;
+	transition: transform 0.2s;
+}
+
+.note-card:hover {
+	transform: translateY(-2px);
+}
+
+.note-card-title {
+	margin-bottom: 8px;
+	word-wrap: break-word;
+}
+
+.note-card-body {
+	color: #cccccc;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	margin-bottom: 8px;
+}
