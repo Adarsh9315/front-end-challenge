@@ -1,6 +1,45 @@
 body {
 	background: #141414;
 	color: #ffffff;
+	margin: 0;
+}
+
+/* Navigation */
+.app-nav {
+	background: #0a0a0a;
+	border-bottom: 1px solid #2a2a2a;
+	padding: 0 20px;
+	position: sticky;
+	top: 0;
+	z-index: 50;
+}
+
+.app-nav-inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	gap: 4px;
+}
+
+.nav-link-item {
+	color: #aaa;
+	text-decoration: none;
+	padding: 14px 20px;
+	font-size: 0.95rem;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	border-bottom: 2px solid transparent;
+	transition: all 0.2s;
+}
+
+.nav-link-item:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.nav-link-item.active {
+	color: #fff;
+	border-bottom-color: #8ab4f8;
 }
 
 .movie-app > .row {
