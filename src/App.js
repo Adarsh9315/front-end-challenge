@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MoviePage from './pages/MoviePage';
 import ChessGame from './components/ChessGame';
+import TodoPage from './pages/TodoPage';
 
 const App = () => {
 	return (
@@ -13,12 +14,14 @@ const App = () => {
 					<div className="nav-container">
 						<Link to="/" className="nav-link">Movies</Link>
 						<Link to="/chess" className="nav-link">Chess Game</Link>
+						<Link to="/todo" className="nav-link">Todo</Link>
 					</div>
 				</nav>
 
 				<Switch>
 					<Route exact path="/" component={MoviePage} />
 					<Route path="/chess" component={ChessGame} />
+					<Route path="/todo" component={TodoPage} />
 				</Switch>
 			</div>
 		</Router>
