@@ -3,6 +3,31 @@ body {
 	color: #ffffff;
 }
 
+.app-nav {
+	display: flex;
+	gap: 8px;
+	padding: 12px 24px;
+	background: #1a1a1a;
+	border-bottom: 1px solid #333;
+}
+
+.nav-link-item {
+	color: #ccc;
+	text-decoration: none;
+	padding: 8px 20px;
+	border-radius: 6px;
+	font-weight: 600;
+	font-size: 0.95rem;
+	letter-spacing: 0.5px;
+	transition: all 0.2s ease;
+}
+
+.nav-link-item:hover {
+	color: #e0c068;
+	background: #252525;
+	text-decoration: none;
+}
+
 .movie-app > .row {
 	overflow-x: auto;
 	flex-wrap: nowrap;
