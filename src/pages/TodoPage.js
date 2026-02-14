@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 const TodoPage = () => {
 	const [todos, setTodos] = useState([]);
 	const [inputValue, setInputValue] = useState('');
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const savedTodos = localStorage.getItem('todos');
 		if (savedTodos) {
 			setTodos(JSON.parse(savedTodos));
 		}
+		setLoading(false);
 	}, []);
 
 	useEffect(() => {
@@ -37,6 +39,19 @@ const TodoPage = () => {
 	const deleteTodo = (id) => {
 		setTodos(todos.filter(todo => todo.id !== id));
 	};
+
+	if (loading) {
+		return (
+			<div className="todo-page">
+				<div className="todo-container">
+					<div className="spinner-container">
+						<div className="spinner"></div>
+						<p className="loading-text">Loading your todos...</p>
+					</div>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="todo-page">
