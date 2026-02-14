@@ -6,7 +6,18 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import Notes from './components/Notes';
 import { useSnackbar } from 'react-simple-snackbar'
+
+const getStoredNominations = () => {
+	const saved = localStorage.getItem('nominations');
+	return saved ? JSON.parse(saved) : [];
+};
+
+const getStoredNominationsCount = () => {
+	const saved = localStorage.getItem('nominations');
+	return saved ? JSON.parse(saved).length : 0;
+};
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
@@ -30,11 +41,8 @@ const App = () => {
 	}, [searchValue]);
 
 	useEffect(() => {
-		const movieNomination = JSON.parse(
-			localStorage.getItem('nominations')
-		);
-
-		if (movieNomination) {
+		const movieNomination = getStoredNominations();
+		if (movieNomination.length) {
 			setNomination(movieNomination);
 		}
 	}, []);
@@ -80,7 +88,7 @@ const App = () => {
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div className='banner' style={{display: getStoredNominationsCount() === 5 ? 'block' : 'none'}}>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
@@ -99,6 +107,9 @@ const App = () => {
 					handleNominationClick={removeNominationMovie}
 					nominationComponent={RemoveNominations}
 				/>
+			</div>
+			<div className='row mt-4 mb-4'>
+				<Notes />
 			</div>
 		</div>
 	);
