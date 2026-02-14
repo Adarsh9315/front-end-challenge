@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Switch, Route, Link, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -6,9 +7,34 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import Showdown from './components/Showdown';
 import { useSnackbar } from 'react-simple-snackbar'
 
-const App = () => {
+const NavBar = () => {
+	const location = useLocation();
+
+	return (
+		<nav className="app-nav">
+			<div className="nav-brand">OMDB Movies</div>
+			<div className="nav-links">
+				<Link
+					to="/"
+					className={`nav-link-item ${location.pathname === '/' ? 'nav-active' : ''}`}
+				>
+					Search &amp; Nominate
+				</Link>
+				<Link
+					to="/showdown"
+					className={`nav-link-item ${location.pathname === '/showdown' ? 'nav-active' : ''}`}
+				>
+					Movie Showdown
+				</Link>
+			</div>
+		</nav>
+	);
+};
+
+const HomePage = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
@@ -74,13 +100,22 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const getNominationsCount = () => {
+		try {
+			const noms = JSON.parse(localStorage.getItem('nominations'));
+			return noms ? noms.length : 0;
+		} catch {
+			return 0;
+		}
+	};
+
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+			<div className='banner' style={{display: getNominationsCount() === 5 ? 'block' : 'none'}}>
 				All 5 nominations are done
 			</div>
 			<div className='row'>
@@ -100,6 +135,22 @@ const App = () => {
 					nominationComponent={RemoveNominations}
 				/>
 			</div>
+		</div>
+	);
+};
+
+const App = () => {
+	return (
+		<div>
+			<NavBar />
+			<Switch>
+				<Route exact path="/">
+					<HomePage />
+				</Route>
+				<Route path="/showdown">
+					<Showdown />
+				</Route>
+			</Switch>
 		</div>
 	);
 };
