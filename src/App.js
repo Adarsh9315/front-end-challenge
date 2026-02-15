@@ -7,6 +7,7 @@ import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import { useSnackbar } from 'react-simple-snackbar'
+import Map from './components/Map';
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
@@ -76,6 +77,7 @@ const App = () => {
 
 	return (
 		<div className='container-fluid movie-app'>
+			<Map />
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />

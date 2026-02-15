@@ -3,6 +3,21 @@ body {
 	color: #ffffff;
 }
 
+.map-container {
+	margin-top: 2rem;
+	background: #1f1f1f;
+	border-radius: 8px;
+	padding: 2rem;
+	min-height: 40vh;
+}
+
+.map-container iframe {
+	width: 100%;
+	border: 0;
+	border-radius: 8px;
+	min-height: 50vh;
+}
+
 .movie-app > .row {
 	overflow-x: auto;
 	flex-wrap: nowrap;
