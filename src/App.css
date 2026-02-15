@@ -35,3 +35,28 @@ body {
 	display: block;
 	margin: auto;
 }
+
+.notes-app {
+	min-height: calc(100vh - 60px);
+}
+
+.notes-app .card {
+	transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.notes-app .card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.navbar {
+	border-bottom: 1px solid #333;
+}
+
+.nav-link {
+	transition: color 0.2s;
+}
+
+.nav-link:hover {
+	color: #fff !important;
+}
