@@ -35,3 +35,61 @@ body {
 	display: block;
 	margin: auto;
 }
+
+.navigation-bar {
+	background-color: #1f1f1f;
+	padding: 15px 30px;
+	border-bottom: 2px solid #333;
+	display: flex;
+	gap: 15px;
+}
+
+.nav-btn {
+	background-color: transparent;
+	color: #ffffff;
+	border: 2px solid #444;
+	padding: 10px 30px;
+	font-size: 1em;
+	cursor: pointer;
+	transition: all 0.3s;
+	border-radius: 5px;
+}
+
+.nav-btn:hover {
+	background-color: #2a2a2a;
+	border-color: #666;
+}
+
+.nav-btn.active {
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.todo-app {
+	padding: 20px;
+}
+
+.todo-item {
+	background-color: #1f1f1f;
+	padding: 15px 20px;
+	border-radius: 8px;
+	border: 1px solid #333;
+	transition: all 0.2s;
+}
+
+.todo-item:hover {
+	background-color: #2a2a2a;
+	border-color: #444;
+}
+
+.add-todo-form {
+	max-width: 100%;
+}
+
+.todo-list {
+	margin-top: 20px;
+}
+
+.todo-stats {
+	text-align: center;
+}
