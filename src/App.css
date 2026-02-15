@@ -35,3 +35,73 @@ body {
 	display: block;
 	margin: auto;
 }
+
+/* Navbar */
+.navbar {
+	background-color: #1a1a1a;
+	padding: 12px 24px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid #2a2a2a;
+}
+
+.navbar-brand {
+	font-size: 1.3rem;
+	font-weight: 700;
+	color: #ffffff;
+}
+
+.navbar-nav-links {
+	display: flex;
+	gap: 8px;
+}
+
+.nav-link-item {
+	color: #aaaaaa;
+	text-decoration: none;
+	padding: 6px 16px;
+	border-radius: 4px;
+	font-size: 0.95rem;
+	transition: color 0.2s, background-color 0.2s;
+}
+
+.nav-link-item:hover {
+	color: #ffffff;
+	background-color: #2a2a2a;
+	text-decoration: none;
+}
+
+.nav-link-item.active {
+	color: #ffffff;
+	background-color: #333333;
+}
+
+/* Map Page */
+.map-page {
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 58px);
+}
+
+.map-header {
+	padding: 20px 24px 12px;
+	background-color: #141414;
+}
+
+.map-header h2 {
+	margin: 0 0 4px;
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.map-header p {
+	margin: 0;
+	color: #aaaaaa;
+	font-size: 0.9rem;
+}
+
+.map-wrapper {
+	flex: 1;
+	min-height: 0;
+}
