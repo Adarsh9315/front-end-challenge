@@ -35,3 +35,98 @@ body {
 	display: block;
 	margin: auto;
 }
+
+/* Navigation styles */
+.navbar {
+	margin-bottom: 0 !important;
+}
+
+.navbar-brand {
+	font-weight: bold;
+}
+
+.nav-link {
+	color: rgba(255, 255, 255, 0.7) !important;
+	transition: color 0.2s;
+}
+
+.nav-link:hover {
+	color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Todo Page styles */
+.todo-app {
+	padding: 20px;
+}
+
+.todo-app h1 {
+	color: #ffffff;
+}
+
+.todo-item {
+	background: #2a2a2a;
+	border-radius: 5px;
+	border: 1px solid #3a3a3a;
+	transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.todo-item:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.todo-item.completed {
+	opacity: 0.7;
+	background: #1a1a1a;
+}
+
+.todo-item input[type="checkbox"] {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.text-strikethrough {
+	text-decoration: line-through;
+	color: #888;
+}
+
+.todo-item .btn-danger {
+	background-color: #dc3545;
+	border: none;
+	padding: 5px 15px;
+}
+
+.todo-item .btn-danger:hover {
+	background-color: #c82333;
+}
+
+.todo-app .input-group .btn-primary {
+	background-color: #007bff;
+	border: none;
+}
+
+.todo-app .input-group .btn-primary:hover {
+	background-color: #0056b3;
+}
+
+.todo-app .form-control {
+	background-color: #2a2a2a;
+	border: 1px solid #3a3a3a;
+	color: #ffffff;
+}
+
+.todo-app .form-control:focus {
+	background-color: #2a2a2a;
+	border-color: #007bff;
+	color: #ffffff;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.todo-app .form-control::placeholder {
+	color: #888;
+}
+
+.text-muted {
+	color: #888 !important;
+}
