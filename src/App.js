@@ -6,12 +6,14 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import Notes from './components/Notes';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [currentView, setCurrentView] = useState('movies');
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
@@ -77,29 +79,54 @@ const App = () => {
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='Movies' />
-				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+				<div className='col'>
+					<div className='navigation-buttons'>
+						<button
+							className={`btn ${currentView === 'movies' ? 'btn-primary' : 'btn-secondary'} mr-2`}
+							onClick={() => setCurrentView('movies')}
+						>
+							Movies
+						</button>
+						<button
+							className={`btn ${currentView === 'notes' ? 'btn-primary' : 'btn-secondary'}`}
+							onClick={() => setCurrentView('notes')}
+						>
+							Notes
+						</button>
+					</div>
+				</div>
 			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-				All 5 nominations are done
-			</div>
-			<div className='row'>
-				<MovieList
-					movies={movies}
-					handleNominationClick={addNominationMovie}
-					nominationComponent={AddNomination}
-				/>
-			</div>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='Nominations' />
-			</div>
-			<div className='row'>
-				<MovieList
-					movies={nomination}
-					handleNominationClick={removeNominationMovie}
-					nominationComponent={RemoveNominations}
-				/>
-			</div>
+
+			{currentView === 'movies' ? (
+				<>
+					<div className='row d-flex align-items-center mt-4 mb-4'>
+						<MovieListHeading heading='Movies' />
+						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+					</div>
+					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+						All 5 nominations are done
+					</div>
+					<div className='row'>
+						<MovieList
+							movies={movies}
+							handleNominationClick={addNominationMovie}
+							nominationComponent={AddNomination}
+						/>
+					</div>
+					<div className='row d-flex align-items-center mt-4 mb-4'>
+						<MovieListHeading heading='Nominations' />
+					</div>
+					<div className='row'>
+						<MovieList
+							movies={nomination}
+							handleNominationClick={removeNominationMovie}
+							nominationComponent={RemoveNominations}
+						/>
+					</div>
+				</>
+			) : (
+				<Notes />
+			)}
 		</div>
 	);
 };
