@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Switch, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -6,6 +7,7 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
+import TodoPage from './components/TodoPage';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
@@ -75,31 +77,50 @@ const App = () => {
 	};
 
 	return (
-		<div className='container-fluid movie-app'>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='Movies' />
-				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-			</div>
-			<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-				All 5 nominations are done
-			</div>
-			<div className='row'>
-				<MovieList
-					movies={movies}
-					handleNominationClick={addNominationMovie}
-					nominationComponent={AddNomination}
-				/>
-			</div>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='Nominations' />
-			</div>
-			<div className='row'>
-				<MovieList
-					movies={nomination}
-					handleNominationClick={removeNominationMovie}
-					nominationComponent={RemoveNominations}
-				/>
-			</div>
+		<div>
+			<nav className='navbar navbar-expand-lg navbar-dark' style={{backgroundColor: '#1a1a1a', marginBottom: '20px'}}>
+				<div className='container-fluid'>
+					<Link className='navbar-brand' to='/'>Movie App</Link>
+					<div className='navbar-nav'>
+						<Link className='nav-link' to='/'>Movies</Link>
+						<Link className='nav-link' to='/todos'>Todos</Link>
+					</div>
+				</div>
+			</nav>
+
+			<Switch>
+				<Route exact path='/'>
+					<div className='container-fluid movie-app'>
+						<div className='row d-flex align-items-center mt-4 mb-4'>
+							<MovieListHeading heading='Movies' />
+							<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+						</div>
+						<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+							All 5 nominations are done
+						</div>
+						<div className='row'>
+							<MovieList
+								movies={movies}
+								handleNominationClick={addNominationMovie}
+								nominationComponent={AddNomination}
+							/>
+						</div>
+						<div className='row d-flex align-items-center mt-4 mb-4'>
+							<MovieListHeading heading='Nominations' />
+						</div>
+						<div className='row'>
+							<MovieList
+								movies={nomination}
+								handleNominationClick={removeNominationMovie}
+								nominationComponent={RemoveNominations}
+							/>
+						</div>
+					</div>
+				</Route>
+				<Route path='/todos'>
+					<TodoPage />
+				</Route>
+			</Switch>
 		</div>
 	);
 };
