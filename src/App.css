@@ -93,3 +93,37 @@ body {
 .todo-stats {
 	text-align: center;
 }
+
+.loader-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 300px;
+	padding: 40px;
+}
+
+.spinner {
+	width: 60px;
+	height: 60px;
+	border: 6px solid #333;
+	border-top: 6px solid #007bff;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.loader-text {
+	margin-top: 20px;
+	font-size: 1.2em;
+	color: #ffffff;
+	opacity: 0.8;
+}
