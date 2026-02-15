@@ -35,3 +35,95 @@ body {
 	display: block;
 	margin: auto;
 }
+
+.navigation-bar {
+	background-color: #1f1f1f;
+	padding: 15px 30px;
+	border-bottom: 2px solid #333;
+	display: flex;
+	gap: 15px;
+}
+
+.nav-btn {
+	background-color: transparent;
+	color: #ffffff;
+	border: 2px solid #444;
+	padding: 10px 30px;
+	font-size: 1em;
+	cursor: pointer;
+	transition: all 0.3s;
+	border-radius: 5px;
+}
+
+.nav-btn:hover {
+	background-color: #2a2a2a;
+	border-color: #666;
+}
+
+.nav-btn.active {
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.todo-app {
+	padding: 20px;
+}
+
+.todo-item {
+	background-color: #1f1f1f;
+	padding: 15px 20px;
+	border-radius: 8px;
+	border: 1px solid #333;
+	transition: all 0.2s;
+}
+
+.todo-item:hover {
+	background-color: #2a2a2a;
+	border-color: #444;
+}
+
+.add-todo-form {
+	max-width: 100%;
+}
+
+.todo-list {
+	margin-top: 20px;
+}
+
+.todo-stats {
+	text-align: center;
+}
+
+.loader-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 300px;
+	padding: 40px;
+}
+
+.spinner {
+	width: 60px;
+	height: 60px;
+	border: 6px solid #333;
+	border-top: 6px solid #007bff;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.loader-text {
+	margin-top: 20px;
+	font-size: 1.2em;
+	color: #ffffff;
+	opacity: 0.8;
+}
