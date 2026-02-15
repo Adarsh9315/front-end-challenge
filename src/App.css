@@ -35,3 +35,85 @@ body {
 	display: block;
 	margin: auto;
 }
+
+.navigation-bar {
+	background: #1f1f1f;
+	padding: 15px 20px;
+	display: flex;
+	gap: 10px;
+	border-bottom: 2px solid #333;
+}
+
+.nav-btn {
+	padding: 10px 30px;
+	background: transparent;
+	color: #ffffff;
+	border: 2px solid #555;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s;
+	font-size: 1em;
+}
+
+.nav-btn:hover {
+	background: #333;
+	border-color: #777;
+}
+
+.nav-btn.active {
+	background: #007bff;
+	border-color: #007bff;
+}
+
+.todo-app {
+	padding: 20px;
+}
+
+.todo-input-form {
+	max-width: 100%;
+}
+
+.todo-input {
+	background: #1f1f1f;
+	border: 2px solid #555;
+	color: #ffffff;
+	padding: 12px;
+	font-size: 1em;
+}
+
+.todo-input:focus {
+	background: #2a2a2a;
+	border-color: #007bff;
+	color: #ffffff;
+	outline: none;
+	box-shadow: none;
+}
+
+.todo-item {
+	background: #1f1f1f;
+	padding: 15px;
+	border-radius: 5px;
+	border: 1px solid #333;
+}
+
+.todo-checkbox {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.todo-text {
+	font-size: 1.1em;
+	flex-grow: 1;
+}
+
+.todo-completed {
+	text-decoration: line-through;
+	opacity: 0.6;
+}
+
+.todo-stats {
+	color: #aaa;
+	font-size: 0.9em;
+	padding: 10px 0;
+}
