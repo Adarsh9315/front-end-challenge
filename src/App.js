@@ -7,6 +7,7 @@ import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import TodoPage from './components/TodoPage';
+import MovieShowdown from './components/MovieShowdown';
 import Loader from './components/Loader';
 import { useSnackbar } from 'react-simple-snackbar'
 
@@ -102,6 +103,12 @@ const App = () => {
 					Movies
 				</button>
 				<button
+					className={`nav-btn ${currentPage === 'showdown' ? 'active' : ''}`}
+					onClick={() => setCurrentPage('showdown')}
+				>
+					Showdown
+				</button>
+				<button
 					className={`nav-btn ${currentPage === 'todos' ? 'active' : ''}`}
 					onClick={() => setCurrentPage('todos')}
 				>
@@ -140,6 +147,8 @@ const App = () => {
 						/>
 					</div>
 				</div>
+			) : currentPage === 'showdown' ? (
+				<MovieShowdown nominations={nomination} />
 			) : (
 				<TodoPage />
 			)}
