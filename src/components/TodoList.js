@@ -1,7 +1,7 @@
 import React from 'react';
 import TodoItem from './TodoItem';
 
-const TodoList = ({ todos, onToggle, onDelete }) => {
+const TodoList = ({ todos, onToggle, onDelete, onUpdate }) => {
 	if (todos.length === 0) {
 		return (
 			<div className='text-center mt-5' style={{ opacity: 0.6 }}>
@@ -18,6 +18,7 @@ const TodoList = ({ todos, onToggle, onDelete }) => {
 					todo={todo}
 					onToggle={onToggle}
 					onDelete={onDelete}
+					onUpdate={onUpdate}
 				/>
 			))}
 		</div>

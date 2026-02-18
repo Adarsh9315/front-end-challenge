@@ -94,6 +94,48 @@ body {
 	text-align: center;
 }
 
+.todo-filters {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.filter-btn {
+	background-color: #1f1f1f;
+	color: #ffffff;
+	border: 2px solid #444;
+	padding: 8px 20px;
+	font-size: 0.9em;
+	cursor: pointer;
+	transition: all 0.3s;
+	border-radius: 5px;
+}
+
+.filter-btn:hover {
+	background-color: #2a2a2a;
+	border-color: #666;
+}
+
+.filter-btn.active {
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.filter-btn.clear-completed {
+	background-color: #dc3545;
+	border-color: #dc3545;
+}
+
+.filter-btn.clear-completed:hover {
+	background-color: #c82333;
+	border-color: #bd2130;
+}
+
+.todo-item .gap-2 {
+	gap: 8px;
+}
+
 .loader-container {
 	display: flex;
 	flex-direction: column;
