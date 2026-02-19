@@ -127,3 +127,57 @@ body {
 	color: #ffffff;
 	opacity: 0.8;
 }
+
+.notes-app {
+	padding: 20px;
+}
+
+.note-item {
+	background-color: #1f1f1f;
+	padding: 20px;
+	border-radius: 8px;
+	border: 1px solid #333;
+	transition: all 0.2s;
+}
+
+.note-item:hover {
+	background-color: #2a2a2a;
+	border-color: #444;
+}
+
+.note-title {
+	color: #ffffff;
+	font-size: 1.4em;
+	font-weight: 600;
+}
+
+.note-content {
+	color: #cccccc;
+	font-size: 1em;
+	line-height: 1.6;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	white-space: pre-wrap;
+}
+
+.note-date {
+	color: #888888;
+	font-size: 0.9em;
+}
+
+.note-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.add-note-form {
+	max-width: 100%;
+}
+
+.note-list {
+	margin-top: 20px;
+}
+
+.notes-stats {
+	text-align: center;
+}
