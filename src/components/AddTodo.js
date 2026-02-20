@@ -22,11 +22,9 @@ const AddTodo = React.memo(({ onAdd }) => {
 					onChange={(e) => setText(e.target.value)}
 					aria-label='Add a new todo'
 				/>
-				<div className='input-group-append'>
-					<button className='btn btn-primary' type='submit' aria-label='Submit todo'>
-						Add Todo
-					</button>
-				</div>
+				<button className='btn btn-primary' type='submit' aria-label='Submit todo'>
+					Add Todo
+				</button>
 			</div>
 		</form>
 	);

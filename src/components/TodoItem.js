@@ -8,7 +8,7 @@ const TodoItem = React.memo(({ todo, onToggle, onDelete }) => {
 					type='checkbox'
 					checked={todo.completed}
 					onChange={() => onToggle(todo.id)}
-					className='todo-checkbox mr-3'
+					className='todo-checkbox me-3'
 					aria-label={`Mark "${todo.text}" as ${todo.completed ? 'incomplete' : 'complete'}`}
 				/>
 				<span className={`todo-text ${todo.completed ? 'completed' : ''}`}>
