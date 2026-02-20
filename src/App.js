@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -15,10 +15,20 @@ const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [debouncedSearchValue, setDebouncedSearchValue] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [openSnackbar] = useSnackbar()
 
-	const getMovieRequest = async (searchValue) => {
+	// Debounce search input
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setDebouncedSearchValue(searchValue);
+		}, 500);
+
+		return () => clearTimeout(timer);
+	}, [searchValue]);
+
+	const getMovieRequest = useCallback(async (searchValue) => {
 		if (!searchValue) {
 			setMovies([]);
 			return;
@@ -41,11 +51,11 @@ const App = () => {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}, []);
 
 	useEffect(() => {
-		getMovieRequest(searchValue);
-	}, [searchValue]);
+		getMovieRequest(debouncedSearchValue);
+	}, [debouncedSearchValue, getMovieRequest]);
 
 	useEffect(() => {
 		const movieNomination = JSON.parse(
@@ -57,57 +67,55 @@ const App = () => {
 		}
 	}, []);
 
-	const saveToLocalStorage = (items) => {
+	const saveToLocalStorage = useCallback((items) => {
 		localStorage.setItem('nominations', JSON.stringify(items));
-	};
+	}, []);
 
-	const addNominationMovie = (movie) => {
-		let savedNominations = localStorage.getItem('nominations');
-		if (savedNominations) {
-			savedNominations = JSON.parse(savedNominations);
-			if (savedNominations.length === 5) {
-				openSnackbar('Only 5 nominations are allowed per user')
-				return;
-			}
+	const addNominationMovie = useCallback((movie) => {
+		if (nomination.length === 5) {
+			openSnackbar('Only 5 nominations are allowed per user');
+			return;
+		}
 
-			let obj = savedNominations.find(o => o.imdbID === movie.imdbID);
-			if (!obj) {
-				const newNominationList = [...nomination, movie];
-				setNomination(newNominationList);
-				saveToLocalStorage(newNominationList);
-			}
-		}else{
+		const isAlreadyNominated = nomination.some(n => n.imdbID === movie.imdbID);
+		if (!isAlreadyNominated) {
 			const newNominationList = [...nomination, movie];
 			setNomination(newNominationList);
 			saveToLocalStorage(newNominationList);
 		}
-	};
+	}, [nomination, openSnackbar, saveToLocalStorage]);
 
-	const removeNominationMovie = (movie) => {
+	const removeNominationMovie = useCallback((movie) => {
 		const newNominationList = nomination.filter(
 			(nomination) => nomination.imdbID !== movie.imdbID
 		);
 
 		setNomination(newNominationList);
 		saveToLocalStorage(newNominationList);
-	};
+	}, [nomination, saveToLocalStorage]);
+
+	const isMaxNominations = useMemo(() => nomination.length === 5, [nomination.length]);
 
 	return (
 		<div>
-			<div className='navigation-bar'>
+			<nav className='navigation-bar' role='navigation' aria-label='Main navigation'>
 				<button
 					className={`nav-btn ${currentPage === 'movies' ? 'active' : ''}`}
 					onClick={() => setCurrentPage('movies')}
+					aria-label='Movies page'
+					aria-current={currentPage === 'movies' ? 'page' : undefined}
 				>
 					Movies
 				</button>
 				<button
 					className={`nav-btn ${currentPage === 'todos' ? 'active' : ''}`}
 					onClick={() => setCurrentPage('todos')}
+					aria-label='Todos page'
+					aria-current={currentPage === 'todos' ? 'page' : undefined}
 				>
 					Todos
 				</button>
-			</div>
+			</nav>
 
 			{currentPage === 'movies' ? (
 				<div className='container-fluid movie-app'>
@@ -115,29 +123,45 @@ const App = () => {
 						<MovieListHeading heading='Movies' />
 						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 					</div>
-					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-						All 5 nominations are done
-					</div>
+					{isMaxNominations && (
+						<div className='banner'>
+							All 5 nominations are done
+						</div>
+					)}
 					{loading ? (
 						<Loader />
 					) : (
 						<div className='row'>
-							<MovieList
-								movies={movies}
-								handleNominationClick={addNominationMovie}
-								nominationComponent={AddNomination}
-							/>
+							{movies.length > 0 ? (
+								<MovieList
+									movies={movies}
+									handleNominationClick={addNominationMovie}
+									nominationComponent={AddNomination}
+								/>
+							) : (
+								debouncedSearchValue && (
+									<div className='empty-state'>
+										<p>No movies found. Try a different search term.</p>
+									</div>
+								)
+							)}
 						</div>
 					)}
 					<div className='row d-flex align-items-center mt-4 mb-4'>
 						<MovieListHeading heading='Nominations' />
 					</div>
 					<div className='row'>
-						<MovieList
-							movies={nomination}
-							handleNominationClick={removeNominationMovie}
-							nominationComponent={RemoveNominations}
-						/>
+						{nomination.length > 0 ? (
+							<MovieList
+								movies={nomination}
+								handleNominationClick={removeNominationMovie}
+								nominationComponent={RemoveNominations}
+							/>
+						) : (
+							<div className='empty-state'>
+								<p>No nominations yet. Add movies to your nominations list!</p>
+							</div>
+						)}
 					</div>
 				</div>
 			) : (
