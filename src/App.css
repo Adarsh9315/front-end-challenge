@@ -7,6 +7,25 @@ body {
 	overflow-x: auto;
 	flex-wrap: nowrap;
 	padding: 20px 20px;
+	scrollbar-width: thin;
+	scrollbar-color: #444 #1f1f1f;
+}
+
+.movie-app > .row::-webkit-scrollbar {
+	height: 8px;
+}
+
+.movie-app > .row::-webkit-scrollbar-track {
+	background: #1f1f1f;
+}
+
+.movie-app > .row::-webkit-scrollbar-thumb {
+	background: #444;
+	border-radius: 4px;
+}
+
+.movie-app > .row::-webkit-scrollbar-thumb:hover {
+	background: #555;
 }
 
 .image-container {
@@ -19,10 +38,38 @@ body {
 	transform: scale(1.1);
 }
 
+.movie-poster {
+	height: 40vh;
+	width: auto;
+	object-fit: cover;
+	border-radius: 4px;
+}
+
+.movie-title {
+	margin-top: 8px;
+	width: 250px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.movie-year {
+	margin-top: 8px;
+}
+
 .btn-handler{
 	padding: 15px 50px;
-	background-color: 'red';
+	background-color: #dc3545;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
 	margin-top: 10px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.btn-handler:hover {
+	background-color: #c82333;
 }
 
 .banner{
@@ -32,8 +79,29 @@ body {
 	background-color: #ffffff;
 	color: #141414;
 	width: 30%;
+	max-width: 400px;
+	min-width: 250px;
 	display: block;
 	margin: auto;
+	border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+	.banner {
+		width: 90%;
+	}
+}
+
+.error-message {
+	text-align: center;
+	padding: 20px;
+	color: #ff6b6b;
+	font-size: 1.1em;
+	background-color: rgba(255, 107, 107, 0.1);
+	border: 1px solid #ff6b6b;
+	border-radius: 4px;
+	margin: 20px auto;
+	max-width: 500px;
 }
 
 .navigation-bar {
@@ -92,6 +160,68 @@ body {
 
 .todo-stats {
 	text-align: center;
+}
+
+.todo-stats-text {
+	font-size: 1.1em;
+	opacity: 0.8;
+}
+
+.todo-checkbox {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.todo-text {
+	font-size: 1.1em;
+}
+
+.todo-text.completed {
+	text-decoration: line-through;
+	opacity: 0.6;
+}
+
+.todo-input {
+	background-color: #2a2a2a;
+	color: #ffffff;
+	border: 1px solid #444;
+}
+
+.todo-input:focus {
+	background-color: #2a2a2a;
+	color: #ffffff;
+	border-color: #007bff;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.empty-todos {
+	opacity: 0.6;
+}
+
+.search-input {
+	transition: border-color 0.2s;
+}
+
+.search-input:focus {
+	border-color: #007bff;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+@media (max-width: 768px) {
+	.movie-app > .row {
+		padding: 10px;
+	}
+	
+	.navigation-bar {
+		padding: 10px 15px;
+		flex-wrap: wrap;
+	}
+	
+	.nav-btn {
+		padding: 8px 20px;
+		font-size: 0.9em;
+	}
 }
 
 .loader-container {

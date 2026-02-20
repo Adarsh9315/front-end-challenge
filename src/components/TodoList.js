@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import TodoItem from './TodoItem';
 
-const TodoList = ({ todos, onToggle, onDelete }) => {
+const TodoList = memo(({ todos, onToggle, onDelete }) => {
 	if (todos.length === 0) {
 		return (
-			<div className='text-center mt-5' style={{ opacity: 0.6 }}>
+			<div className='text-center mt-5 empty-todos'>
 				<p>No todos yet. Add one to get started!</p>
 			</div>
 		);
@@ -22,6 +22,8 @@ const TodoList = ({ todos, onToggle, onDelete }) => {
 			))}
 		</div>
 	);
-};
+});
+
+TodoList.displayName = 'TodoList';
 
 export default TodoList;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -15,16 +15,29 @@ const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [debouncedSearchValue, setDebouncedSearchValue] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
 	const [openSnackbar] = useSnackbar()
 
-	const getMovieRequest = async (searchValue) => {
+	// Debounce search input
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setDebouncedSearchValue(searchValue);
+		}, 500);
+
+		return () => clearTimeout(timer);
+	}, [searchValue]);
+
+	const getMovieRequest = useCallback(async (searchValue) => {
 		if (!searchValue) {
 			setMovies([]);
+			setError(null);
 			return;
 		}
 
 		setLoading(true);
+		setError(null);
 		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=a21d8f2b`;
 
 		try {
@@ -35,17 +48,21 @@ const App = () => {
 				setMovies(responseJson.Search);
 			} else {
 				setMovies([]);
+				if (responseJson.Error) {
+					setError(responseJson.Error);
+				}
 			}
 		} catch (error) {
 			setMovies([]);
+			setError('Failed to fetch movies. Please try again.');
 		} finally {
 			setLoading(false);
 		}
-	};
+	}, []);
 
 	useEffect(() => {
-		getMovieRequest(searchValue);
-	}, [searchValue]);
+		getMovieRequest(debouncedSearchValue);
+	}, [debouncedSearchValue, getMovieRequest]);
 
 	useEffect(() => {
 		const movieNomination = JSON.parse(
@@ -57,11 +74,11 @@ const App = () => {
 		}
 	}, []);
 
-	const saveToLocalStorage = (items) => {
+	const saveToLocalStorage = useCallback((items) => {
 		localStorage.setItem('nominations', JSON.stringify(items));
-	};
+	}, []);
 
-	const addNominationMovie = (movie) => {
+	const addNominationMovie = useCallback((movie) => {
 		let savedNominations = localStorage.getItem('nominations');
 		if (savedNominations) {
 			savedNominations = JSON.parse(savedNominations);
@@ -81,29 +98,39 @@ const App = () => {
 			setNomination(newNominationList);
 			saveToLocalStorage(newNominationList);
 		}
-	};
+	}, [nomination, openSnackbar, saveToLocalStorage]);
 
-	const removeNominationMovie = (movie) => {
+	const removeNominationMovie = useCallback((movie) => {
 		const newNominationList = nomination.filter(
 			(nomination) => nomination.imdbID !== movie.imdbID
 		);
 
 		setNomination(newNominationList);
 		saveToLocalStorage(newNominationList);
-	};
+	}, [nomination, saveToLocalStorage]);
+
+	const isNominationsFull = useMemo(() => {
+		return nomination.length === 5;
+	}, [nomination]);
+
+	const handlePageChange = useCallback((page) => {
+		setCurrentPage(page);
+	}, []);
 
 	return (
 		<div>
 			<div className='navigation-bar'>
 				<button
 					className={`nav-btn ${currentPage === 'movies' ? 'active' : ''}`}
-					onClick={() => setCurrentPage('movies')}
+					onClick={() => handlePageChange('movies')}
+					aria-label='Navigate to movies page'
 				>
 					Movies
 				</button>
 				<button
 					className={`nav-btn ${currentPage === 'todos' ? 'active' : ''}`}
-					onClick={() => setCurrentPage('todos')}
+					onClick={() => handlePageChange('todos')}
+					aria-label='Navigate to todos page'
 				>
 					Todos
 				</button>
@@ -115,11 +142,17 @@ const App = () => {
 						<MovieListHeading heading='Movies' />
 						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 					</div>
-					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-						All 5 nominations are done
-					</div>
+					{isNominationsFull && (
+						<div className='banner'>
+							All 5 nominations are done
+						</div>
+					)}
 					{loading ? (
 						<Loader />
+					) : error ? (
+						<div className='error-message'>
+							{error}
+						</div>
 					) : (
 						<div className='row'>
 							<MovieList
