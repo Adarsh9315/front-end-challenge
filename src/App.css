@@ -1,12 +1,41 @@
 body {
 	background: #141414;
 	color: #ffffff;
+	min-height: 100vh;
+}
+
+* {
+	box-sizing: border-box;
 }
 
 .movie-app > .row {
 	overflow-x: auto;
 	flex-wrap: nowrap;
 	padding: 20px 20px;
+	scrollbar-width: thin;
+	scrollbar-color: #444 #1f1f1f;
+}
+
+.movie-app > .row::-webkit-scrollbar {
+	height: 8px;
+}
+
+.movie-app > .row::-webkit-scrollbar-track {
+	background: #1f1f1f;
+}
+
+.movie-app > .row::-webkit-scrollbar-thumb {
+	background: #444;
+	border-radius: 4px;
+}
+
+.movie-app > .row::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+.movie-heading {
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+	margin-bottom: 0;
 }
 
 .image-container {
@@ -16,24 +45,129 @@ body {
 
 .image-container:hover {
 	cursor: pointer;
-	transform: scale(1.1);
+	transform: scale(1.05);
+}
+
+.image-container:focus-within {
+	outline: 2px solid #007bff;
+	outline-offset: 4px;
+	border-radius: 8px;
+}
+
+.movie-poster {
+	height: 40vh;
+	width: auto;
+	border-radius: 8px;
+	object-fit: cover;
+}
+
+.movie-title {
+	width: 250px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.movie-year {
+	color: #cccccc;
+	font-size: 0.9em;
+}
+
+.search-input {
+	background-color: #2a2a2a;
+	color: #ffffff;
+	border: 1px solid #444;
+}
+
+.search-input:focus {
+	background-color: #2a2a2a;
+	color: #ffffff;
+	border-color: #007bff;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .btn-handler{
 	padding: 15px 50px;
-	background-color: 'red';
+	background-color: #dc3545;
+	color: #ffffff;
+	border: none;
+	border-radius: 5px;
 	margin-top: 10px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	font-size: 1em;
+}
+
+.btn-handler:hover {
+	background-color: #c82333;
+}
+
+.btn-handler:focus {
+	outline: 2px solid #007bff;
+	outline-offset: 2px;
+}
+
+.btn-handler-remove {
+	background-color: #6c757d;
+}
+
+.btn-handler-remove:hover {
+	background-color: #5a6268;
 }
 
 .banner{
 	text-align: center;
 	font-size: 1.2em;
 	padding: 10px 0px;
-	background-color: #ffffff;
-	color: #141414;
+	background-color: #28a745;
+	color: #ffffff;
 	width: 30%;
 	display: block;
 	margin: auto;
+	border-radius: 5px;
+	animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media (max-width: 768px) {
+	.banner {
+		width: 90%;
+		font-size: 1em;
+		padding: 8px 0px;
+	}
+
+	.movie-poster {
+		height: 30vh;
+	}
+
+	.movie-title {
+		width: 200px;
+	}
+
+	.navigation-bar {
+		padding: 10px 15px;
+		gap: 10px;
+	}
+
+	.nav-btn {
+		padding: 8px 20px;
+		font-size: 0.9em;
+	}
+
+	.btn-handler {
+		padding: 12px 30px;
+		font-size: 0.9em;
+	}
 }
 
 .navigation-bar {
@@ -65,6 +199,11 @@ body {
 	border-color: #007bff;
 }
 
+.nav-btn:focus {
+	outline: 2px solid #007bff;
+	outline-offset: 2px;
+}
+
 .todo-app {
 	padding: 20px;
 }
@@ -86,12 +225,59 @@ body {
 	max-width: 100%;
 }
 
+.add-todo-input {
+	background-color: #2a2a2a;
+	color: #ffffff;
+	border: 1px solid #444;
+}
+
+.add-todo-input:focus {
+	background-color: #2a2a2a;
+	color: #ffffff;
+	border-color: #007bff;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
 .todo-list {
 	margin-top: 20px;
 }
 
 .todo-stats {
 	text-align: center;
+}
+
+.todo-stats-text {
+	font-size: 1.1em;
+	opacity: 0.8;
+}
+
+.empty-state {
+	text-align: center;
+	opacity: 0.6;
+}
+
+.empty-state-movies {
+	margin-top: 3rem;
+}
+
+.empty-state-nominations {
+	margin-top: 1rem;
+}
+
+.todo-checkbox {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.todo-text {
+	font-size: 1.1em;
+	transition: all 0.2s;
+}
+
+.todo-text.completed {
+	text-decoration: line-through;
+	opacity: 0.6;
 }
 
 .loader-container {
@@ -126,4 +312,14 @@ body {
 	font-size: 1.2em;
 	color: #ffffff;
 	opacity: 0.8;
+	animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+	0%, 100% {
+		opacity: 0.8;
+	}
+	50% {
+		opacity: 0.4;
+	}
 }

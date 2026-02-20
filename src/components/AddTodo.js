@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddTodo = ({ onAdd }) => {
+const AddTodo = React.memo(({ onAdd }) => {
 	const [text, setText] = useState('');
 
 	const handleSubmit = (e) => {
@@ -16,24 +16,22 @@ const AddTodo = ({ onAdd }) => {
 			<div className='input-group'>
 				<input
 					type='text'
-					className='form-control'
+					className='form-control add-todo-input'
 					placeholder='Add a new todo...'
 					value={text}
 					onChange={(e) => setText(e.target.value)}
-					style={{
-						backgroundColor: '#2a2a2a',
-						color: '#ffffff',
-						border: '1px solid #444'
-					}}
+					aria-label='Add a new todo'
 				/>
 				<div className='input-group-append'>
-					<button className='btn btn-primary' type='submit'>
+					<button className='btn btn-primary' type='submit' aria-label='Submit todo'>
 						Add Todo
 					</button>
 				</div>
 			</div>
 		</form>
 	);
-};
+});
+
+AddTodo.displayName = 'AddTodo';
 
 export default AddTodo;
