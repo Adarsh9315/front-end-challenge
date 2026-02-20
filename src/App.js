@@ -115,8 +115,8 @@ const App = () => {
 						<MovieListHeading heading='Movies' />
 						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 					</div>
-					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-						All 5 nominations are done
+					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations') || '[]').length === 5 ? 'block' : 'none'}}>
+						All 5 nominations selected!
 					</div>
 					{loading ? (
 						<Loader />
@@ -129,16 +129,20 @@ const App = () => {
 							/>
 						</div>
 					)}
-					<div className='row d-flex align-items-center mt-4 mb-4'>
-						<MovieListHeading heading='Nominations' />
-					</div>
-					<div className='row'>
-						<MovieList
-							movies={nomination}
-							handleNominationClick={removeNominationMovie}
-							nominationComponent={RemoveNominations}
-						/>
-					</div>
+					{nomination.length > 0 && (
+						<>
+							<div className='row d-flex align-items-center mt-4 mb-4'>
+								<MovieListHeading heading='Your Nominations' />
+							</div>
+							<div className='row'>
+								<MovieList
+									movies={nomination}
+									handleNominationClick={removeNominationMovie}
+									nominationComponent={RemoveNominations}
+								/>
+							</div>
+						</>
+					)}
 				</div>
 			) : (
 				<TodoPage />

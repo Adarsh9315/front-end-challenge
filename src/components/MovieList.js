@@ -7,17 +7,29 @@ const MovieList = (props) => {
 		<>
 			{props.movies.map((movie, index) => (
 				<div className='image-container justify-content-start m-3' key={index}>
-					<img src={movie.Poster !== "N/A" ? movie.Poster : `https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie.jpg`} style={{height: '40vh'}} alt='movie'></img>
-					<div className='mt-2' style={{width: '250px',whiteSpace: 'nowrap',overflow: 'hidden',textOverflow: 'ellipsis'}}>
-						{movie.Title}
-					</div>
-					<div className='mt-2'>
-						{movie.Year}
-					</div>
-					<div
-						onClick={() => props.handleNominationClick(movie)}
-					>
-						<NominationComponent />
+					<img src={movie.Poster !== "N/A" ? movie.Poster : `https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie.jpg`} alt='movie'></img>
+					<div style={{padding: '12px'}}>
+						<div style={{
+							width: '200px',
+							whiteSpace: 'nowrap',
+							overflow: 'hidden',
+							textOverflow: 'ellipsis',
+							fontWeight: '600',
+							fontSize: '0.95rem',
+							color: '#fff',
+							marginBottom: '4px'
+						}}>
+							{movie.Title}
+						</div>
+						<div style={{color: '#888', fontSize: '0.85rem'}}>
+							{movie.Year}
+						</div>
+						<div
+							onClick={() => props.handleNominationClick(movie)}
+							style={{marginTop: '8px'}}
+						>
+							<NominationComponent />
+						</div>
 					</div>
 
 				</div>
