@@ -3,7 +3,7 @@ import React from 'react';
 const RemoveNominations = () => {
 	return (
 		<>
-			<button className='btn-handler'>Remove Nomination</button>
+			<button className='btn-remove'>Remove</button>
 		</>
 	);
 };
