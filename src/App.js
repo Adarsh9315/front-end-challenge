@@ -10,13 +10,28 @@ import TodoPage from './components/TodoPage';
 import Loader from './components/Loader';
 import { useSnackbar } from 'react-simple-snackbar'
 
+const snackbarOptions = {
+	position: 'bottom-center',
+	style: {
+		backgroundColor: '#1a1a2e',
+		border: '1px solid rgba(231, 76, 111, 0.3)',
+		color: '#e74c6f',
+		fontFamily: 'Inter, sans-serif',
+		fontSize: '0.9em',
+		fontWeight: '500',
+		borderRadius: '12px',
+		padding: '14px 24px',
+		boxShadow: '0 8px 40px rgba(0,0,0,0.4)',
+	},
+};
+
 const App = () => {
 	const [currentPage, setCurrentPage] = useState('movies');
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [openSnackbar] = useSnackbar()
+	const [openSnackbar] = useSnackbar(snackbarOptions)
 
 	const getMovieRequest = async (searchValue) => {
 		if (!searchValue) {
@@ -92,6 +107,15 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const getNominationCount = () => {
+		try {
+			const saved = JSON.parse(localStorage.getItem('nominations'));
+			return saved ? saved.length : 0;
+		} catch {
+			return 0;
+		}
+	};
+
 	return (
 		<div>
 			<div className='navigation-bar'>
@@ -110,35 +134,60 @@ const App = () => {
 			</div>
 
 			{currentPage === 'movies' ? (
-				<div className='container-fluid movie-app'>
-					<div className='row d-flex align-items-center mt-4 mb-4'>
-						<MovieListHeading heading='Movies' />
+				<div className='movie-app'>
+					<div className='d-flex align-items-center justify-content-between mb-4 mt-2 header-row' style={{ flexWrap: 'wrap', gap: '16px' }}>
+						<MovieListHeading heading='Movies' subtitle='Search and nominate your favorites' />
 						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 					</div>
-					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-						All 5 nominations are done
-					</div>
+
+					{getNominationCount() === 5 && (
+						<div className='banner fade-in'>
+							All 5 nominations are complete — you're all set!
+						</div>
+					)}
+
 					{loading ? (
 						<Loader />
-					) : (
-						<div className='row'>
+					) : movies.length > 0 ? (
+						<div className='movies-grid fade-in'>
 							<MovieList
 								movies={movies}
 								handleNominationClick={addNominationMovie}
 								nominationComponent={AddNomination}
 							/>
 						</div>
+					) : searchValue ? (
+						<div className='empty-state'>
+							<span className='empty-state-emoji'>🎬</span>
+							<p className='empty-state-text'>No movies found for "{searchValue}"</p>
+						</div>
+					) : (
+						<div className='empty-state'>
+							<span className='empty-state-emoji'>🔍</span>
+							<p className='empty-state-text'>Start typing to search for movies</p>
+						</div>
 					)}
-					<div className='row d-flex align-items-center mt-4 mb-4'>
-						<MovieListHeading heading='Nominations' />
+
+					<hr className='section-divider' />
+
+					<div className='mb-4'>
+						<MovieListHeading heading='Nominations' subtitle={`${nomination.length} of 5 selected`} />
 					</div>
-					<div className='row'>
-						<MovieList
-							movies={nomination}
-							handleNominationClick={removeNominationMovie}
-							nominationComponent={RemoveNominations}
-						/>
-					</div>
+
+					{nomination.length > 0 ? (
+						<div className='movies-grid fade-in'>
+							<MovieList
+								movies={nomination}
+								handleNominationClick={removeNominationMovie}
+								nominationComponent={RemoveNominations}
+							/>
+						</div>
+					) : (
+						<div className='empty-state'>
+							<span className='empty-state-emoji'>⭐</span>
+							<p className='empty-state-text'>No nominations yet — search and add movies above</p>
+						</div>
+					)}
 				</div>
 			) : (
 				<TodoPage />

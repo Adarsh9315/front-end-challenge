@@ -44,29 +44,34 @@ const TodoPage = () => {
 
 	const completedCount = todos.filter((todo) => todo.completed).length;
 	const totalCount = todos.length;
+	const progressPercent = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
 
 	return (
-		<div className='container-fluid todo-app'>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieListHeading heading='My Todos' />
+		<div className='todo-app'>
+			<div className='mb-4 mt-2'>
+				<MovieListHeading heading='My Todos' subtitle='Stay organized' />
 			</div>
+
 			{totalCount > 0 && (
 				<div className='todo-stats mb-4'>
-					<p style={{ fontSize: '1.1em', opacity: 0.8 }}>
+					<p>
 						{completedCount} of {totalCount} completed
 					</p>
+					<div className='todo-progress-bar'>
+						<div
+							className='todo-progress-fill'
+							style={{ width: `${progressPercent}%` }}
+						/>
+					</div>
 				</div>
 			)}
-			<div className='row'>
-				<div className='col-md-8 offset-md-2'>
-					<AddTodo onAdd={addTodo} />
-					<TodoList
-						todos={todos}
-						onToggle={toggleTodo}
-						onDelete={deleteTodo}
-					/>
-				</div>
-			</div>
+
+			<AddTodo onAdd={addTodo} />
+			<TodoList
+				todos={todos}
+				onToggle={toggleTodo}
+				onDelete={deleteTodo}
+			/>
 		</div>
 	);
 };

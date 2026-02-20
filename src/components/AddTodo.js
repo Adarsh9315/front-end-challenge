@@ -13,24 +13,17 @@ const AddTodo = ({ onAdd }) => {
 
 	return (
 		<form onSubmit={handleSubmit} className='add-todo-form mb-4'>
-			<div className='input-group'>
+			<div className='todo-input-group'>
 				<input
 					type='text'
-					className='form-control'
-					placeholder='Add a new todo...'
+					className='todo-input'
+					placeholder='What needs to be done?'
 					value={text}
 					onChange={(e) => setText(e.target.value)}
-					style={{
-						backgroundColor: '#2a2a2a',
-						color: '#ffffff',
-						border: '1px solid #444'
-					}}
 				/>
-				<div className='input-group-append'>
-					<button className='btn btn-primary' type='submit'>
-						Add Todo
-					</button>
-				</div>
+				<button className='todo-add-btn' type='submit'>
+					Add
+				</button>
 			</div>
 		</form>
 	);

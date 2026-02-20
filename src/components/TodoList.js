@@ -4,8 +4,9 @@ import TodoItem from './TodoItem';
 const TodoList = ({ todos, onToggle, onDelete }) => {
 	if (todos.length === 0) {
 		return (
-			<div className='text-center mt-5' style={{ opacity: 0.6 }}>
-				<p>No todos yet. Add one to get started!</p>
+			<div className='empty-state'>
+				<span className='empty-state-emoji'>📝</span>
+				<p className='empty-state-text'>No todos yet — add one above to get started</p>
 			</div>
 		);
 	}

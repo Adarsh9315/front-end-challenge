@@ -2,8 +2,11 @@ import React from 'react';
 
 const MovieListHeading = (props) => {
 	return (
-		<div className='col'>
-			<h1>{props.heading}</h1>
+		<div>
+			{props.subtitle && (
+				<p className='section-heading-small'>{props.subtitle}</p>
+			)}
+			<h1 className='section-heading'>{props.heading}</h1>
 		</div>
 	);
 };
