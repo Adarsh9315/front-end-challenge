@@ -1,6 +1,46 @@
+/* Theme Variables */
+body[data-theme='dark'] {
+	--bg-primary: #141414;
+	--bg-secondary: #1f1f1f;
+	--bg-tertiary: #2a2a2a;
+	--text-primary: #ffffff;
+	--text-secondary: rgba(255, 255, 255, 0.8);
+	--text-muted: rgba(255, 255, 255, 0.6);
+	--border-color: #333;
+	--border-hover: #444;
+	--border-light: #666;
+	--banner-bg: #ffffff;
+	--banner-text: #141414;
+	--input-bg: #2a2a2a;
+	--input-text: #ffffff;
+	--input-border: #444;
+	--spinner-track: #333;
+	--spinner-active: #007bff;
+}
+
+body[data-theme='light'] {
+	--bg-primary: #f5f5f5;
+	--bg-secondary: #ffffff;
+	--bg-tertiary: #e8e8e8;
+	--text-primary: #1a1a1a;
+	--text-secondary: rgba(0, 0, 0, 0.75);
+	--text-muted: rgba(0, 0, 0, 0.5);
+	--border-color: #ddd;
+	--border-hover: #bbb;
+	--border-light: #999;
+	--banner-bg: #1a1a1a;
+	--banner-text: #ffffff;
+	--input-bg: #ffffff;
+	--input-text: #1a1a1a;
+	--input-border: #ccc;
+	--spinner-track: #ddd;
+	--spinner-active: #007bff;
+}
+
 body {
-	background: #141414;
-	color: #ffffff;
+	background: var(--bg-primary);
+	color: var(--text-primary);
+	transition: background 0.3s ease, color 0.3s ease;
 }
 
 .movie-app > .row {
@@ -19,35 +59,36 @@ body {
 	transform: scale(1.1);
 }
 
-.btn-handler{
+.btn-handler {
 	padding: 15px 50px;
 	background-color: 'red';
 	margin-top: 10px;
 }
 
-.banner{
+.banner {
 	text-align: center;
 	font-size: 1.2em;
 	padding: 10px 0px;
-	background-color: #ffffff;
-	color: #141414;
+	background-color: var(--banner-bg);
+	color: var(--banner-text);
 	width: 30%;
 	display: block;
 	margin: auto;
 }
 
 .navigation-bar {
-	background-color: #1f1f1f;
+	background-color: var(--bg-secondary);
 	padding: 15px 30px;
-	border-bottom: 2px solid #333;
+	border-bottom: 2px solid var(--border-color);
 	display: flex;
 	gap: 15px;
+	align-items: center;
 }
 
 .nav-btn {
 	background-color: transparent;
-	color: #ffffff;
-	border: 2px solid #444;
+	color: var(--text-primary);
+	border: 2px solid var(--border-hover);
 	padding: 10px 30px;
 	font-size: 1em;
 	cursor: pointer;
@@ -56,13 +97,44 @@ body {
 }
 
 .nav-btn:hover {
-	background-color: #2a2a2a;
-	border-color: #666;
+	background-color: var(--bg-tertiary);
+	border-color: var(--border-light);
 }
 
 .nav-btn.active {
 	background-color: #007bff;
 	border-color: #007bff;
+	color: #ffffff;
+}
+
+/* Theme Toggle */
+.theme-toggle-btn {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background-color: var(--bg-tertiary);
+	color: var(--text-primary);
+	border: 2px solid var(--border-hover);
+	padding: 8px 18px;
+	font-size: 0.95em;
+	cursor: pointer;
+	border-radius: 20px;
+	transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+	background-color: var(--border-hover);
+	border-color: var(--border-light);
+}
+
+.theme-toggle-icon {
+	font-size: 1.15em;
+	line-height: 1;
+}
+
+.theme-toggle-label {
+	font-weight: 500;
 }
 
 .todo-app {
@@ -70,16 +142,16 @@ body {
 }
 
 .todo-item {
-	background-color: #1f1f1f;
+	background-color: var(--bg-secondary);
 	padding: 15px 20px;
 	border-radius: 8px;
-	border: 1px solid #333;
+	border: 1px solid var(--border-color);
 	transition: all 0.2s;
 }
 
 .todo-item:hover {
-	background-color: #2a2a2a;
-	border-color: #444;
+	background-color: var(--bg-tertiary);
+	border-color: var(--border-hover);
 }
 
 .add-todo-form {
@@ -106,8 +178,8 @@ body {
 .spinner {
 	width: 60px;
 	height: 60px;
-	border: 6px solid #333;
-	border-top: 6px solid #007bff;
+	border: 6px solid var(--spinner-track);
+	border-top: 6px solid var(--spinner-active);
 	border-radius: 50%;
 	animation: spin 1s linear infinite;
 }
@@ -124,6 +196,23 @@ body {
 .loader-text {
 	margin-top: 20px;
 	font-size: 1.2em;
-	color: #ffffff;
+	color: var(--text-primary);
 	opacity: 0.8;
+}
+
+/* Override Bootstrap form-control for theming */
+body[data-theme='light'] .form-control {
+	background-color: var(--input-bg);
+	color: var(--input-text);
+	border-color: var(--input-border);
+}
+
+body[data-theme='light'] .form-control::placeholder {
+	color: var(--text-muted);
+}
+
+body[data-theme='light'] .form-control:focus {
+	background-color: var(--input-bg);
+	color: var(--input-text);
+	border-color: #007bff;
 }

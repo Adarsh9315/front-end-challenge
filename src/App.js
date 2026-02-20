@@ -8,6 +8,7 @@ import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import TodoPage from './components/TodoPage';
 import Loader from './components/Loader';
+import ThemeToggle from './components/ThemeToggle';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
@@ -107,6 +108,7 @@ const App = () => {
 				>
 					Todos
 				</button>
+				<ThemeToggle />
 			</div>
 
 			{currentPage === 'movies' ? (

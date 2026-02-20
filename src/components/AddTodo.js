@@ -21,9 +21,9 @@ const AddTodo = ({ onAdd }) => {
 					value={text}
 					onChange={(e) => setText(e.target.value)}
 					style={{
-						backgroundColor: '#2a2a2a',
-						color: '#ffffff',
-						border: '1px solid #444'
+						backgroundColor: 'var(--input-bg)',
+						color: 'var(--input-text)',
+						border: '1px solid var(--input-border)'
 					}}
 				/>
 				<div className='input-group-append'>
