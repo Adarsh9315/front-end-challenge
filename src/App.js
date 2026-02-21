@@ -8,7 +8,10 @@ import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import TodoPage from './components/TodoPage';
 import Loader from './components/Loader';
+import Onboarding from './components/Onboarding';
 import { useSnackbar } from 'react-simple-snackbar'
+
+const ONBOARDING_STORAGE_KEY = 'onboardingDismissed';
 
 const App = () => {
 	const [currentPage, setCurrentPage] = useState('movies');
@@ -16,6 +19,7 @@ const App = () => {
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [showOnboarding, setShowOnboarding] = useState(false);
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
@@ -57,8 +61,20 @@ const App = () => {
 		}
 	}, []);
 
+	useEffect(() => {
+		const dismissed = localStorage.getItem(ONBOARDING_STORAGE_KEY);
+		if (!dismissed) {
+			setShowOnboarding(true);
+		}
+	}, []);
+
 	const saveToLocalStorage = (items) => {
 		localStorage.setItem('nominations', JSON.stringify(items));
+	};
+
+	const handleCloseOnboarding = () => {
+		localStorage.setItem(ONBOARDING_STORAGE_KEY, 'true');
+		setShowOnboarding(false);
 	};
 
 	const addNominationMovie = (movie) => {
@@ -76,7 +92,7 @@ const App = () => {
 				setNomination(newNominationList);
 				saveToLocalStorage(newNominationList);
 			}
-		}else{
+		} else {
 			const newNominationList = [...nomination, movie];
 			setNomination(newNominationList);
 			saveToLocalStorage(newNominationList);
@@ -94,6 +110,12 @@ const App = () => {
 
 	return (
 		<div>
+			{showOnboarding && (
+				<Onboarding
+					onClose={handleCloseOnboarding}
+					onNavigate={setCurrentPage}
+				/>
+			)}
 			<div className='navigation-bar'>
 				<button
 					className={`nav-btn ${currentPage === 'movies' ? 'active' : ''}`}
@@ -115,7 +137,13 @@ const App = () => {
 						<MovieListHeading heading='Movies' />
 						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 					</div>
-					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
+					<div
+						className='banner'
+						style={{
+							display:
+								nomination.length === 5 ? 'block' : 'none'
+						}}
+					>
 						All 5 nominations are done
 					</div>
 					{loading ? (
