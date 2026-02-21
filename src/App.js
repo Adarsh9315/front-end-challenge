@@ -8,15 +8,24 @@ import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import TodoPage from './components/TodoPage';
 import Loader from './components/Loader';
+import Onboarding from './components/Onboarding';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
+	const [showOnboarding, setShowOnboarding] = useState(() => {
+		return !localStorage.getItem('onboardingComplete');
+	});
 	const [currentPage, setCurrentPage] = useState('movies');
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [openSnackbar] = useSnackbar()
+
+	const handleOnboardingComplete = () => {
+		localStorage.setItem('onboardingComplete', 'true');
+		setShowOnboarding(false);
+	};
 
 	const getMovieRequest = async (searchValue) => {
 		if (!searchValue) {
@@ -94,6 +103,7 @@ const App = () => {
 
 	return (
 		<div>
+			{showOnboarding && <Onboarding onComplete={handleOnboardingComplete} />}
 			<div className='navigation-bar'>
 				<button
 					className={`nav-btn ${currentPage === 'movies' ? 'active' : ''}`}
