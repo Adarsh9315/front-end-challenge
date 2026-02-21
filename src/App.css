@@ -127,3 +127,144 @@ body {
 	color: #ffffff;
 	opacity: 0.8;
 }
+
+/* Onboarding Styles */
+.onboarding-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 10000;
+}
+
+.onboarding-highlight {
+	transition: all 0.3s ease;
+}
+
+.onboarding-tooltip {
+	background-color: #ffffff;
+	color: #141414;
+	border-radius: 12px;
+	padding: 0;
+	max-width: 400px;
+	width: 90%;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+	animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: scale(0.9) translateX(-50%);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1) translateX(-50%);
+	}
+}
+
+.onboarding-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 24px 16px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.onboarding-header h3 {
+	margin: 0;
+	font-size: 1.4em;
+	color: #141414;
+	font-weight: 600;
+}
+
+.onboarding-close {
+	background: none;
+	border: none;
+	font-size: 2em;
+	color: #666;
+	cursor: pointer;
+	padding: 0;
+	line-height: 1;
+	transition: color 0.2s;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.onboarding-close:hover {
+	color: #141414;
+}
+
+.onboarding-tooltip p {
+	padding: 16px 24px;
+	margin: 0;
+	font-size: 1.05em;
+	line-height: 1.6;
+	color: #333;
+}
+
+.onboarding-progress {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	padding: 16px 24px 8px;
+}
+
+.progress-dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: #d0d0d0;
+	transition: all 0.3s;
+}
+
+.progress-dot.active {
+	background-color: #007bff;
+	transform: scale(1.3);
+}
+
+.progress-dot.completed {
+	background-color: #28a745;
+}
+
+.onboarding-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 12px;
+	padding: 16px 24px 20px;
+}
+
+.onboarding-btn {
+	padding: 10px 24px;
+	font-size: 1em;
+	border-radius: 6px;
+	border: none;
+	cursor: pointer;
+	transition: all 0.2s;
+	font-weight: 500;
+}
+
+.onboarding-btn-primary {
+	background-color: #007bff;
+	color: #ffffff;
+}
+
+.onboarding-btn-primary:hover {
+	background-color: #0056b3;
+	transform: translateY(-1px);
+	box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.onboarding-btn-secondary {
+	background-color: #f0f0f0;
+	color: #333;
+}
+
+.onboarding-btn-secondary:hover {
+	background-color: #e0e0e0;
+}

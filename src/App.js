@@ -8,6 +8,7 @@ import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import TodoPage from './components/TodoPage';
 import Loader from './components/Loader';
+import Onboarding from './components/Onboarding';
 import { useSnackbar } from 'react-simple-snackbar'
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [showOnboarding, setShowOnboarding] = useState(false);
 	const [openSnackbar] = useSnackbar()
 
 	const getMovieRequest = async (searchValue) => {
@@ -48,12 +50,16 @@ const App = () => {
 	}, [searchValue]);
 
 	useEffect(() => {
-		const movieNomination = JSON.parse(
-			localStorage.getItem('nominations')
-		);
-
+		const movieNomination = localStorage.getItem('nominations');
 		if (movieNomination) {
-			setNomination(movieNomination);
+			setNomination(JSON.parse(movieNomination));
+		} else {
+			localStorage.setItem('nominations', JSON.stringify([]));
+		}
+
+		const onboardingCompleted = localStorage.getItem('onboardingCompleted');
+		if (!onboardingCompleted) {
+			setShowOnboarding(true);
 		}
 	}, []);
 
@@ -92,8 +98,13 @@ const App = () => {
 		saveToLocalStorage(newNominationList);
 	};
 
+	const handleOnboardingComplete = () => {
+		setShowOnboarding(false);
+	};
+
 	return (
 		<div>
+			{showOnboarding && <Onboarding onComplete={handleOnboardingComplete} />}
 			<div className='navigation-bar'>
 				<button
 					className={`nav-btn ${currentPage === 'movies' ? 'active' : ''}`}
@@ -115,9 +126,11 @@ const App = () => {
 						<MovieListHeading heading='Movies' />
 						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 					</div>
-					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-						All 5 nominations are done
-					</div>
+					{nomination.length === 5 && (
+						<div className='banner'>
+							All 5 nominations are done
+						</div>
+					)}
 					{loading ? (
 						<Loader />
 					) : (
