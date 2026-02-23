@@ -111,12 +111,12 @@ const App = () => {
 
 			{currentPage === 'movies' ? (
 				<div className='container-fluid movie-app'>
-					<div className='row d-flex align-items-center mt-4 mb-4'>
+					<div className='row d-flex align-items-center mt-4 mb-2'>
 						<MovieListHeading heading='Movies' />
 						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 					</div>
-					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-						All 5 nominations are done
+					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations') || '[]').length === 5 ? 'block' : 'none'}}>
+						All 5 nominations are done!
 					</div>
 					{loading ? (
 						<Loader />
@@ -129,7 +129,7 @@ const App = () => {
 							/>
 						</div>
 					)}
-					<div className='row d-flex align-items-center mt-4 mb-4'>
+					<div className='row d-flex align-items-center mt-4 mb-2'>
 						<MovieListHeading heading='Nominations' />
 					</div>
 					<div className='row'>
