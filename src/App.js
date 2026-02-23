@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -10,15 +10,33 @@ import TodoPage from './components/TodoPage';
 import Loader from './components/Loader';
 import { useSnackbar } from 'react-simple-snackbar'
 
+const useDebounce = (value, delay) => {
+	const [debouncedValue, setDebouncedValue] = useState(value);
+
+	useEffect(() => {
+		const handler = setTimeout(() => {
+			setDebouncedValue(value);
+		}, delay);
+
+		return () => {
+			clearTimeout(handler);
+		};
+	}, [value, delay]);
+
+	return debouncedValue;
+};
+
 const App = () => {
 	const [currentPage, setCurrentPage] = useState('movies');
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [openSnackbar] = useSnackbar()
+	const [openSnackbar] = useSnackbar();
+	
+	const debouncedSearchValue = useDebounce(searchValue, 500);
 
-	const getMovieRequest = async (searchValue) => {
+	const getMovieRequest = useCallback(async (searchValue) => {
 		if (!searchValue) {
 			setMovies([]);
 			return;
@@ -41,15 +59,15 @@ const App = () => {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}, []);
 
 	useEffect(() => {
-		getMovieRequest(searchValue);
-	}, [searchValue]);
+		getMovieRequest(debouncedSearchValue);
+	}, [debouncedSearchValue, getMovieRequest]);
 
 	useEffect(() => {
 		const movieNomination = JSON.parse(
-			localStorage.getItem('nominations')
+			localStorage.getItem('nominations') || '[]'
 		);
 
 		if (movieNomination) {
@@ -57,40 +75,38 @@ const App = () => {
 		}
 	}, []);
 
-	const saveToLocalStorage = (items) => {
+	const saveToLocalStorage = useCallback((items) => {
 		localStorage.setItem('nominations', JSON.stringify(items));
-	};
+	}, []);
 
-	const addNominationMovie = (movie) => {
-		let savedNominations = localStorage.getItem('nominations');
-		if (savedNominations) {
-			savedNominations = JSON.parse(savedNominations);
-			if (savedNominations.length === 5) {
-				openSnackbar('Only 5 nominations are allowed per user')
-				return;
-			}
+	const addNominationMovie = useCallback((movie) => {
+		if (nomination.length === 5) {
+			openSnackbar('Only 5 nominations are allowed per user')
+			return;
+		}
 
-			let obj = savedNominations.find(o => o.imdbID === movie.imdbID);
-			if (!obj) {
-				const newNominationList = [...nomination, movie];
-				setNomination(newNominationList);
-				saveToLocalStorage(newNominationList);
-			}
-		}else{
+		const obj = nomination.find(o => o.imdbID === movie.imdbID);
+		if (!obj) {
 			const newNominationList = [...nomination, movie];
 			setNomination(newNominationList);
 			saveToLocalStorage(newNominationList);
 		}
-	};
+	}, [nomination, openSnackbar, saveToLocalStorage]);
 
-	const removeNominationMovie = (movie) => {
+	const removeNominationMovie = useCallback((movie) => {
 		const newNominationList = nomination.filter(
 			(nomination) => nomination.imdbID !== movie.imdbID
 		);
 
 		setNomination(newNominationList);
 		saveToLocalStorage(newNominationList);
-	};
+	}, [nomination, saveToLocalStorage]);
+
+	const showBanner = nomination.length === 5;
+	
+	const hasSearchResults = movies.length > 0;
+	const hasNominations = nomination.length > 0;
+	const showEmptySearch = !loading && searchValue && !hasSearchResults;
 
 	return (
 		<div>
@@ -115,30 +131,46 @@ const App = () => {
 						<MovieListHeading heading='Movies' />
 						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 					</div>
-					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-						All 5 nominations are done
-					</div>
+					{showBanner && (
+						<div className='banner'>
+							All 5 nominations are done!
+						</div>
+					)}
 					{loading ? (
 						<Loader />
-					) : (
-						<div className='row'>
-							<MovieList
-								movies={movies}
-								handleNominationClick={addNominationMovie}
-								nominationComponent={AddNomination}
-							/>
+					) : showEmptySearch ? (
+						<div className='empty-state'>
+							<div className='empty-state-icon'>🎬</div>
+							<p>No movies found for "{searchValue}"</p>
 						</div>
+					) : (
+						<>
+							<div className='row'>
+								<MovieList
+									movies={movies}
+									handleNominationClick={addNominationMovie}
+									nominationComponent={AddNomination}
+								/>
+							</div>
+						</>
 					)}
 					<div className='row d-flex align-items-center mt-4 mb-4'>
 						<MovieListHeading heading='Nominations' />
 					</div>
-					<div className='row'>
-						<MovieList
-							movies={nomination}
-							handleNominationClick={removeNominationMovie}
-							nominationComponent={RemoveNominations}
-						/>
-					</div>
+					{hasNominations ? (
+						<div className='row'>
+							<MovieList
+								movies={nomination}
+								handleNominationClick={removeNominationMovie}
+								nominationComponent={RemoveNominations}
+							/>
+						</div>
+					) : (
+						<div className='empty-state'>
+							<div className='empty-state-icon'>🏆</div>
+							<p>No nominations yet. Add some movies!</p>
+						</div>
+					)}
 				</div>
 			) : (
 				<TodoPage />

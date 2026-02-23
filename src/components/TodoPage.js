@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import AddTodo from './AddTodo';
 import TodoList from './TodoList';
 import MovieListHeading from './MovieListHeading';
@@ -7,17 +7,17 @@ const TodoPage = () => {
 	const [todos, setTodos] = useState([]);
 
 	useEffect(() => {
-		const savedTodos = JSON.parse(localStorage.getItem('todos'));
+		const savedTodos = JSON.parse(localStorage.getItem('todos') || '[]');
 		if (savedTodos) {
 			setTodos(savedTodos);
 		}
 	}, []);
 
-	const saveToLocalStorage = (items) => {
+	const saveToLocalStorage = useCallback((items) => {
 		localStorage.setItem('todos', JSON.stringify(items));
-	};
+	}, []);
 
-	const addTodo = (text) => {
+	const addTodo = useCallback((text) => {
 		const newTodo = {
 			id: Date.now(),
 			text: text,
@@ -26,21 +26,21 @@ const TodoPage = () => {
 		const newTodos = [...todos, newTodo];
 		setTodos(newTodos);
 		saveToLocalStorage(newTodos);
-	};
+	}, [todos, saveToLocalStorage]);
 
-	const toggleTodo = (id) => {
+	const toggleTodo = useCallback((id) => {
 		const newTodos = todos.map((todo) =>
 			todo.id === id ? { ...todo, completed: !todo.completed } : todo
 		);
 		setTodos(newTodos);
 		saveToLocalStorage(newTodos);
-	};
+	}, [todos, saveToLocalStorage]);
 
-	const deleteTodo = (id) => {
+	const deleteTodo = useCallback((id) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
 		setTodos(newTodos);
 		saveToLocalStorage(newTodos);
-	};
+	}, [todos, saveToLocalStorage]);
 
 	const completedCount = todos.filter((todo) => todo.completed).length;
 	const totalCount = todos.length;
@@ -52,7 +52,7 @@ const TodoPage = () => {
 			</div>
 			{totalCount > 0 && (
 				<div className='todo-stats mb-4'>
-					<p style={{ fontSize: '1.1em', opacity: 0.8 }}>
+					<p>
 						{completedCount} of {totalCount} completed
 					</p>
 				</div>
