@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -15,99 +15,132 @@ const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [debouncedSearchValue, setDebouncedSearchValue] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
 	const [openSnackbar] = useSnackbar()
 
-	const getMovieRequest = async (searchValue) => {
+	// Debounce search input
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setDebouncedSearchValue(searchValue);
+		}, 500);
+
+		return () => clearTimeout(timer);
+	}, [searchValue]);
+
+	const getMovieRequest = useCallback(async (searchValue) => {
 		if (!searchValue) {
 			setMovies([]);
+			setError(null);
 			return;
 		}
 
 		setLoading(true);
+		setError(null);
 		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=a21d8f2b`;
 
 		try {
 			const response = await fetch(url);
+			if (!response.ok) {
+				throw new Error('Failed to fetch movies');
+			}
 			const responseJson = await response.json();
 
 			if (responseJson.Search) {
 				setMovies(responseJson.Search);
 			} else {
 				setMovies([]);
+				if (responseJson.Error) {
+					setError(responseJson.Error);
+				}
 			}
 		} catch (error) {
 			setMovies([]);
+			setError('Failed to load movies. Please try again.');
 		} finally {
 			setLoading(false);
 		}
-	};
+	}, []);
 
 	useEffect(() => {
-		getMovieRequest(searchValue);
-	}, [searchValue]);
+		getMovieRequest(debouncedSearchValue);
+	}, [debouncedSearchValue, getMovieRequest]);
 
 	useEffect(() => {
-		const movieNomination = JSON.parse(
-			localStorage.getItem('nominations')
-		);
+		try {
+			const movieNomination = JSON.parse(
+				localStorage.getItem('nominations') || '[]'
+			);
 
-		if (movieNomination) {
-			setNomination(movieNomination);
+			if (movieNomination && Array.isArray(movieNomination)) {
+				setNomination(movieNomination);
+			}
+		} catch (error) {
+			console.error('Error loading nominations from localStorage:', error);
+			setNomination([]);
 		}
 	}, []);
 
-	const saveToLocalStorage = (items) => {
-		localStorage.setItem('nominations', JSON.stringify(items));
-	};
-
-	const addNominationMovie = (movie) => {
-		let savedNominations = localStorage.getItem('nominations');
-		if (savedNominations) {
-			savedNominations = JSON.parse(savedNominations);
-			if (savedNominations.length === 5) {
-				openSnackbar('Only 5 nominations are allowed per user')
-				return;
-			}
-
-			let obj = savedNominations.find(o => o.imdbID === movie.imdbID);
-			if (!obj) {
-				const newNominationList = [...nomination, movie];
-				setNomination(newNominationList);
-				saveToLocalStorage(newNominationList);
-			}
-		}else{
-			const newNominationList = [...nomination, movie];
-			setNomination(newNominationList);
-			saveToLocalStorage(newNominationList);
+	const saveToLocalStorage = useCallback((items) => {
+		try {
+			localStorage.setItem('nominations', JSON.stringify(items));
+		} catch (error) {
+			console.error('Error saving to localStorage:', error);
+			openSnackbar('Failed to save nominations');
 		}
-	};
+	}, [openSnackbar]);
 
-	const removeNominationMovie = (movie) => {
+	const addNominationMovie = useCallback((movie) => {
+		if (nomination.length >= 5) {
+			openSnackbar('Only 5 nominations are allowed per user');
+			return;
+		}
+
+		const exists = nomination.find(o => o.imdbID === movie.imdbID);
+		if (exists) {
+			openSnackbar('Movie already nominated');
+			return;
+		}
+
+		const newNominationList = [...nomination, movie];
+		setNomination(newNominationList);
+		saveToLocalStorage(newNominationList);
+		openSnackbar('Movie added to nominations');
+	}, [nomination, saveToLocalStorage, openSnackbar]);
+
+	const removeNominationMovie = useCallback((movie) => {
 		const newNominationList = nomination.filter(
 			(nomination) => nomination.imdbID !== movie.imdbID
 		);
 
 		setNomination(newNominationList);
 		saveToLocalStorage(newNominationList);
-	};
+		openSnackbar('Movie removed from nominations');
+	}, [nomination, saveToLocalStorage, openSnackbar]);
+
+	const isNominationsFull = useMemo(() => nomination.length === 5, [nomination.length]);
 
 	return (
 		<div>
-			<div className='navigation-bar'>
+			<nav className='navigation-bar' role='navigation' aria-label='Main navigation'>
 				<button
 					className={`nav-btn ${currentPage === 'movies' ? 'active' : ''}`}
 					onClick={() => setCurrentPage('movies')}
+					aria-pressed={currentPage === 'movies'}
+					aria-label='Movies page'
 				>
 					Movies
 				</button>
 				<button
 					className={`nav-btn ${currentPage === 'todos' ? 'active' : ''}`}
 					onClick={() => setCurrentPage('todos')}
+					aria-pressed={currentPage === 'todos'}
+					aria-label='Todos page'
 				>
 					Todos
 				</button>
-			</div>
+			</nav>
 
 			{currentPage === 'movies' ? (
 				<div className='container-fluid movie-app'>
@@ -115,11 +148,21 @@ const App = () => {
 						<MovieListHeading heading='Movies' />
 						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 					</div>
-					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-						All 5 nominations are done
-					</div>
+					{isNominationsFull && (
+						<div className='banner' role='alert' aria-live='polite'>
+							All 5 nominations are done
+						</div>
+					)}
 					{loading ? (
 						<Loader />
+					) : error ? (
+						<div className='error-message' role='alert'>
+							{error}
+						</div>
+					) : movies.length === 0 && debouncedSearchValue ? (
+						<div className='empty-state' role='status'>
+							<p>No movies found. Try a different search term.</p>
+						</div>
 					) : (
 						<div className='row'>
 							<MovieList
@@ -132,13 +175,19 @@ const App = () => {
 					<div className='row d-flex align-items-center mt-4 mb-4'>
 						<MovieListHeading heading='Nominations' />
 					</div>
-					<div className='row'>
-						<MovieList
-							movies={nomination}
-							handleNominationClick={removeNominationMovie}
-							nominationComponent={RemoveNominations}
-						/>
-					</div>
+					{nomination.length === 0 ? (
+						<div className='empty-state' role='status'>
+							<p>No nominations yet. Add movies from the search results above.</p>
+						</div>
+					) : (
+						<div className='row'>
+							<MovieList
+								movies={nomination}
+								handleNominationClick={removeNominationMovie}
+								nominationComponent={RemoveNominations}
+							/>
+						</div>
+					)}
 				</div>
 			) : (
 				<TodoPage />

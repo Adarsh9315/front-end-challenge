@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-const SearchBox = (props) => {
+const SearchBox = memo((props) => {
 	return (
 		<div className='col col-sm-4'>
 			<input
-				className='form-control'
-				value={props.value}
+				className='form-control search-input'
+				value={props.searchValue}
 				onChange={(event) => props.setSearchValue(event.target.value)}
 				placeholder='Type to search movies...'
-			></input>
+				aria-label='Search for movies'
+				type='search'
+			/>
 		</div>
 	);
-};
+});
+
+SearchBox.displayName = 'SearchBox';
 
 export default SearchBox;
