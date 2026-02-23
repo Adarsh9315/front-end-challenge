@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -15,10 +15,20 @@ const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [nomination, setNomination] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [debouncedSearchValue, setDebouncedSearchValue] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [openSnackbar] = useSnackbar()
 
-	const getMovieRequest = async (searchValue) => {
+	// Debounce search input
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setDebouncedSearchValue(searchValue);
+		}, 500);
+
+		return () => clearTimeout(timer);
+	}, [searchValue]);
+
+	const getMovieRequest = useCallback(async (searchValue) => {
 		if (!searchValue) {
 			setMovies([]);
 			return;
@@ -41,27 +51,35 @@ const App = () => {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}, []);
 
 	useEffect(() => {
-		getMovieRequest(searchValue);
-	}, [searchValue]);
+		getMovieRequest(debouncedSearchValue);
+	}, [debouncedSearchValue, getMovieRequest]);
 
 	useEffect(() => {
-		const movieNomination = JSON.parse(
-			localStorage.getItem('nominations')
-		);
-
-		if (movieNomination) {
-			setNomination(movieNomination);
+		try {
+			const savedNominations = localStorage.getItem('nominations');
+			if (savedNominations) {
+				const movieNomination = JSON.parse(savedNominations);
+				if (movieNomination) {
+					setNomination(movieNomination);
+				}
+			}
+		} catch (error) {
+			console.error('Error loading nominations from localStorage:', error);
 		}
 	}, []);
 
-	const saveToLocalStorage = (items) => {
-		localStorage.setItem('nominations', JSON.stringify(items));
-	};
+	const saveToLocalStorage = useCallback((items) => {
+		try {
+			localStorage.setItem('nominations', JSON.stringify(items));
+		} catch (error) {
+			console.error('Error saving nominations to localStorage:', error);
+		}
+	}, []);
 
-	const addNominationMovie = (movie) => {
+	const addNominationMovie = useCallback((movie) => {
 		let savedNominations = localStorage.getItem('nominations');
 		if (savedNominations) {
 			savedNominations = JSON.parse(savedNominations);
@@ -81,33 +99,41 @@ const App = () => {
 			setNomination(newNominationList);
 			saveToLocalStorage(newNominationList);
 		}
-	};
+	}, [nomination, openSnackbar, saveToLocalStorage]);
 
-	const removeNominationMovie = (movie) => {
+	const removeNominationMovie = useCallback((movie) => {
 		const newNominationList = nomination.filter(
 			(nomination) => nomination.imdbID !== movie.imdbID
 		);
 
 		setNomination(newNominationList);
 		saveToLocalStorage(newNominationList);
-	};
+	}, [nomination, saveToLocalStorage]);
+
+	const isNominationsFull = useMemo(() => {
+		return nomination.length === 5;
+	}, [nomination]);
 
 	return (
 		<div>
-			<div className='navigation-bar'>
+			<nav className='navigation-bar' role='navigation' aria-label='Main navigation'>
 				<button
 					className={`nav-btn ${currentPage === 'movies' ? 'active' : ''}`}
 					onClick={() => setCurrentPage('movies')}
+					aria-label='Movies page'
+					aria-current={currentPage === 'movies' ? 'page' : undefined}
 				>
 					Movies
 				</button>
 				<button
 					className={`nav-btn ${currentPage === 'todos' ? 'active' : ''}`}
 					onClick={() => setCurrentPage('todos')}
+					aria-label='Todos page'
+					aria-current={currentPage === 'todos' ? 'page' : undefined}
 				>
 					Todos
 				</button>
-			</div>
+			</nav>
 
 			{currentPage === 'movies' ? (
 				<div className='container-fluid movie-app'>
@@ -115,9 +141,11 @@ const App = () => {
 						<MovieListHeading heading='Movies' />
 						<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 					</div>
-					<div className='banner' style={{display: JSON.parse(localStorage.getItem('nominations')).length === 5 ? 'block' : 'none'}}>
-						All 5 nominations are done
-					</div>
+					{isNominationsFull && (
+						<div className='banner'>
+							All 5 nominations are done
+						</div>
+					)}
 					{loading ? (
 						<Loader />
 					) : (

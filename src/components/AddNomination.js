@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AddNomination = () => {
+const AddNomination = React.memo(() => {
 	return (
-		<>
-			<button className='btn-handler'>Add Nomination</button>
-		</>
+		<button className='btn-handler' type='button'>Add Nomination</button>
 	);
-};
+});
+
+AddNomination.displayName = 'AddNomination';
 
 export default AddNomination;
