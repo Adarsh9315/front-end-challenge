@@ -11,7 +11,8 @@ body {
 
 .image-container {
 	position: relative;
-	transition: transform 0.2s;
+	transition: transform 0.2s ease-out;
+	will-change: transform;
 }
 
 .image-container:hover {
@@ -19,10 +20,30 @@ body {
 	transform: scale(1.1);
 }
 
+.image-container:focus-within {
+	outline: 2px solid #007bff;
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
 .btn-handler{
 	padding: 15px 50px;
-	background-color: 'red';
+	background-color: #dc3545;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
 	margin-top: 10px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.btn-handler:hover {
+	background-color: #c82333;
+}
+
+.btn-handler:focus {
+	outline: 2px solid #007bff;
+	outline-offset: 2px;
 }
 
 .banner{
@@ -51,18 +72,21 @@ body {
 	padding: 10px 30px;
 	font-size: 1em;
 	cursor: pointer;
-	transition: all 0.3s;
+	transition: all 0.3s ease-out;
 	border-radius: 5px;
+	font-weight: 500;
 }
 
 .nav-btn:hover {
 	background-color: #2a2a2a;
 	border-color: #666;
+	transform: translateY(-2px);
 }
 
 .nav-btn.active {
 	background-color: #007bff;
 	border-color: #007bff;
+	box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
 }
 
 .todo-app {
@@ -74,12 +98,13 @@ body {
 	padding: 15px 20px;
 	border-radius: 8px;
 	border: 1px solid #333;
-	transition: all 0.2s;
+	transition: all 0.2s ease-out;
 }
 
 .todo-item:hover {
 	background-color: #2a2a2a;
 	border-color: #444;
+	transform: translateX(4px);
 }
 
 .add-todo-form {
@@ -125,5 +150,78 @@ body {
 	margin-top: 20px;
 	font-size: 1.2em;
 	color: #ffffff;
+	opacity: 0.8;
+}
+
+.movie-poster {
+	height: 40vh;
+	object-fit: cover;
+	width: 100%;
+	border-radius: 4px;
+	background-color: #2a2a2a;
+	transition: opacity 0.2s;
+}
+
+.movie-poster:hover {
+	opacity: 0.9;
+}
+
+.movie-title {
+	width: 250px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.movie-year {
+	color: #cccccc;
+	font-size: 0.9em;
+}
+
+.image-container > div[role="button"] {
+	cursor: pointer;
+}
+
+.image-container > div[role="button"]:focus {
+	outline: 2px solid #007bff;
+	outline-offset: 2px;
+}
+
+.empty-state {
+	text-align: center;
+	margin-top: 40px;
+	opacity: 0.6;
+}
+
+.todo-checkbox {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.todo-text {
+	font-size: 1.1em;
+}
+
+.todo-text.completed {
+	text-decoration: line-through;
+	opacity: 0.6;
+}
+
+.todo-input {
+	background-color: #2a2a2a;
+	color: #ffffff;
+	border: 1px solid #444;
+}
+
+.todo-input:focus {
+	background-color: #2a2a2a;
+	color: #ffffff;
+	border-color: #007bff;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.todo-stats-text {
+	font-size: 1.1em;
 	opacity: 0.8;
 }
