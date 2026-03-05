@@ -107,6 +107,13 @@ const App = () => {
 				>
 					Todos
 				</button>
+				<button
+					className='nav-btn refresh-btn'
+					onClick={() => window.location.reload()}
+					title='Refresh page'
+				>
+					↻ Refresh
+				</button>
 			</div>
 
 			{currentPage === 'movies' ? (
