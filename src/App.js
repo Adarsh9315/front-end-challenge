@@ -7,6 +7,7 @@ import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import TodoPage from './components/TodoPage';
+import NotesPage from './components/NotesPage';
 import Loader from './components/Loader';
 import { useSnackbar } from 'react-simple-snackbar'
 
@@ -107,6 +108,12 @@ const App = () => {
 				>
 					Todos
 				</button>
+				<button
+					className={`nav-btn ${currentPage === 'notes' ? 'active' : ''}`}
+					onClick={() => setCurrentPage('notes')}
+				>
+					Notes
+				</button>
 			</div>
 
 			{currentPage === 'movies' ? (
@@ -140,9 +147,11 @@ const App = () => {
 						/>
 					</div>
 				</div>
-			) : (
-				<TodoPage />
-			)}
+		) : currentPage === 'todos' ? (
+			<TodoPage />
+		) : (
+			<NotesPage />
+		)}
 		</div>
 	);
 };

@@ -127,3 +127,21 @@ body {
 	color: #ffffff;
 	opacity: 0.8;
 }
+
+.note-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 15px;
+}
+
+.note-content {
+	flex: 1;
+}
+
+.note-date {
+	font-size: 0.8em;
+	opacity: 0.6;
+	display: block;
+	margin-top: 8px;
+}
