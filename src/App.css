@@ -42,6 +42,7 @@ body {
 	border-bottom: 2px solid #333;
 	display: flex;
 	gap: 15px;
+	align-items: center;
 }
 
 .nav-btn {
@@ -63,6 +64,10 @@ body {
 .nav-btn.active {
 	background-color: #007bff;
 	border-color: #007bff;
+}
+
+.refresh-btn {
+	margin-left: auto;
 }
 
 .todo-app {
