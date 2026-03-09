@@ -127,3 +127,74 @@ body {
 	color: #ffffff;
 	opacity: 0.8;
 }
+
+.notes-app {
+	padding: 20px;
+}
+
+.add-note {
+	background-color: #1f1f1f;
+	padding: 20px;
+	border-radius: 8px;
+	border: 1px solid #333;
+}
+
+.note-item {
+	background-color: #1f1f1f;
+	padding: 20px;
+	border-radius: 8px;
+	border: 1px solid #333;
+	transition: all 0.2s;
+}
+
+.note-item:hover {
+	background-color: #2a2a2a;
+	border-color: #444;
+}
+
+.note-view {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.note-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 15px;
+}
+
+.note-header h4 {
+	margin: 0;
+	color: #ffffff;
+	flex: 1;
+}
+
+.note-content {
+	color: #cccccc;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	margin: 0;
+	line-height: 1.6;
+}
+
+.note-date {
+	color: #888;
+	font-size: 0.85em;
+}
+
+.note-actions {
+	display: flex;
+	gap: 10px;
+	flex-shrink: 0;
+}
+
+.note-edit textarea {
+	min-height: 150px;
+	resize: vertical;
+}
+
+.notes-list {
+	margin-top: 20px;
+}
