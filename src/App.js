@@ -8,6 +8,7 @@ import AddNomination from './components/AddNomination';
 import RemoveNominations from './components/RemoveNominations.js';
 import TodoPage from './components/TodoPage';
 import NotesPage from './components/NotesPage';
+import ChessGame from './components/ChessGame';
 import Loader from './components/Loader';
 import { useSnackbar } from 'react-simple-snackbar'
 
@@ -114,6 +115,12 @@ const App = () => {
 				>
 					Notes
 				</button>
+				<button
+					className={`nav-btn ${currentPage === 'chess' ? 'active' : ''}`}
+					onClick={() => setCurrentPage('chess')}
+				>
+					Chess
+				</button>
 			</div>
 
 			{currentPage === 'movies' ? (
@@ -149,8 +156,10 @@ const App = () => {
 				</div>
 			) : currentPage === 'todos' ? (
 				<TodoPage />
-			) : (
+			) : currentPage === 'notes' ? (
 				<NotesPage />
+			) : (
+				<ChessGame />
 			)}
 		</div>
 	);

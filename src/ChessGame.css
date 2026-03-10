@@ -1,0 +1,161 @@
+.chess-game-container {
+	padding: 20px;
+	max-width: 800px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.chess-title {
+	color: #333;
+	margin-bottom: 10px;
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+.game-status {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #444;
+	margin-bottom: 20px;
+	padding: 10px;
+	background: #f0f0f0;
+	border-radius: 8px;
+}
+
+.chess-board {
+	display: inline-block;
+	border: 4px solid #333;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+	border-radius: 4px;
+	margin-bottom: 20px;
+}
+
+.chess-row {
+	display: flex;
+}
+
+.chess-square {
+	width: 70px;
+	height: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	position: relative;
+}
+
+.chess-square.light {
+	background-color: #f0d9b5;
+}
+
+.chess-square.dark {
+	background-color: #b58863;
+}
+
+.chess-square:hover {
+	opacity: 0.8;
+	transform: scale(1.05);
+}
+
+.chess-square.selected {
+	background-color: #7cb342 !important;
+	box-shadow: inset 0 0 0 3px #558b2f;
+}
+
+.chess-square.valid-move {
+	background-color: #ffd54f !important;
+}
+
+.chess-square.valid-move::after {
+	content: '';
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background-color: rgba(76, 175, 80, 0.6);
+	border-radius: 50%;
+}
+
+.chess-piece {
+	font-size: 3rem;
+	user-select: none;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.reset-btn {
+	background-color: #2196f3;
+	color: white;
+	border: none;
+	padding: 12px 30px;
+	font-size: 1.2rem;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	margin-bottom: 20px;
+}
+
+.reset-btn:hover {
+	background-color: #1976d2;
+	transform: translateY(-2px);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.reset-btn:active {
+	transform: translateY(0);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.chess-instructions {
+	background: #f5f5f5;
+	padding: 20px;
+	border-radius: 8px;
+	margin-top: 20px;
+	text-align: left;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.chess-instructions h3 {
+	color: #333;
+	margin-top: 0;
+	margin-bottom: 15px;
+}
+
+.chess-instructions ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.chess-instructions li {
+	padding: 8px 0;
+	color: #555;
+	font-size: 1.1rem;
+}
+
+.chess-instructions li::before {
+	content: '✓ ';
+	color: #4caf50;
+	font-weight: bold;
+	margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+	.chess-square {
+		width: 45px;
+		height: 45px;
+	}
+
+	.chess-piece {
+		font-size: 2rem;
+	}
+
+	.chess-title {
+		font-size: 2rem;
+	}
+
+	.game-status {
+		font-size: 1.2rem;
+	}
+}
